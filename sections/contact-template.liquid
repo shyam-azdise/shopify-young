@@ -1,0 +1,250 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-10 ml-auto mr-auto">
+      <div class="row">
+        <div class="col-xl-9 col-lg-8 col-md-7">
+          <div class="contact-form-area">
+            {% if section.settings.form_title != '' %}
+            <h2>{{ section.settings.form_title }}</h2>
+            {% endif %}
+            {% include 'contact-form' %}
+          </div>
+        </div>
+        <div class="col-xl-3 col-lg-4 col-md-5">
+          <div class="contact-info-area">
+            {% if section.settings.contact_info_title != '' %}
+            <h2>{{ section.settings.contact_info_title }}</h2>
+            {% endif %}
+            {% include 'contact-information' %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+{%comment%}
+
+<!-- contact area start -->
+<div class="contact-area">
+  <div class="container-fluid p-0">
+    <div class="row no-gutters">
+      {% if section.settings.contact_form_enable %}
+      <div class="col-lg-6">
+        <div class="contact-message pt-62 pb-68 pl-80 mr-30 pl-lg-30 pl-md-30 pl-sm-16 mr-sm-16 pt-sm-44 pb-sm-50">
+          {% if section.settings.form_title != '' %}
+          <h2>{{ section.settings.form_title }}</h2>
+          {% endif %}
+          {% include 'contact-form' %}
+        </div> 
+      </div>
+      {% endif %}
+      {% if section.settings.contact_information_enable %}
+      <div class="col-lg-6">
+        {% include 'contact-information' %}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+<!-- contact area end -->
+
+<!-- map area start -->
+<div class="map-area-wrapper">
+  {% include 'contact-map' %}
+</div>
+<!-- map area end -->
+
+
+{% if section.settings.map_margin_bottom_enable %}
+<style>
+  .google__map{
+  	margin-bottom: 130px;
+  }
+  @media (max-width: 767px) {
+    .google__map{
+      margin-bottom: 70px;
+    }
+  }
+</style>
+{% endif %}
+
+{%endcomment%}
+
+{% schema %}
+  {
+    "name": "Contact Template",
+    "settings": [
+		  {
+              "type": "header",
+              "content": "Contact Form"
+          },
+          {
+              "type": "checkbox",
+              "id": "contact_form_enable",
+              "label": "Show Contact Form",
+              "default": true
+          },
+          {
+              "type": "text",
+              "id": "form_title",
+              "label": "Form Title",
+              "default": "GET A QUOTE"
+          },
+          {
+              "type": "text",
+              "id": "name_placeholder",
+              "label": "Input fild Name",
+              "default": "Your name *"
+          },
+          {
+              "type": "text",
+              "id": "email_placeholder",
+              "label": "Input fild Email",
+              "default": "Your email *"
+          },
+		  {
+              "type": "text",
+              "id": "subject_placeholder",
+              "label": "Input fild Subject",
+              "default": "Subject"
+          },
+          {
+              "type": "text",
+              "id": "message_placeholder",
+              "label": "Input fild Message",
+              "default": "Type your message here.."
+          },
+          {
+              "type": "text",
+              "id": "form_button_name",
+              "label": "Form Button Name",
+              "default": "Send Email"
+          },
+		  {
+              "type": "header",
+              "content": "Contact Information Area"
+          },
+		  {
+              "type": "checkbox",
+              "id": "contact_information_enable",
+              "label": "Show Contact Information",
+              "default": true
+          },
+          {
+              "type": "text",
+              "id": "contact_info_title",
+              "label": "Contact Info Title",
+              "default": "GET INFO"
+          },
+		  {
+              "type": "header",
+              "content": "Address"
+          },
+		  {
+              "type": "checkbox",
+              "id": "address_1_enable",
+              "label": "Show Address One",
+              "default": true
+          },
+          {
+              "type": "text",
+              "id": "address_title_1",
+              "label": "Address One Title",
+              "default": "SkudMart Headquarter"
+          },
+		  {
+              "type": "textarea",
+              "id": "address_content_1",
+              "label": "Address One Content",
+              "default": "PO Box 16122 Collins Street West Victoria 8007 Australia"
+          },
+		  {
+              "type": "checkbox",
+              "id": "address_2_enable",
+              "label": "Show Address Two",
+              "default": true
+          },
+		  {
+              "type": "text",
+              "id": "address_title_2",
+              "label": "Address Two Title",
+              "default": "SkudMart California"
+          },
+		  {
+              "type": "textarea",
+              "id": "address_content_2",
+              "label": "Address Two Content",
+              "default": "8131 Budd Rd Terre Haute, IN 47805"
+          },
+		  {
+              "type": "header",
+              "content": "Contact Information"
+          },
+		  {
+              "type": "textarea",
+              "id": "email_content",
+              "label": "Email Content",
+              "default": "info@example.com"
+          },
+		  {
+              "type": "textarea",
+              "id": "phone_number_content",
+              "label": "Phone Number Content",
+              "default": "716-298-1822"
+          },
+		  {
+              "type": "header",
+              "content": "Map"
+          },
+          {
+              "type": "checkbox",
+              "id": "map_enable",
+              "label": "Show Map",
+              "default": true
+          },
+          {
+              "type": "text",
+              "id": "latitude",
+              "label": "Your Adderss Latititude",
+              "default": "47.606205"
+          },
+          {
+              "type": "text",
+              "id": "languid",
+              "label": "Your Adderss Languid",
+              "default": "-122.332046"
+          },
+		  {
+              "type": "image_picker",
+              "id": "map_icon_image",
+              "label": "Map Marker Image"
+          },
+		  {
+              "type": "checkbox",
+              "id": "icon_animation_enable",
+              "label": "Map Marker Animation Enable",
+			  "default": true
+          },
+		  {
+              "type": "text",
+              "id": "google_map_api_key",
+              "label": "Google Map API Key",
+              "default": "AIzaSyCBEypW1XtGLWpikFPcityAok8rhJzzWRw"
+          },
+		  {
+              "type": "checkbox",
+              "id": "map_margin_bottom_enable",
+              "label": "Margin Bottom Enable",
+              "default": false
+          }
+	]
+  }
+{% endschema %}
+

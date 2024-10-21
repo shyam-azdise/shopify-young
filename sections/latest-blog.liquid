@@ -1,0 +1,803 @@
+{% if section.settings.latest_blog_style == 'latest_blog_style_1' %}
+
+<div class="blog-area section-padding-1" id="section-{{ section.id }}">
+  <div class="container{% if section.settings.fullwidth_on %}-fluid{%endif%}">
+    {% if section.settings.section_title != '' %}
+    <div class="{% if section.settings.sec_title_italic %}section-title-6{%else%}section-title-2{%endif%} text-center mb-60">
+      <h2>{{ section.settings.section_title }}</h2>
+    </div>
+    {% endif %}
+    <div class="row">
+      
+      <!-- product-item start -->
+      {% assign blog = blogs[section.settings.blog_handle] %}
+      {% assign blog_limit = section.settings.blog_limit_handle %}
+      
+      {%- if blog == empty -%}
+      {% for i in (1..blog_limit) %}
+      <div class="col-xl-{{ section.settings.blog_column_xl }}  col-lg-{{ section.settings.blog_column }} col-md-{{ section.settings.blog_column_md }} col-{{ section.settings.blog_column_xs }}">
+        <div class="blog-content-2 bc-padding-left">
+          <h3>
+            Blog Post Title
+          </h3>
+          <div class="">
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      {%- else -%}
+      {% for article in blog.articles limit: blog_limit %}
+      <div class="col-xl-{{ section.settings.blog_column_xl }}  col-lg-{{ section.settings.blog_column }} col-md-{{ section.settings.blog_column_md }} col-{{ section.settings.blog_column_xs }}">
+        {% include 'blog-grid-item' %}
+      </div>
+	  {% endfor %}
+      {%- endif -%}
+      
+    </div>
+  </div>
+</div>
+{% elsif section.settings.latest_blog_style == 'latest_blog_style_2' %}
+
+<div class="blog-area section-padding-1 pt-45 pb-60">
+  <div class="container{% if section.settings.fullwidth_on %}-fluid{%endif%}">
+    <div class="{% if section.settings.sec_title_italic %}section-title-6{%else%}section-title-10{%endif%} text-center mb-50">
+      {% if section.settings.section_icon_img_enable %}
+      <img src="{% if section.settings.section_title_icon %}{{ section.settings.section_title_icon | img_url: 'master' }}{% else %}https://via.placeholder.com/60x46 {% endif %}" class="lazyload" alt="product">
+      {% endif %}
+      {% if section.settings.section_title != '' %}
+      <h2>{{ section.settings.section_title }}</h2>
+      {% endif %}
+    </div>
+    <div class="row">
+      
+      <!-- product-item start -->
+      {% assign blog = blogs[section.settings.blog_handle] %}
+      {% assign blog_limit = section.settings.blog_limit_handle %}
+      
+      {%- if blog == empty -%}
+      {% for i in (1..blog_limit) %}
+      <div class="col-xl-{{ section.settings.blog_column_xl }}  col-lg-{{ section.settings.blog_column }} col-md-{{ section.settings.blog_column_md }} col-{{ section.settings.blog_column_xs }}">
+        <div class="blog-content-2 bc-padding-left">
+          <h3>
+            Blog Post Title
+          </h3>
+          <div class="">
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      {%- else -%}
+      {% for article in blog.articles limit: blog_limit %}
+      <div class="col-xl-{{ section.settings.blog_column_xl }}  col-lg-{{ section.settings.blog_column }} col-md-{{ section.settings.blog_column_md }} col-{{ section.settings.blog_column_xs }}">
+        {% include 'blog-grid-item-cake' %}
+      </div>
+	  {% endfor %}
+      {%- endif -%}
+      
+    </div>
+  </div>
+</div>
+
+
+{% elsif section.settings.latest_blog_style == 'latest_blog_style_3' %}
+
+
+<div class="blog-area bg-gray pt-110 pb-115 default-mlr-120" id="section-{{ section.id }}">
+  <div class="container{% if section.settings.fullwidth_on %}-fluid{% endif %}">
+    {% if section.settings.section_title != '' %}
+    <div class="{% if section.settings.sec_title_italic %}section-title-6{%else%}section-title-1-content{%endif%} section-mrg-dec text-center mb-60">
+      {% if section.settings.section_title != '' %}
+      <span>{{ section.settings.section_subtitle }}</span>
+      {% endif %}
+      <h2>{{ section.settings.section_title }}</h2>
+    </div>
+    {% endif %}
+
+    <div class="blog-active owl-carousel dot-style-1">
+
+      <!-- product-item start -->
+      {% assign blog = blogs[section.settings.blog_handle] %}
+      {% assign blog_limit = section.settings.blog_limit_handle %}
+      
+      {%- if blog == empty -%}
+      {% for i in (1..blog_limit) %}
+      <div class="blog-grid-item-3">
+        <div class="blog-content-2 bc-padding-left">
+          <h3>
+            Blog Post Title
+          </h3>
+          <div class="">
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      {%- else -%}
+      {% for article in blog.articles limit: blog_limit %}
+      <div class="blog-grid-item-3">
+        {% include 'blog-grid-item-3' %}
+      </div>
+	  {% endfor %}
+      {%- endif -%}
+
+    </div>
+  </div>
+</div>
+
+
+
+{% elsif section.settings.latest_blog_style == 'latest_blog_style_4' %}
+
+
+<div class="blog-area pb-115" id="section-{{ section.id }}">
+  {% if section.settings.section_title != '' %}
+  <div class="container{% if section.settings.fullwidth_on %}-fluid{%endif%} p-0">
+    {% if section.settings.section_title != '' %}
+    <div class="{% if section.settings.sec_title_italic %}section-title-6{%else%}section-title-7{%endif%} section-title-7-modify-2 bg-theme-color-yellow-2 text-center section-title-7-ptb">
+      <h2>{{ section.settings.section_title }}</h2>
+    </div>
+    {% endif %}
+  </div>
+  {% endif %}
+  <div class="section-padding-1">
+    <div class="container{% if section.settings.fullwidth_on %}-fluid{%endif%}">
+      <div class="row no-gutters">
+        <!-- product-item start -->
+        {% assign blog = blogs[section.settings.blog_handle] %}
+        {% assign blog_limit = section.settings.blog_limit_handle %}
+
+        {%- if blog == empty -%}
+        {% for i in (1..blog_limit) %}
+        <div class="col-xl-{{ section.settings.blog_column_xl }}  col-lg-{{ section.settings.blog_column }} col-md-{{ section.settings.blog_column_md }} col-{{ section.settings.blog_column_xs }}">
+          <div class="blog-content-2 bc-padding-left">
+            <h3>
+              Blog Post Title
+            </h3>
+            <div class="">
+              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        {%- else -%}
+        {% for article in blog.articles limit: blog_limit %}
+        <div class="col-xl-{{ section.settings.blog_column_xl }}  col-lg-{{ section.settings.blog_column }} col-md-{{ section.settings.blog_column_md }} col-{{ section.settings.blog_column_xs }}">
+          {% include 'blog-grid-item-furniture' %}
+        </div>
+        {% endfor %}
+        {%- endif -%}
+      </div>
+      {% if section.settings.section_title != '' %}
+      <div class="row">
+        <div class="col-12">
+          <div class="blog-more mt-30 text-center">
+            <a href="{{ section.settings.view_more_blog_url }}">{{ section.settings.view_more_blog }}</a>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% elsif section.settings.latest_blog_style == 'latest_blog_style_5' %}
+
+
+<div class="blog-area bg-img kids-blog-ptb" id="section-{{ section.id }}">
+  <div class="container{% if section.settings.fullwidth_on %}-fluid{%endif%}">
+    {% if section.settings.section_title != '' %}
+    <div class="{% if section.settings.sec_title_italic %}section-title-6{%else%}section-title-8{%endif%} text-center mb-55">
+      <h2>{{ section.settings.section_title }}</h2>
+    </div>
+    {% endif %}
+
+    <div class="blog-active owl-carousel dot-style-1">
+      
+      <!-- product-item start -->
+      {% assign blog = blogs[section.settings.blog_handle] %}
+      {% assign blog_limit = section.settings.blog_limit_handle %}
+      
+      {%- if blog == empty -%}
+      {% for i in (1..blog_limit) %}
+      <div class="blog-grid-item-3">
+        <div class="blog-content-2 bc-padding-left">
+          <h3>
+            Blog Post Title
+          </h3>
+          <div class="">
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      {%- else -%}
+      {% for article in blog.articles limit: blog_limit %}
+      <div class="blog-grid-item-3">
+        {% include 'blog-grid-item-3' %}
+      </div>
+	  {% endfor %}
+      {%- endif -%}
+
+    </div>
+  </div>
+  
+  {% if section.settings.blog_animated_image_1 %}
+  <div class="kids-blog-pattern-1">
+    <img src="{{ section.settings.blog_animated_image_1 | img_url: 'master' }}" class="lazyload" alt="kids">
+  </div>
+  {% endif %}
+  {% if section.settings.blog_animated_image_2 %}
+  <div class="kids-blog-pattern-2">
+    <img src="{{ section.settings.blog_animated_image_2 | img_url: 'master' }}" class="lazyload" alt="kids">
+  </div>
+  {% endif %}
+  {% if section.settings.blog_animated_image_3 %}
+  <div class="kids-blog-pattern-3">
+    <img src="{{ section.settings.blog_animated_image_3 | img_url: 'master' }}" class="lazyload" alt="kids">
+  </div>
+  {% endif %}
+  
+  
+</div>
+
+{% elsif section.settings.latest_blog_style == 'latest_blog_style_6' %}
+
+
+<div class="blog-area pt-105 pb-115 bg-img organic-blog-ptb-1" id="section-{{ section.id }}">
+  <div class="container{% if section.settings.fullwidth_on %}-fluid{%endif%}">
+    {% if section.settings.section_title != '' %}
+    <div class="{% if section.settings.sec_title_italic %}section-title-6{%else%}section-title-11{%endif%} mb-60 text-center">
+      <h2>{{ section.settings.section_title }}</h2>
+      {% if section.settings.section_icon_img_enable %}
+      <img src="{% if section.settings.section_title_icon6 %}{{ section.settings.section_title_icon6 | img_url: 'master' }}{% else %}https://via.placeholder.com/220x46 {% endif %}" class="lazyload" alt="banner">
+      {% endif %}
+    </div>
+    {% endif %}
+
+
+    <div class="blog-active owl-carousel dot-style-1 dot-style-1-white">
+      
+      <!-- product-item start -->
+      {% assign blog = blogs[section.settings.blog_handle] %}
+      {% assign blog_limit = section.settings.blog_limit_handle %}
+      
+      {%- if blog == empty -%}
+      {% for i in (1..blog_limit) %}
+      <div class="blog-grid-item-3">
+        <div class="blog-content-2 bc-padding-left">
+          <h3>
+            Blog Post Title
+          </h3>
+          <div class="">
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      {%- else -%}
+      {% for article in blog.articles limit: blog_limit %}
+      <div class="blog-grid-item-3">
+        {% include 'blog-grid-item-3' %}
+      </div>
+	  {% endfor %}
+      {%- endif -%}
+
+    </div>
+    
+    
+  </div>
+</div>
+{% elsif section.settings.latest_blog_style == 'latest_blog_style_7' %}
+
+<div class="blog-area section-padding-1 pt-105 pb-80" id="section-{{ section.id }}">
+  <div class="container{% if section.settings.fullwidth_on %}-fluid{%endif%}">
+    {% if section.settings.section_title != '' %}
+    <div class="{% if section.settings.sec_title_italic %}section-title-6{%else%}section-title-9{%endif%} text-center mb-60">
+      <h2>{{ section.settings.section_title }}</h2>
+    </div>
+    {% endif %}
+    <div class="row">
+      
+      <!-- product-item start -->
+      {% assign blog = blogs[section.settings.blog_handle] %}
+      {% assign blog_limit = section.settings.blog_limit_handle %}
+      
+      {%- if blog == empty -%}
+      {% for i in (1..blog_limit) %}
+      <div class="col-xl-{{ section.settings.blog_column_xl }}  col-lg-{{ section.settings.blog_column }} col-md-{{ section.settings.blog_column_md }} col-{{ section.settings.blog_column_xs }}">
+        <div class="blog-content-2 bc-padding-left">
+          <h3>
+            Blog Post Title
+          </h3>
+          <div class="">
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      {%- else -%}
+      {% for article in blog.articles limit: blog_limit %}
+      <div class="col-xl-{{ section.settings.blog_column_xl }}  col-lg-{{ section.settings.blog_column }} col-md-{{ section.settings.blog_column_md }} col-{{ section.settings.blog_column_xs }}">
+        {% include 'blog-grid-item-pets' %}
+      </div>
+	  {% endfor %}
+      {%- endif -%}
+      
+    </div>
+  </div>
+</div>
+
+
+
+{% endif %}
+
+
+<script>
+  
+   /* Blog active */
+    $('.blog-active').owlCarousel({
+        loop: true,
+        nav: false,
+        autoplay: false,
+        autoplayTimeout: 5000,
+        item: 3,
+        margin: 30,
+        responsive: {
+            0: {
+                items: 1
+            },
+            576: {
+                items: 1
+            },
+            768: {
+                items: 2
+            },
+            992: {
+                items: 3
+            }
+        }
+    })
+  
+</script>
+
+
+{%- include 'section-style' -%}
+
+
+
+{% schema %}
+  {
+    "name": "Latest Blog",
+    "settings": [
+		{
+          "type": "select",
+          "id": "latest_blog_style",
+          "label": "Select Latest Blog Style",
+          "options":[
+            {
+              "value":"latest_blog_style_1",
+              "label": "Latest Blog Style One"
+            },
+            {
+              "value":"latest_blog_style_2",
+              "label": "Latest Blog Style Two"
+            },
+			{
+              "value":"latest_blog_style_3",
+              "label": "Latest Blog Style Three"
+            },
+			{
+              "value":"latest_blog_style_4",
+              "label": "Latest Blog Style Four"
+            },
+			{
+              "value":"latest_blog_style_5",
+              "label": "Latest Blog Style Five"
+            },
+			{
+              "value":"latest_blog_style_6",
+              "label": "Latest Blog Style Six"
+            },
+			{
+              "value":"latest_blog_style_7",
+              "label": "Latest Blog Style Seven"
+            }
+          ],
+
+          "default": "latest_blog_style_1"
+        },
+		{
+		  "type": "header",
+          "content": "Container Full Width Enable"
+        },
+		{
+            "type": "checkbox",
+            "id": "fullwidth_on",
+            "label": "Full Width Enable",
+            "default": true,
+            "info": "If you want Full Width click checkbox"
+        },
+		{
+		  "type": "header",
+          "content": "Section Heading"
+        },
+		{
+          "type": "checkbox",
+          "id": "section_icon_img_enable",
+          "label": "Section Title Icom Image Enable",
+          "default": true,
+          "info": "If you want Section Title Icon Image click checkbox"
+        },
+        {
+          "type": "image_picker",
+          "id": "section_title_icon",
+          "label": "Section Title Icon Image For Style Two",
+          "info": "Recommended Size: 60 x 46 px"
+        },
+		{
+          "type": "image_picker",
+          "id": "section_title_icon6",
+          "label": "Section Title Icon  For Style Six",
+		  "info": "Recommended Size: 120x46px"
+      	},
+		{
+          "type": "text",
+          "id": "section_title",
+          "label": "Section Title",
+          "default": "Tech News"
+      	},
+		{
+          "type": "text",
+          "id": "section_subtitle",
+          "label": "Section Subtitle",
+          "default": "LATEST BLOG"
+      	},
+		{
+          "type": "text",
+          "id": "view_more_blog",
+          "label": "View more blog",
+          "default": "View more blog"
+      	},
+		{
+          "type": "url",
+          "id": "view_more_blog_url",
+          "label": "View more blog URL"
+      	},
+		{
+            "type": "checkbox",
+            "id": "sec_title_italic",
+            "label": "Section Title Italic",
+            "default": false,
+            "info": "If you want Title Italic click checkbox"
+        },
+		{
+			"type": "header",
+            "content": "Blog"
+        },
+		{
+          "type": "blog",
+          "id": "blog_handle",
+          "label": "Select Blog"
+        },
+		{
+            "type": "range",
+            "id": "blog_limit_handle",
+            "min": 2,
+            "max": 12,
+            "step": 1,
+            "label": "Limit",
+            "default": 2
+        },	
+		{
+			"type": "header",
+            "content": "Blog Column"
+        },
+		{
+          "type": "select",
+          "id": "blog_column_xl",
+          "label": "Desktop XL",
+		  "options":[
+				{
+                    "label": "2",
+                    "value": "6"
+                },
+                {
+                    "label": "3",
+                    "value": "4"
+                },
+                {
+                    "label": "4",
+                    "value": "3"
+                }
+			],
+			"default": "6"
+      	},
+		{
+          "type": "select",
+          "id": "blog_column",
+          "label": "Desktop",
+		  "options":[
+				{
+                    "label": "1",
+                    "value": "12"
+                },
+				{
+                    "label": "2",
+                    "value": "6"
+                },
+                {
+                    "label": "3",
+                    "value": "4"
+                },
+                {
+                    "label": "4",
+                    "value": "3"
+                }
+			],
+			"default": "12"
+      	},
+		{
+          "type": "select",
+          "id": "blog_column_md",
+          "label": "Tablet",
+		  "options":[
+				{
+                    "label": "1",
+                    "value": "12"
+                },
+				{
+                    "label": "2",
+                    "value": "6"
+                },
+                {
+                    "label": "3",
+                    "value": "4"
+                },
+                {
+                    "label": "4",
+                    "value": "3"
+                }
+			],
+			"default": "12"
+      	},
+		{
+          "type": "select",
+          "id": "blog_column_xs",
+          "label": "Mobile",
+		  "options":[
+				{
+                    "label": "1",
+                    "value": "12"
+                },
+                {
+                    "label": "2",
+                    "value": "6"
+                }
+			],
+			"default": "12"
+      	},
+		{
+		  "type": "header",
+          "content": "Only for Style Five"
+        },
+		{
+          "type": "image_picker",
+          "id": "blog_animated_image_1",
+          "label": "Blog Animated Image One",
+          "info": "Recommended Size: 224 x 204 px"
+        },
+		{
+          "type": "image_picker",
+          "id": "blog_animated_image_2",
+          "label": "Blog Animated Image Two",
+          "info": "Recommended Size: 195 x 341 px"
+        },
+		{
+          "type": "image_picker",
+          "id": "blog_animated_image_3",
+          "label": "Blog Animated Image Three",
+          "info": "Recommended Size: 335 x 439 px"
+        }
+
+    ],
+	"blocks":[
+	   {
+          "type": "section_padding",
+          "name": "Section Padding",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 115
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 90
+			},
+			{
+			  "type": "header",
+			  "content": "Tablet Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 90
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 65
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 60
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 40
+			}
+          ]
+       },
+	   {
+          "type": "section_margin",
+          "name": "Section Margin",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Tablet Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			}
+          ]
+       },
+	   {
+          "type": "section_background",
+          "name": "Section Background",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "image_picker",
+			  "id": "section_bg_image",
+			  "label": "BG Image"
+			},
+			{
+			  "type": "color",
+			  "id": "section_bg_color",
+			  "label": "BG Color",
+			  "default": "#ffffff"
+			}
+          ]
+       }
+	],
+	"presets": [
+		{
+		  "name": "Latest Blog",
+		  "category": "5. blog",
+		  "blocks":[
+				{
+					"type": "section_padding"
+				}
+			]
+		}
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+
+

@@ -1,0 +1,21 @@
+<div class="blog-wrap-4">
+  <div class="blog-img-4">
+    <a href="{{ article.url }}">
+      {{ article | img_url: '870x410', crop:'center' | img_tag: article.title }}
+    </a>
+  </div>
+  <div class="blog-content-4">
+    <h3><a href="{{ article.url }}">{{ article.title }}</a></h3>
+    <div class="blog-meta-4">
+      <ul>
+        <li>By <a href="#"> {{ article.author }}</a></li>
+        <li>-</li>
+        <li><a href="#">{{ article.published_at |date: "%d %b, %Y" }}</a></li>
+      </ul>
+    </div>
+    <p>{{ article.content | strip_html | truncatewords: 35 }}</p>
+    <div class="blog-btn-2 btn-hover">
+      <a class="bg-black-hover" href="{{ article.url }}">{{ 'blogs.article.read_more' | t }} &rarr;</a>
+    </div>
+  </div>
+</div>

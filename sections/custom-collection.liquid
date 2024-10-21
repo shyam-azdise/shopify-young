@@ -1,0 +1,161 @@
+{%- if section.settings.custom_collection_enable -%}
+<div class="related-product-area section-padding-2 pb-110">
+  <div class="container-fluid">
+    {% if section.settings.section_title != '' %}
+    <div class="section-title-12 mb-30">
+      <h2>{{ section.settings.section_title }}</h2>
+    </div>
+    {% endif %}
+    <div class="row">
+      <!-- product-item start -->
+    {% assign featured_product = collections[section.settings.featured_product_handle] %}
+    {% assign featured_product_limit = section.settings.featured_product_limit_handle %}
+
+    {%- if featured_product == empty -%}
+    {% assign a = 1 %}
+    {% for i in (1..featured_product_limit) %}
+
+    {% assign product_item = "product-" | append: a  %}
+    {% assign a = a | plus: 1 %}
+    <div class="col-lg-{{ section.settings.product_column }} col-md-{{ section.settings.product_column_md }} col-{{ section.settings.product_column_xs }}" style="margin-bottom: 30px;">
+      <div>
+        <div style="background: #f2f2f2;">
+          {{ product_item | placeholder_svg_tag: 'my-custom-class' }}
+        </div>
+        <br>
+        <h6>
+          Product Title
+        </h6>
+        <div class="">
+          <span>$99.99</span>
+        </div>
+      </div>
+    </div>
+    {% if a == 7 %}
+    {% assign a = 1 %}
+    {% endif %}
+    {% endfor %}
+
+
+    {%- else -%}
+    {% for product in featured_product.products limit: featured_product_limit %}
+      <div class="col-lg-{{ section.settings.product_column }} col-md-{{ section.settings.product_column_md }} col-{{ section.settings.product_column_xs }}">
+        {% include 'product-grid-item' %}
+      </div>
+    {% endfor %}
+    {%- endif -%}
+      
+    </div>
+  </div>
+</div>
+
+{%- endif -%}
+
+
+{% schema %}
+  {
+    "name": "Custom Collection",
+    "settings": [
+		{
+          "type": "checkbox",
+          "id": "custom_collection_enable",
+          "label": "Show Custom Collection",
+          "default": true
+      	},
+		{
+		  "type": "header",
+          "content": "Section Heading"
+        },
+		{
+          "type": "text",
+          "id": "section_title",
+          "label": "Section Title",
+          "default": "Section Title Here"
+      	},
+		{
+			"type": "header",
+            "content": "Product"
+        },
+		{
+			"type": "collection",
+            "id": "featured_product_handle",
+            "label": "Select Collection"
+        },
+		{
+            "type": "range",
+            "id": "featured_product_limit_handle",
+            "min": 2,
+            "max": 20,
+            "step": 1,
+            "label": "Limit",
+            "default": 8
+        },
+		{
+			"type": "header",
+            "content": "Product Column"
+        },
+		{
+          "type": "select",
+          "id": "product_column",
+          "label": "Desktop",
+		  "options":[
+				{
+                    "label": "2",
+                    "value": "6"
+                },
+                {
+                    "label": "3",
+                    "value": "4"
+                },
+                {
+                    "label": "4",
+                    "value": "3"
+                }
+			],
+			"default": "3"
+      	},
+		{
+          "type": "select",
+          "id": "product_column_md",
+          "label": "Tablet",
+		  "options":[
+				{
+                    "label": "2",
+                    "value": "6"
+                },
+                {
+                    "label": "3",
+                    "value": "4"
+                },
+                {
+                    "label": "4",
+                    "value": "3"
+                }
+			],
+			"default": "4"
+      	},
+		{
+          "type": "select",
+          "id": "product_column_xs",
+          "label": "Mobile",
+		  "options":[
+				{
+                    "label": "1",
+                    "value": "12"
+                },
+                {
+                    "label": "2",
+                    "value": "6"
+                }
+			],
+			"default": "12"
+      	}
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

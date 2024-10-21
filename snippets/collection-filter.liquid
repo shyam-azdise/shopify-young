@@ -1,0 +1,122 @@
+{% for block in section.blocks %}
+{% case block.type %}
+
+
+{% when 'category' %}
+<div class="col-lg-3 col-md-3 col-sm-6 col-12 mb-30">
+  <div class="product-filter">
+    {%- if block.settings.widget_title != '' -%}
+    <h5>{{ block.settings.widget_title }}</h5>
+    {%- endif -%}
+    <div class="sidebar-widget-list mt-30">
+      <ul>
+        {% assign categories_list_limit = block.settings.categories_list_limit_hanlde %}
+        {% for c in collections limit: categories_list_limit %}
+        <li class="{% if collection and collection.handle == c.handle %}active{% endif %}"><a href="{{ c.url }}">{{ c.title }}</a><span>({{ c.products_count }})</span></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+{% when 'size' %}
+<div class="col-lg-3 col-md-3 col-sm-6 col-12 mb-30">
+  <div class="product-filter">
+    {%- if block.settings.widget_title != '' -%}
+    <h5>{{ block.settings.widget_title }}</h5>
+    {%- endif -%}
+    <div class="product-size">
+      <ul>
+        {% assign tags = block.settings.size_picker | replace: ', ', ',' | replace: ' ,', ',' | split: ',' %}
+        {% assign size_list_limit = block.settings.size_list_limit_hanlde %}
+
+        {% for t in tags limit: size_list_limit %}
+        {% assign tag = t | strip %}
+        {%- if current_tags contains tag -%}
+        <li class="active"><a href="/collections/all/{{ tag | handle }}">{{ tag }}</a></li>
+        {%- elsif collection.all_tags contains tag -%}
+        <li><a href="/collections/all/{{ tag | handle }}">{{ tag }}</a></li>
+        {%- endif -%}
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<!-- Product Filter -->
+{% when 'color' %}
+<div class="col-lg-3 col-md-3 col-sm-6 col-12 mb-30">
+  <div class="product-filter">
+    {%- if block.settings.widget_title != '' -%}
+    <h5>{{ block.settings.widget_title }}</h5>
+    {%- endif -%}
+    <div class="product-color">
+      <ul>
+        {% assign tags = block.settings.color_picker | replace: ', ', ',' | replace: ' ,', ',' | split: ',' %}
+        {% assign colors_list_limit = block.settings.colors_list_limit_hanlde %}
+
+        {% for t in tags limit: 5 %}
+        {% assign tag = t | strip %}
+        {%- if current_tags contains tag -%}
+        <li class="{{ tag }} active"><a title="{{ tag }}" class="color-text swatch-anchor2" href="/collections/all/{{ tag | handle }}">{{ tag }}</a></li>
+        {%- elsif collection.all_tags contains tag -%}
+        <li class="{{ tag }}"><a title="{{ tag }}" class="color-text swatch-anchor2" href="/collections/all/{{ tag | handle }}">{{ tag }}</a></li>
+        {%- endif -%}
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+{% when 'brands' %}
+<div class="col-lg-3 col-md-3 col-sm-6 col-12 mb-30">
+  <div class="product-filter">
+    {%- if block.settings.widget_title != '' -%}
+    <h5>{{ block.settings.widget_title }} </h5>
+    {%- endif -%}
+    <div class="product-brands">
+      <ul>
+        {% assign tags = block.settings.brands_picker | replace: ', ', ',' | replace: ' ,', ',' | split: ',' %}
+        {% assign brands_list_limit = block.settings.brands_list_limit_hanlde %}
+        {% for t in tags limit: brands_list_limit %}
+        {% assign tag = t | strip %}
+        {%- if current_tags contains tag -%}
+        <li class="active"><a href="/collections/all/{{ tag | handle }}">{{ tag }}</a></li>
+        {%- elsif collection.all_tags contains tag -%}
+        <li><a href="/collections/all/{{ tag | handle }}">{{ tag }}</a></li>
+        {%- endif -%}
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+{% endcase %}
+{% endfor %}
+
+
+
+<script>
+  $(".sidebar-widget li.active a").removeAttr("href");
+
+  $('.category-sub-menu li.has-sub > a').on('click', function () {
+    $(this).removeAttr('href');
+    var element = $(this).parent('li');
+    if (element.hasClass('open')) {
+      element.removeClass('open');
+      element.find('li').removeClass('open');
+      element.find('ul').slideUp();
+    } else {
+      element.addClass('open');
+      element.children('ul').slideDown();
+      element.siblings('li').children('ul').slideUp();
+      element.siblings('li').removeClass('open');
+      element.siblings('li').find('li').removeClass('open');
+      element.siblings('li').find('ul').slideUp();
+    }
+  }); 
+</script>

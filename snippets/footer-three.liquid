@@ -1,0 +1,52 @@
+<footer class="footer-area section-padding-1">
+  <div class="container-fluid">
+    <div class="footer-top pt-50 pb-50">
+      <div class="row align-items-center">
+        {% for block in section.blocks %}
+        {% case block.type %}
+        {% when 'footer_logo' %}
+        <div class="col-lg-{{ section.settings.logo_col }} col-md-{{ section.settings.logo_col_md }}">
+          <div class="footer-logo">
+            <a href="/">
+              <img src="{% if block.settings.footer_logo %}{{ block.settings.footer_logo | img_url: 'master' }}
+                                    {% else %}https://via.placeholder.com/182x67 {% endif %}"  class="lazyload" alt="{{ block.settings.footer_logo.alt }}">
+            </a>
+          </div>
+        </div>
+
+
+        {% when 'footer_menu' %}
+        <div class="col-lg-6">
+          <div class="footer-menu">
+            <nav>
+              <ul>
+                {% assign footer_menu = block.settings.footer_menu_handle %}
+                {% for link in linklists[footer_menu].links %}
+                <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                {% endfor %}
+              </ul>
+            </nav>
+          </div>
+        </div>
+
+        <div class="col-lg-3">
+          <div class="social-icon-style social-icon-right">
+            {% include 'footer-social-media' %}
+          </div>
+        </div>
+        
+        {% endcase %}
+        {% endfor %}
+      </div>
+    </div>
+    <div class="footer-botoom border-top-1">
+      <div class="row">
+        <div class="col-12">
+          <div class="copyright text-center copyright-ptb">
+            <p><a target="_blank" href="https://hasthemes.com/">{{ section.settings.copy_ritht_text }}</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

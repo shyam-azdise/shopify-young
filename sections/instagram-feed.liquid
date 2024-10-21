@@ -1,0 +1,342 @@
+{%- include 'instafeed' -%}
+
+
+{%- include 'section-style' -%}
+
+
+{% schema %}
+  {
+    "name": "Instagram",
+    "settings": [
+		{
+          "type": "select",
+          "id": "instagram_style",
+          "label": "Select Instagram Style",
+          "options":[
+            {
+              "value":"instagram_style_1",
+              "label": "Instagram Style One"
+            },
+            {
+              "value":"instagram_style_2",
+              "label": "Instagram Style Two"
+            },
+			{
+              "value":"instagram_style_3",
+              "label": "Instagram Style Three"
+            },
+			{
+              "value":"instagram_style_4",
+              "label": "Instagram Style Four"
+            },
+			{
+              "value":"instagram_style_5",
+              "label": "Instagram Style Five"
+            },
+			{
+              "value":"instagram_style_6",
+              "label": "Instagram Style Six"
+            }
+          ],
+
+          "default": "instagram_style_1"
+        },
+		{
+		  "type": "header",
+          "content": "Container Full Width Enable"
+        },
+		{
+            "type": "checkbox",
+            "id": "fullwidth_on",
+            "label": "Full Width Enable",
+            "default": true,
+            "info": "If you want Full Width click checkbox"
+        },
+		{
+		  "type": "header",
+          "content": "Section Heading"
+        },
+		{
+          "type": "text",
+          "id": "section_sub_title",
+          "label": "Section Sub Title",
+          "default": "Follow us on"
+      	},
+		{
+          "type": "text",
+          "id": "section_title",
+          "label": "Section Title",
+          "default": "Young Instagram"
+      	},
+		{
+		  "type": "header",
+          "content": "Instagram"
+        },
+		{
+            "type": "text",
+            "id": "instafeed_user_id",
+            "label": "Instafeed Use Id",
+            "default": "6665768655",
+			"info": "Get Instagram User ID - [Click here](https://codeofaninja.com/tools/find-instagram-user-id)"
+        },
+		{
+            "type": "textarea",
+            "id": "instafeed_access_token",
+            "label": "Instafeed Access Token",
+            "default": "6665768655.1677ed0.313e6c96807c45d8900b4f680650dee5",
+			"info": "Get Instagram Access Token - [Click here](https://instagram.pixelunion.net/)"
+        },
+		{
+          "type": "range",
+          "id": "instafeed_limit",
+          "min": 1,
+          "max": 15,
+          "step": 1,
+          "label": "Instafeed Limit",
+          "default": 8
+        },
+		{
+            "type": "select",
+            "id": "image_resolution",
+            "label": "Image Resolution",
+            "options":[
+                {
+                    "label": "Thumbnail (150x150)",
+                    "value": "thumbnail"
+                },
+                {
+                    "label": "Low Resolution (306x306)",
+                    "value": "low_resolution"
+                },
+                {
+                    "label": "Standard Resolution (612x612)",
+                    "value": "standard_resolution"
+                }
+            ],
+            "default": "standard_resolution"
+        },
+		{
+		  "type": "header",
+          "content": "Instagram For Style Four"
+        },
+		{
+          "type": "image_picker",
+          "id": "animate_img_top_left",
+          "label": "Animate Img Left Side",
+          "info": "Recommended Size: 249x222px"
+        },
+		{
+          "type": "image_picker",
+          "id": "animate_img_top_right",
+          "label": "Animate Img Right Side",
+          "info": "Recommended Size: 249x222px"
+        },
+		{
+          "type": "image_picker",
+          "id": "instagram_bg_img",
+          "label": "Instagram BG Images",
+          "info": "Recommended Size: 249x222px"
+        },
+		{
+          "type": "text",
+          "id": "instagram_more",
+          "label": "More Instagram",
+		  "default": "More"
+        },
+		{
+          "type": "url",
+          "id": "instagram_more_url",
+          "label": "More Instagram URL"
+        }
+	],
+	"blocks":[
+	   {
+          "type": "section_padding",
+          "name": "Section Padding",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 100
+			},
+			{
+			  "type": "header",
+			  "content": "Tablet Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 80
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 60
+			}
+          ]
+       },
+	   {
+          "type": "section_margin",
+          "name": "Section Margin",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Tablet Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			}
+          ]
+       },
+	   {
+          "type": "section_background",
+          "name": "Section Background",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "image_picker",
+			  "id": "section_bg_image",
+			  "label": "BG Image"
+			},
+			{
+			  "type": "color",
+			  "id": "section_bg_color",
+			  "label": "BG Color",
+			  "default": "#ffffff"
+			}
+          ]
+       }
+	],
+	"presets": [
+		{
+			"name": "Instagram",
+			"category": "others",
+		  	"blocks":[
+				{
+					"type": "section_padding"
+				}
+			]
+		}
+	]
+  }
+{% endschema %}

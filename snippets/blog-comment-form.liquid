@@ -1,0 +1,30 @@
+<h3>{{ 'blogs.comments.title' | t }}</h3>
+<p>Your email address will not be published. Required fields are marked *</p>
+
+{% form 'new_comment', article %}
+
+{{ form.errors | default_errors }}
+  <div class="row">
+    <div class="col-lg-6 col-md-6">
+      <div class="leave-form">
+        <input type="text" class="{% if form.errors contains 'author' %}error{% endif %}" name="comment[author]" id="commentAuthor" value="{{ form.author }}" placeholder="{{ 'blogs.comments.name' | t }}">
+      </div>
+    </div>
+    <div class="col-lg-6 col-md-6">
+      <div class="leave-form">
+        <input type="text" class="{% if form.errors contains 'email' %}error{% endif %}" name="comment[email]" id="commentEmail" value="{{ form.email }}" placeholder="{{ 'blogs.comments.email' | t }}">
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="leave-form">
+        <textarea class="custom-textarea" name="comment[body]" id="commentBody"  placeholder="{{ 'blogs.comments.message' | t }}">{{ form.body }}</textarea>
+      </div>
+    </div>
+  </div>
+  {% if blog.moderated? %}
+  <p>{{ 'blogs.comments.moderated' | t }}</p>
+  {% endif %}
+  <div class="text-submit">
+    <input type="submit" value="Post Comment">
+  </div>
+{% endform %}

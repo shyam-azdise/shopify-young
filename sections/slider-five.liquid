@@ -1,0 +1,401 @@
+<div class="slider-area pt-30" id="section-{{ section.id }}">
+  <div class="single-main-slider bg-img slider-height-8 align-items-center custom-d-flex" style="background-image:url({% if section.settings.slider_img %}{{ section.settings.slider_img | img_url: 'master' }}{% else %}https://via.placeholder.com/1920x878{% endif %});">
+    <div class="container{% if section.settings.fullwidth_on %}-fluid{% endif %}">
+      <div class="row">
+        <div class="col-12">
+          <div class="main-hero-content-6 text-{{ section.settings.slider_content_alignment }}">
+            
+            {%if section.settings.slider_title != '' %}
+            <h1 class="wow fadeInDown" data-wow-delay=".5s">{{ section.settings.slider_title }}</h1>
+            {%endif%}
+            
+            {% if section.settings.slider_button != '' %}
+            <div class="btn-style-3 btn-hover-2 wow fadeInUp" data-wow-delay=".5s">
+              <a class="animated bs3-white-text bs3-pink-bg bs3-ptb-5 bs3-border-radius ptb-2-white-hover" href="{{ section.settings.slider_button_url }}">{{ section.settings.slider_button }}</a>
+            </div>
+            {% endif %}
+
+          </div>
+        </div>
+      </div>
+    </div>
+    {% if section.settings.slider_top_img %}
+    <div class="cake-slider-position-img">
+      <img src="{{ section.settings.slider_top_img | img_url: 'master' }}" class="lazyload" alt="banner">
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+
+{%- style -%}
+  #section-{{ section.id }}{
+    {%- for block in section.blocks -%}
+    {%- case block.type -%}
+    {%- when 'section_margin' -%}
+    margin-top: {{ block.settings.section_margin_top }}px;
+    margin-bottom: {{ block.settings.section_margin_bottom }}px;
+    {%- when 'section_padding' -%}
+    padding-top: {{ block.settings.section_padding_top }}px;
+    padding-bottom: {{ block.settings.section_padding_bottom }}px;
+    {%- when 'section_background' -%}    
+    background: {{ block.settings.section_bg_color }} 
+      {%- if block.settings.section_bg_image -%}url("{{ block.settings.section_bg_image | img_url: 'master' }}"){%- endif -%} no-repeat scroll center center / cover;
+    {%- endcase -%}
+    {%- endfor -%}
+  }
+  @media (min-width: 768px) and (max-width: 991px) {
+    #section-{{ section.id }}{
+      {%- for block in section.blocks -%}
+      {% case block.type %}
+      {%- when 'section_margin' -%}
+      margin-top: {{ block.settings.section_margin_top_md }}px;
+      margin-bottom: {{ block.settings.section_margin_bottom_md }}px;
+      {%- when 'section_padding' -%}
+      padding-top: {{ block.settings.section_padding_top_md }}px;
+      padding-bottom: {{ block.settings.section_padding_bottom_md }}px;
+      {%- endcase -%}
+      {%- endfor -%}
+    }
+  }
+  @media (max-width: 767px) {
+    #section-{{ section.id }}{
+      {%- for block in section.blocks -%}
+      {%- case block.type -%}
+      {%- when 'section_margin' -%}
+      margin-top: {{ block.settings.section_margin_top_xs }}px;
+      margin-bottom: {{ block.settings.section_margin_bottom_xs }}px;
+      {%- when 'section_padding' -%}
+      padding-top: {{ block.settings.section_padding_top_xs }}px;
+      padding-bottom: {{ block.settings.section_padding_bottom_xs }}px;
+      {%- endcase -%}
+      {%- endfor -%}
+    }
+  }
+
+
+{% if section.settings.slider_content_enable %}
+
+  .main-hero-content-6 h1 {
+      color: {{ section.settings.slider_title_color }};
+  }
+
+  .btn-style-3 a.bs3-pink-bg {
+      background-color: {{ section.settings.slider_button_bg_color }};
+  }
+  .btn-style-3 a.bs3-white-text {
+      color: {{ section.settings.slider_button_color }};
+  }
+
+  .btn-hover-2 a.ptb-2-white-hover::after {
+      background: {{ section.settings.slider_button_bg_hover_color }};
+  }
+  .btn-style-3 a.bs3-white-text:hover {
+      color: {{ section.settings.slider_button_color_hov }};
+  }
+
+{%endif%}
+
+{%- endstyle -%}
+
+
+
+{% schema %}
+  {
+    "name": "Slider Five",
+    "settings": [
+        {
+          "type": "header",
+          "content": "Slider Width Control"
+        },
+        {
+          "type": "checkbox",
+          "id": "fullwidth_on",
+          "label": "Full Width Enable",
+          "default": false,
+          "info": "If you want Full Width click checkbox"
+        },
+		{
+          "type": "select",
+          "id": "slider_content_alignment",
+          "label": "Slider Content Alignment",
+          "options":[
+              {
+                "label": "Left",
+                "value": "left"
+              },
+              {
+                "label": "Right",
+                "value": "right"
+              },
+              {
+                "label": "Center",
+                "value": "center"
+              }
+          ],
+          "default": "center"
+        },
+        {
+          "type": "image_picker",
+          "id": "slider_img",
+          "label": "Slide Image",
+          "info": "Recommended Size: 1920x878 px"
+        },
+		{
+          "type": "image_picker",
+          "id": "slider_top_img",
+          "label": "Slide Top Image",
+          "info": "Recommended Size: 1920x39 px"
+        },
+        {
+          "type": "text",
+          "id": "slider_title",
+          "label": "Slider Title",
+          "default": "Enjoy Life <br>Eat cake"
+        },
+        {
+          "type": "text",
+          "id": "slider_button",
+          "label": "Button Text",
+          "default": "Eat now"
+        },
+        {
+          "type": "url",
+          "id": "slider_button_url",
+          "label": "Button URL"
+        },
+        {
+          "type": "header",
+          "content": "Slider Content Style"
+        },
+        {
+          "type": "checkbox",
+          "id": "slider_content_enable",
+          "label": "Slider Content Style Enable",
+          "default": true
+        },
+		{
+          "type": "color",
+          "id": "slider_title_color",
+          "label": "Slider Title Color",
+          "default": "#fff"
+        },
+        {
+          "type": "color",
+          "id": "slider_button_color",
+          "label": "Slider Button Color",
+          "default": "#fff"
+        },
+        {
+          "type": "color",
+          "id": "slider_button_bg_color",
+          "label": "Slider Button BG Color",
+          "default": "#ef8da1"
+        },
+        {
+          "type": "color",
+          "id": "slider_button_color_hov",
+          "label": "Slider Button Hover Color",
+          "default": "#393939"
+        },
+        {
+          "type": "color",
+          "id": "slider_button_bg_hover_color",
+          "label": "Slider Button Hover BG Color",
+          "default": "#fff"
+        }
+
+	],
+	"blocks":[
+	   {
+          "type": "section_margin",
+          "name": "Section Margin",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Tablat Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			}
+          ]
+       },
+	   {
+          "type": "section_padding",
+          "name": "Section Padding",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Tablat Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 0
+			}
+          ]
+       },
+	   {
+          "type": "section_background",
+          "name": "Section Background",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "image_picker",
+			  "id": "section_bg_image",
+			  "label": "BG Image"
+			},
+			{
+			  "type": "color",
+			  "id": "section_bg_color",
+			  "label": "BG Color",
+			  "default": "#ffffff"
+			}
+          ]
+       }
+	],
+	"presets": [
+		{
+		  "name": "Slider Five",
+		  "category": "1. slideshow",
+		  "blocks":[
+				
+			]
+		}
+	]
+  }
+{% endschema %}
+
+
+
+

@@ -1,0 +1,56 @@
+<!-- Your update file include here -->
+<script src="{{ 'modernizr-3.6.0.min.js' | asset_url }}"></script>
+<script src="{{ 'jquery-1.12.4.min.js' | asset_url }}"></script>
+
+
+<!-- Put all third-party JS files in the vendor.css file and minify the files -->
+<script src="{{ 'popper.js' | asset_url }}"></script>
+<script src="{{ 'bootstrap.min.js' | asset_url }}"></script>
+
+
+
+{% if content_for_layout contains 'owl-carousel' %}
+<script src="{{ 'owl-carousel.js' | asset_url }}"></script>
+{% endif %}
+
+<script src="{{ 'slick.js' | asset_url }}"></script>
+{% if content_for_layout contains 'video-wrap' %}
+<script src="{{ 'jquery.mb.ytplayer.min.js' | asset_url }}"></script>
+{% endif %}
+
+
+<script src="{{ 'magnific-popup.js' | asset_url }}"></script>
+
+
+<script src="{{ 'wow.js' | asset_url }}"></script>
+
+
+<script src="{{ 'instafeed.js' | asset_url }}"></script>
+
+
+<script src="{{ 'countdown.js' | asset_url }}"></script>
+
+
+{% if content_for_layout contains 'jarallax' %}
+<script src="{{ 'parallax.min.js' | asset_url }}"></script>
+{% endif %}
+
+<script src="{{ 'images-loaded.js' | asset_url }}"></script>
+<script src="{{ 'isotope.js' | asset_url }}"></script>
+<script src="{{ 'tilt.js' | asset_url }}"></script>
+<script src="{{ 'jquery-ui-touch-punch.js' | asset_url }}"></script>
+<script src="{{ 'jquery-ui.js' | asset_url }}"></script>
+<script src="{{ 'easyzoom.js' | asset_url }}"></script>
+<script src="{{ 'resizesensor.js' | asset_url }}"></script>
+<script src="{{ 'sticky-sidebar.js' | asset_url }}"></script>
+<script src="{{ 'scrollup.js' | asset_url }}"></script>
+<script src="{{ 'ajax-mail.js' | asset_url }}"></script>
+<script src="{{ 'vendor.js' | asset_url }}"></script>
+
+<!-- Ajax Cart js -->
+<script src="{{ 'option_selection.js' | shopify_asset_url }}"></script>
+<script src="{{ 'api.jquery.js' | shopify_asset_url }}"></script>
+<script src="{{ 'cart.api.js' | asset_url }}"></script>
+
+<!-- Your main.js file upload this file -->
+<script src="{{ 'theme.js' | asset_url }}"></script>

@@ -1,0 +1,993 @@
+{% if section.settings.banner_grid_style == 'banner_grid_style_1' %}
+<div class="banner-area" id="section-{{ section.id }}">
+  <div class="container{% if section.settings.fullwidth_on %}-fluid{% endif %}">
+    <div class="row">
+      
+      {% for block in section.blocks %}
+      {% case block.type %}
+      {% when 'banner_grid' %}
+      <div class="col-lg-{{ block.settings.banner_col }} col-md-{{ block.settings.banner_col_md }}">
+         <div class="banner-wrap banner-{{ block.id }} banner-zoom mb-30">
+          <div class="banner-img">
+            <a href="{{ block.settings.banner_button_url }}"><img src="{% if block.settings.banner_images %}{{ block.settings.banner_images | img_url: 'master' }}{% else %}https://via.placeholder.com/370x247 {% endif %}" class="lazyload" alt="banner"></a>
+            {%if block.settings.salse_discount != '' %}
+            <div class="banner-badge">
+              <span>{{ block.settings.salse_discount }}</span>
+            </div>
+            {% endif %}
+          </div>
+          
+          <div class="banner-content-1 banner-position-1">
+            {%if block.settings.banner_sub_title != '' %}
+            <h5>{{ block.settings.banner_sub_title }}</h5>
+            {% endif %}
+            {%if block.settings.banner_title != '' %}
+            <h2 class="yellow">{{ block.settings.banner_title }}</h2>
+            {% endif %}
+            {%if block.settings.banner_price != '' %}
+            <span>{{ block.settings.banner_price }}</span>
+            {% endif %}
+            {%if block.settings.banner_button_title != '' %}
+            <div class="btn-style-3 btn-hover-2">
+              <a class="animated bs3-white-text bs3-yellow-bg bs3-ptb-2 bs3-border-radius ptb-2-white-hover" href="{{ block.settings.banner_button_url }}">{{ block.settings.banner_button_title }}</a>
+            </div>
+            {% endif %}
+          </div>
+          {%if block.settings.banner_title_2 != '' %}
+          <div class="banner-content-2 banner-position-2">
+            <h2><a href="{{ block.settings.banner_button_url }}">{{ block.settings.banner_title_2 }}</a></h2>
+          </div>
+          {% endif %}
+        </div>
+        
+        <style>
+          .banner-wrap.banner-{{ block.id }} .banner-content-1 h5 {
+            color: {{ block.settings.banner_sub_title_color }};
+          }
+          .banner-wrap.banner-{{ block.id }} .banner-content-1 h2.yellow {
+            color: {{ block.settings.banner_title_color }};
+          }
+          .banner-wrap.banner-{{ block.id }} .banner-content-1 span {
+            color: {{ block.settings.banner_price_color }};
+          }
+          .banner-{{ block.id }} .btn-style-3 a.bs3-yellow-bg {
+            background-color: {{ block.settings.banner_btn_bg }};
+          }
+          .banner-{{ block.id }} .btn-style-3 a.bs3-white-text {
+            color: {{ block.settings.banner_text_bg }};
+          }
+          .banner-{{ block.id }} .btn-hover-2 a.ptb-2-white-hover::after {
+            background: {{ block.settings.banner_btn_bg_hov }};
+          }
+          .banner-{{ block.id }} .btn-style-3 a.bs3-white-text:hover {
+            color: {{ block.settings.banner_text_bg_hov }};
+          }
+          .banner-wrap.banner-{{ block.id }} .banner-img .banner-badge span {
+            color: {{ block.settings.banner_discount_text_color }};
+            background-color: {{ block.settings.banner_discount_bg_color }};
+          }
+          .banner-wrap.banner-{{ block.id }} .banner-content-2 h2 a {
+            color: {{ block.settings.banner_title2_color }};
+          }
+
+        </style>
+        
+      </div>
+	  {% endcase %}
+      {% endfor %}
+
+    </div>
+  </div>
+</div>
+
+{% elsif section.settings.banner_grid_style == 'banner_grid_style_2' %}
+
+
+<div class="collection-area section-padding-4 padding-37-row-col mt-50" id="section-{{ section.id }}">
+  <div class="container{% if section.settings.fullwidth_on %}-fluid{% endif %}">
+    <div class="row">
+      {% for block in section.blocks %}
+      {% case block.type %}
+      {% when 'banner_grid2' %}
+      <div class="col-lg-{{ block.settings.banner_col }} col-md-{{ block.settings.banner_col_md }}">
+        <div class="collection-img-2 mb-37">
+          <a href="{{ block.settings.banner_url }}">
+            <img src="{% if block.settings.banner_images %}{{ block.settings.banner_images | img_url: 'master' }}{% else %}https://via.placeholder.com/711x661 {% endif %}" class="lazyload" alt="banner">
+          </a>
+        </div>
+      </div>
+      {% when 'banner_grid_dubble2' %}
+      <div class="col-lg-{{ block.settings.banner_col }} col-md-{{ block.settings.banner_col_md }}">
+        <div class="collection-img-2 mb-37">
+          <a href="{{ block.settings.banner_url_1 }}">
+            <img src="{% if block.settings.banner_images_1 %}{{ block.settings.banner_images_1 | img_url: 'master' }}{% else %}https://via.placeholder.com/711x312 {% endif %}" class="lazyload" alt="banner">
+          </a>
+        </div>
+        <div class="collection-img-2 mb-37">
+          <a href="{{ block.settings.banner_url_2 }}">
+            <img src="{% if block.settings.banner_images_2 %}{{ block.settings.banner_images_2 | img_url: 'master' }}{% else %}https://via.placeholder.com/711x312 {% endif %}" class="lazyload" alt="banner">
+          </a>
+        </div>
+      </div>
+      {% endcase %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+
+{% elsif section.settings.banner_grid_style == 'banner_grid_style_3' %}
+
+
+<div class="furniture-banner-area" id="section-{{ section.id }}">
+  <div class="row no-gutters grid-2">
+    {% for block in section.blocks %}
+    {% case block.type %}
+    {% when 'banner_grid3' %}
+    <div class="col-lg-{{ block.settings.banner_col }} col-md-{{ block.settings.banner_col_md }} grid-item-2">
+      <div class="furniture-banner-wrap">
+        <a href="{{ block.settings.button_url }}">
+          <img src="{% if block.settings.banner_images %}{{ block.settings.banner_images | img_url: 'master' }}{% else %}https://via.placeholder.com/960x750 {% endif %}" class="lazyload" alt="banner">
+        </a>
+        <div class="furniture-banner-content-wrap">
+          <div class="furniture-banner-content">
+            {%if block.settings.banner_title != '' %}
+            <h2>{{ block.settings.banner_title }}</h2>
+            {% endif %}
+            {%if block.settings.banner_desc != '' %}
+            <p>{{ block.settings.banner_desc }}</p>
+            {% endif %}
+            {%if block.settings.button_title != '' %}
+            <div class="slider-btn-1 btn-hover">
+              <a class="animated slider-btn-1-bg-white slider-btn-1-ptb theme-color-yellow-2-hover" href="{{ block.settings.button_url }}">{{ block.settings.button_title }} </a>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+    {% when 'banner_grid_dubble3' %}
+    <div class="col-lg-{{ block.settings.banner_col }} col-md-{{ block.settings.banner_col_md }} grid-item-2">
+      <div class="furniture-banner-wrap">
+        <a href="{{ block.settings.button_url }}">
+          <img src="{% if block.settings.banner_images %}{{ block.settings.banner_images | img_url: 'master' }}{% else %}https://via.placeholder.com/960x375 {% endif %}" class="lazyload" alt="banner">
+        </a>
+        <div class="furniture-banner-content-wrap">
+          <div class="furniture-banner-content">
+            {%if block.settings.banner_title != '' %}
+            <h2>{{ block.settings.banner_title }}</h2>
+            {% endif %}
+            {%if block.settings.banner_desc != '' %}
+            <p>{{ block.settings.banner_desc }}</p>
+            {% endif %}
+            {%if block.settings.button_title != '' %}
+            <div class="slider-btn-1 btn-hover">
+              <a class="animated slider-btn-1-bg-white slider-btn-1-ptb theme-color-yellow-2-hover" href="{{ block.settings.button_url }}">{{ block.settings.button_title }} </a>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      <div class="furniture-banner-wrap">
+        <a href="{{ block.settings.button_url2 }}">
+          <img src="{% if block.settings.banner_images2 %}{{ block.settings.banner_images2 | img_url: 'master' }}{% else %}https://via.placeholder.com/960x375 {% endif %}" class="lazyload" alt="banner">
+        </a>
+        <div class="furniture-banner-content-wrap">
+          <div class="furniture-banner-content">
+            {%if block.settings.banner_title2 != '' %}
+            <h2>{{ block.settings.banner_title2 }}</h2>
+            {% endif %}
+            {%if block.settings.banner_desc2 != '' %}
+            <p>{{ block.settings.banner_desc2 }}</p>
+            {% endif %}
+            {%if block.settings.button_title2 != '' %}
+            <div class="slider-btn-1 btn-hover">
+              <a class="animated slider-btn-1-bg-white slider-btn-1-ptb theme-color-yellow-2-hover" href="{{ block.settings.button_url2 }}">{{ block.settings.button_title2 }} </a>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endcase %}
+    {% endfor %}
+
+  </div>
+</div>
+
+{% elsif section.settings.banner_grid_style == 'banner_grid_style_4' %}
+
+<div class="handmade-collection-area pt-115 pb-90 section-padding-1 padding-20-row-col" id="section-{{ section.id }}">
+  <div class="container{% if section.settings.fullwidth_on %}-fluid{% endif %}">
+    <div class="section-title-6 st-handmade text-center mb-55">
+      {%if section.settings.section_subtitle != '' %}
+      <h4>{{ section.settings.section_subtitle }}</h4>
+      {% endif %}
+      {%if section.settings.section_title != '' %}
+      <h2>{{ section.settings.section_title }}</h2>
+      {% endif %}
+      {%if section.settings.section_desc != '' %}
+      <p>{{ section.settings.section_desc }}</p>
+      {% endif %}
+    </div>
+
+    <div class="row grid">
+      {% for block in section.blocks %}
+      {% case block.type %}
+      {% when 'banner_grid_4' %}
+      <div class="col-lg-{{ block.settings.banner_col }} col-md-{{ block.settings.banner_col_md }} col-sm-{{ block.settings.banner_col_sm }} col-12 grid-item">
+        <div class="single-collection-wrap-2 blo-{{ block.id }} mb-20">
+          <a href="{{ block.settings.button_url }}">
+            <img src="{% if block.settings.banner_images %}{{ block.settings.banner_images | img_url: 'master' }}{% else %}https://via.placeholder.com/625x596 {% endif %}" class="lazyload" alt="banner">
+          </a>
+          {%if block.settings.banner_title != '' %}
+          <div class="collection-content-wrap-2">
+            <h3><a href="{{ block.settings.button_url }}">{{ block.settings.banner_title }}</a></h3>
+          </div>
+          {% endif %}
+        </div>
+        
+        
+        <style>
+          .single-collection-wrap-2.blo-{{ block.id }} > a:before {
+            background-color: {{ block.settings.banner_overlay_color }};
+          }
+          .single-collection-wrap-2 .collection-content-wrap-2.blo-{{ block.id }} h3 a {
+            color: {{ block.settings.banner_title_color }};
+          }
+          .single-collection-wrap-2 .collection-content-wrap-2.blo-{{ block.id }} h3:before {
+            background-color: {{ block.settings.banner_border_color }};
+          }
+          .single-collection-wrap-2 .collection-content-wrap-2.blo-{{ block.id }} h3:after {
+            background-color: {{ block.settings.banner_border_color }};
+          }
+
+        </style>
+        
+        
+      </div>
+      {% endcase %}
+      {% endfor %}
+
+    </div>
+  </div>
+</div>
+
+{% endif %}
+
+
+
+
+
+{%- style -%}
+  #section-{{ section.id }}{
+    {%- for block in section.blocks -%}
+    {%- case block.type -%}
+    {%- when 'section_margin' -%}
+    margin-top: {{ block.settings.section_margin_top }}px;
+    margin-bottom: {{ block.settings.section_margin_bottom }}px;
+    {%- when 'section_padding' -%}
+    padding-top: {{ block.settings.section_padding_top }}px;
+    padding-bottom: {{ block.settings.section_padding_bottom }}px;
+    {%- when 'section_background' -%}    
+    background: {{ block.settings.section_bg_color }} 
+      {%- if block.settings.section_bg_image -%}url("{{ block.settings.section_bg_image | img_url: 'master' }}"){%- endif -%} no-repeat scroll center center / cover;
+    {%- endcase -%}
+    {%- endfor -%}
+  }
+  @media (min-width: 768px) and (max-width: 991px) {
+    #section-{{ section.id }}{
+      {%- for block in section.blocks -%}
+      {% case block.type %}
+      {%- when 'section_margin' -%}
+      margin-top: {{ block.settings.section_margin_top_md }}px;
+      margin-bottom: {{ block.settings.section_margin_bottom_md }}px;
+      {%- when 'section_padding' -%}
+      padding-top: {{ block.settings.section_padding_top_md }}px;
+      padding-bottom: {{ block.settings.section_padding_bottom_md }}px;
+      {%- endcase -%}
+      {%- endfor -%}
+    }
+  }
+  @media (max-width: 767px) {
+    #section-{{ section.id }}{
+      {%- for block in section.blocks -%}
+      {%- case block.type -%}
+      {%- when 'section_margin' -%}
+      margin-top: {{ block.settings.section_margin_top_xs }}px;
+      margin-bottom: {{ block.settings.section_margin_bottom_xs }}px;
+      {%- when 'section_padding' -%}
+      padding-top: {{ block.settings.section_padding_top_xs }}px;
+      padding-bottom: {{ block.settings.section_padding_bottom_xs }}px;
+      {%- endcase -%}
+      {%- endfor -%}
+    }
+  }
+{%- endstyle -%}
+
+
+{% schema %}
+  	{
+		"name": "Banner Grid",
+		"settings": [
+    		{
+              "type": "select",
+              "id": "banner_grid_style",
+              "label": "Select Banner Grid Style",
+              "options":[
+                {
+                  "value":"banner_grid_style_1",
+                  "label": "Banner Grid Style One"
+                },
+                {
+                  "value":"banner_grid_style_2",
+                  "label": "Banner Grid Style Two"
+                },
+                {
+                  "value":"banner_grid_style_3",
+                  "label": "Banner Grid Style Three"
+                },
+				{
+                  "value":"banner_grid_style_4",
+                  "label": "Banner Grid Style Four"
+                }
+              ],
+
+              "default": "banner_grid_style_1"
+            },
+            {
+              "type": "header",
+              "content": "Banner Width Control"
+            },
+            {
+              "type": "checkbox",
+              "id": "fullwidth_on",
+              "label": "Full Width Enable",
+              "default": false,
+              "info": "If you want Full Width click checkbox"
+            },
+			{
+              "type": "header",
+              "content": "Banner Section Title"
+            },
+			{
+              "type": "text",
+              "id": "section_subtitle",
+              "label": "Section Subtitle",
+			  "default": "Top collections"
+            },
+            {
+              "type": "text",
+              "id": "section_title",
+              "label": "Section Title",
+			  "default": "Welcome to Handmade Website"
+            },
+			{
+              "type": "text",
+              "id": "section_desc",
+              "label": "Section Description",
+			  "default": "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas venenatis posuere volutpat. Mauris laore"
+            }
+		],
+        "blocks":[
+				{
+                  "type": "banner_grid",
+                  "name": "Banner Grid Style One",
+                  "settings": [
+                      {
+                        "type": "range",
+                        "id": "banner_col",
+                        "min": 1,
+                        "max": 12,
+                        "step": 1,
+                        "label": "Column",
+                        "default": 4,
+                        "info": "Follow Bootstrap-4 Column"
+                      },
+					  {
+                        "type": "range",
+                        "id": "banner_col_md",
+                        "min": 1,
+                        "max": 12,
+                        "step": 1,
+                        "label": "Column",
+                        "default": 6,
+                        "info": "Follow Bootstrap-4 Column"
+                      },
+                      {
+                          "type": "image_picker",
+                          "id": "banner_images",
+                          "label": "Banner Images",
+                          "info": "Recommended Size: 634 x 736px"
+                      },
+                      {
+                        "type": "text",
+                        "id": "banner_sub_title",
+                        "label": "Banner Sub Title",
+                        "default": "Gaming Headset for PS4"
+                      },
+                      {
+                        "type": "text",
+                        "id": "banner_title",
+                        "label": "Banner Offer Title",
+                        "default": "Sale Off 30%"
+                      },
+					  {
+                        "type": "text",
+                        "id": "banner_price",
+                        "label": "Banner Price",
+                        "default": "only $138.00"
+                      },
+					  {
+                        "type": "text",
+                        "id": "banner_button_title",
+                        "label": "Banner Button Title",
+                        "default": "Shop Now"
+                      },
+					  {
+                        "type": "url",
+                        "id": "banner_button_url",
+                        "label": "Banner Button URL"
+                      },
+					  {
+                        "type": "text",
+                        "id": "banner_title_2",
+                        "label": "Banner Title Two"
+                      },
+					  {
+                        "type": "text",
+                        "id": "salse_discount",
+                        "label": "sales discounts"
+                      },
+                      {
+                        "type": "header",
+                        "content": "Banner Grid Style"
+                      },
+                      {
+                        "type": "color",
+                        "id": "banner_sub_title_color",
+                        "label": "Banner Subtitle Color",
+                        "default": "#fff"
+                      },
+					  {
+                        "type": "color",
+                        "id": "banner_title_color",
+                        "label": "Banner title Color",
+                        "default": "#ffe30b"
+                      },
+					  {
+                        "type": "color",
+                        "id": "banner_price_color",
+                        "label": "Banner Price Color",
+                        "default": "#ff6e21"
+                      },
+					  {
+                        "type": "color",
+                        "id": "banner_btn_bg",
+                        "label": "Banner Button BG Color",
+                        "default": "#ff6e21"
+                      },
+					  {
+                        "type": "color",
+                        "id": "banner_btn_bg_hov",
+                        "label": "Banner Button Hover BG Color",
+                        "default": "#fff"
+                      },
+					  {
+                        "type": "color",
+                        "id": "banner_text_bg_hov",
+                        "label": "Banner Button Hover text Color",
+                        "default": "#393939"
+                      },
+					  {
+                        "type": "color",
+                        "id": "banner_discount_bg_color",
+                        "label": "Banner sales discounts BG Color",
+                        "default": "#ff6e21"
+                      },
+					  {
+                        "type": "color",
+                        "id": "banner_discount_text_color",
+                        "label": "Banner sales discounts Color",
+                        "default": "#fff"
+                      },
+					  {
+                        "type": "color",
+                        "id": "banner_title2_color",
+                        "label": "Banner Title Two Color",
+                        "default": "#1b1b1b"
+                      }
+				]
+               },
+			   {
+                  "type": "banner_grid2",
+                  "name": "Banner Single Style Two",
+                  "settings": [
+                      {
+                        "type": "range",
+                        "id": "banner_col",
+                        "min": 1,
+                        "max": 12,
+                        "step": 1,
+                        "label": "Column",
+                        "default": 6,
+                        "info": "Follow Bootstrap-4 Column"
+                      },
+					  {
+                        "type": "range",
+                        "id": "banner_col_md",
+                        "min": 1,
+                        "max": 12,
+                        "step": 1,
+                        "label": "Column",
+                        "default": 6,
+                        "info": "Follow Bootstrap-4 Column"
+                      },
+                      {
+                          "type": "image_picker",
+                          "id": "banner_images",
+                          "label": "Banner Images",
+                          "info": "Recommended Size: 711 x 661px"
+                      },
+					  {
+                        "type": "url",
+                        "id": "banner_url",
+                        "label": "Banner URL"
+                      }
+				 ]
+               },
+			   {
+                  "type": "banner_grid_dubble2",
+                  "name": "Banner Dubble Style Two",
+                  "settings": [
+                      {
+                        "type": "range",
+                        "id": "banner_col",
+                        "min": 1,
+                        "max": 12,
+                        "step": 1,
+                        "label": "Column",
+                        "default": 6,
+                        "info": "Follow Bootstrap-4 Column"
+                      },
+					  {
+                        "type": "range",
+                        "id": "banner_col_md",
+                        "min": 1,
+                        "max": 12,
+                        "step": 1,
+                        "label": "Column",
+                        "default": 6,
+                        "info": "Follow Bootstrap-4 Column"
+                      },
+                      {
+                          "type": "image_picker",
+                          "id": "banner_images_1",
+                          "label": "Banner Images",
+                          "info": "Recommended Size: 711 x 312px"
+                      },
+					  {
+                        "type": "url",
+                        "id": "banner_url_1",
+                        "label": "Banner URL One"
+                      },
+					  {
+                          "type": "image_picker",
+                          "id": "banner_images_2",
+                          "label": "Banner Images",
+                          "info": "Recommended Size: 711 x 312px"
+                      },
+					  {
+                        "type": "url",
+                        "id": "banner_url_2",
+                        "label": "Banner URL Two"
+                      }
+				 ]
+               },
+			   {
+                  "type": "banner_grid3",
+                  "name": "Banner Single Style Three",
+                  "settings": [
+                      {
+                        "type": "range",
+                        "id": "banner_col",
+                        "min": 1,
+                        "max": 12,
+                        "step": 1,
+                        "label": "Column",
+                        "default": 6,
+                        "info": "Follow Bootstrap-4 Column"
+                      },
+					  {
+                        "type": "range",
+                        "id": "banner_col_md",
+                        "min": 1,
+                        "max": 12,
+                        "step": 1,
+                        "label": "Column",
+                        "default": 12,
+                        "info": "Follow Bootstrap-4 Column"
+                      },
+                      {
+                          "type": "image_picker",
+                          "id": "banner_images",
+                          "label": "Banner Images",
+                          "info": "Recommended Size: 960 x 750 px"
+                      },
+					  {
+                        "type": "text",
+                        "id": "banner_title",
+                        "label": "Banner Title",
+                        "default": "Modern Kitchen Design"
+                      },
+					  {
+                        "type": "text",
+                        "id": "banner_desc",
+                        "label": "Banner Description"
+                      },
+					  {
+                        "type": "text",
+                        "id": "button_title",
+                        "label": "Button Title",
+                        "default": "Shop Now"
+                      },
+					  {
+                        "type": "url",
+                        "id": "button_url",
+                        "label": "Button URL"
+                      }
+				 ]
+               },
+			   {
+                  "type": "banner_grid_dubble3",
+                  "name": "Banner Dubble Style Three",
+                  "settings": [
+                      {
+                        "type": "range",
+                        "id": "banner_col",
+                        "min": 1,
+                        "max": 12,
+                        "step": 1,
+                        "label": "Column",
+                        "default": 6,
+                        "info": "Follow Bootstrap-4 Column"
+                      },
+					  {
+                        "type": "range",
+                        "id": "banner_col_md",
+                        "min": 1,
+                        "max": 12,
+                        "step": 1,
+                        "label": "Column",
+                        "default": 12,
+                        "info": "Follow Bootstrap-4 Column"
+                      },
+                      {
+                          "type": "image_picker",
+                          "id": "banner_images",
+                          "label": "Banner Images One",
+                          "info": "Recommended Size: 960 x 375 px"
+                      },
+					  {
+                        "type": "text",
+                        "id": "banner_title",
+                        "label": "Banner Title One",
+                        "default": "Modern Kitchen Design"
+                      },
+					  {
+                        "type": "text",
+                        "id": "banner_desc",
+                        "label": "Banner Description One"
+                      },
+					  {
+                        "type": "text",
+                        "id": "button_title",
+                        "label": "Button Title One",
+                        "default": "Shop Now"
+                      },
+					  {
+                        "type": "url",
+                        "id": "button_url",
+                        "label": "Button URL One"
+                      },
+					  {
+                          "type": "image_picker",
+                          "id": "banner_images2",
+                          "label": "Banner Images Two",
+                          "info": "Recommended Size: 960 x 375 px"
+                      },
+					  {
+                        "type": "text",
+                        "id": "banner_title2",
+                        "label": "Banner Title Two",
+                        "default": "Modern Kitchen Design"
+                      },
+					  {
+                        "type": "text",
+                        "id": "banner_desc2",
+                        "label": "Banner Description Two"
+                      },
+					  {
+                        "type": "text",
+                        "id": "button_title2",
+                        "label": "Button Title Two",
+                        "default": "Shop Now"
+                      },
+					  {
+                        "type": "url",
+                        "id": "button_url2",
+                        "label": "Button URL Two"
+                      }
+				 ]
+               },
+				{
+                  "type": "banner_grid_4",
+                  "name": "Banner Style Four",
+                  "settings": [
+                      {
+                        "type": "range",
+                        "id": "banner_col",
+                        "min": 1,
+                        "max": 12,
+                        "step": 1,
+                        "label": "Column",
+                        "default": 4,
+                        "info": "Follow Bootstrap-4 Column"
+                      },
+					  {
+                        "type": "range",
+                        "id": "banner_col_md",
+                        "min": 1,
+                        "max": 12,
+                        "step": 1,
+                        "label": "Column",
+                        "default": 6,
+                        "info": "Follow Bootstrap-4 Column"
+                      },
+					  {
+                        "type": "range",
+                        "id": "banner_col_sm",
+                        "min": 1,
+                        "max": 12,
+                        "step": 1,
+                        "label": "Column",
+                        "default": 6,
+                        "info": "Follow Bootstrap-4 Column"
+                      },
+                      {
+                          "type": "image_picker",
+                          "id": "banner_images",
+                          "label": "Banner Images One",
+                          "info": "Recommended Size: 625 x 596 px"
+                      },
+					  {
+                        "type": "text",
+                        "id": "banner_title",
+                        "label": "Banner Title One",
+                        "default": "Jewelry handmade"
+                      },
+					  {
+                        "type": "url",
+                        "id": "button_url",
+                        "label": "Banner URL One"
+                      },
+                      {
+                        "type": "header",
+                        "content": "Banner Style"
+                      },
+					  {
+                        "type": "color",
+                        "id": "banner_overlay_color",
+                        "label": "Banner Overlay Color",
+                        "default": "#52e3b9"
+                      },
+                      {
+                        "type": "color",
+                        "id": "banner_title_color",
+                        "label": "Banner Title Color",
+                        "default": "#1b1b1b"
+                      },
+					  {
+                        "type": "color",
+                        "id": "banner_border_color",
+                        "label": "Banner Border Color",
+                        "default": "#1b1b1b"
+                      }
+				 ]
+               },
+               {
+                  "type": "section_margin",
+                  "name": "Section Margin",
+                  "limit": 1,
+                  "settings": [
+                    {
+                      "type": "header",
+                      "content": "Large/Desktop/Tablate Device"
+                    },
+                    {
+                      "type": "range",
+                      "id": "section_margin_top",
+                      "min": 0,
+                      "max": 150,
+                      "step": 5,
+                      "label": "Margin Top",
+                      "unit": "px",
+                      "default": 0
+                    },
+                    {
+                      "type": "range",
+                      "id": "section_margin_bottom",
+                      "min": 0,
+                      "max": 150,
+                      "step": 5,
+                      "label": "Margin Bottom",
+                      "unit": "px",
+                      "default": 0
+                    },
+                    {
+                      "type": "header",
+                      "content": "Mobile Device"
+                    },
+                    {
+                      "type": "range",
+                      "id": "section_margin_top_xs",
+                      "min": 0,
+                      "max": 150,
+                      "step": 5,
+                      "label": "Margin Top",
+                      "unit": "px",
+                      "default": 0
+                    },
+                    {
+                      "type": "range",
+                      "id": "section_margin_bottom_xs",
+                      "min": 0,
+                      "max": 150,
+                      "step": 5,
+                      "label": "Margin Bottom",
+                      "unit": "px",
+                      "default": 0
+                    }
+                  ]
+               },
+               {
+                  "type": "section_padding",
+                  "name": "Section Padding",
+                  "limit": 1,
+                  "settings": [
+                    {
+                      "type": "header",
+                      "content": "Large/Desktop/Tablate Device"
+                    },
+                    {
+                      "type": "range",
+                      "id": "section_padding_top",
+                      "min": 0,
+                      "max": 150,
+                      "step": 5,
+                      "label": "Padding Top",
+                      "unit": "px",
+                      "default": 50
+                    },
+                    {
+                      "type": "range",
+                      "id": "section_padding_bottom",
+                      "min": 0,
+                      "max": 150,
+                      "step": 5,
+                      "label": "Padding Bottom",
+                      "unit": "px",
+                      "default": 85
+                    },
+                    {
+                      "type": "header",
+                      "content": "Mobile Device"
+                    },
+                    {
+                      "type": "range",
+                      "id": "section_padding_top_xs",
+                      "min": 0,
+                      "max": 150,
+                      "step": 5,
+                      "label": "Padding Top",
+                      "unit": "px",
+                      "default": 30
+                    },
+                    {
+                      "type": "range",
+                      "id": "section_padding_bottom_xs",
+                      "min": 0,
+                      "max": 150,
+                      "step": 5,
+                      "label": "Padding Bottom",
+                      "unit": "px",
+                      "default": 65
+                    }
+                  ]
+               },
+               {
+                  "type": "section_background",
+                  "name": "Section Background",
+                  "limit": 1,
+                  "settings": [
+                    {
+                      "type": "image_picker",
+                      "id": "section_bg_image",
+                      "label": "BG Image"
+                    },
+                    {
+                      "type": "color",
+                      "id": "section_bg_color",
+                      "label": "BG Color",
+                      "default": "#ffffff"
+                    }
+                  ]
+               }
+
+            ],
+
+        "presets":[
+                {
+                    "name": "Banner Grid",
+                    "category": "2. Banner",
+                    "blocks":[
+                        {
+                            "type": "banner_grid"
+                        },
+						{
+                            "type": "banner_grid"
+                        },
+						{
+                            "type": "banner_grid"
+                        },
+						{
+                            "type": "banner_grid_dubble2"
+                        },
+						{
+                            "type": "banner_grid2"
+                        },
+						{
+                            "type": "banner_grid_dubble3"
+                        },
+						{
+                            "type": "banner_grid3"
+                        },
+						{
+                            "type": "banner_grid3"
+                        },
+						{
+                            "type": "banner_grid3"
+                        },
+						{
+                            "type": "banner_grid_4"
+                        },
+						{
+                            "type": "banner_grid_4"
+                        },
+						{
+                            "type": "banner_grid_4"
+                        },
+						{
+                            "type": "banner_grid_4"
+                        },
+						{
+                            "type": "banner_grid_4"
+                        },
+						{
+                            "type": "section_padding"
+                        }
+                    ]
+                }
+            ]
+
+
+ 	 }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+
+

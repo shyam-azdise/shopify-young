@@ -1,0 +1,178 @@
+<div class="shop-top-bar collection-shorting">
+  
+  <div class="shop-top-bar-left">
+    <div class="shop-page-list">
+      {%- if section.settings.show_ajax_paginate -%}
+      {% assign ajax_show_title = section.settings.ajax_show_title_handle | split: "|" %}
+      <div class="page-show"><span>{{ ajax_show_title | slice: 0 }} Show :</span>
+        <div class="shop-select">
+          <select name="paginateBy" id="paginateBy" class="collection-sort__input">
+            {% for i in (4..50) %}
+            {% assign v = i | append:'' %}
+            <option value="{{ v }}"
+                    {% if cart.attributes.pagination != blank and cart.attributes.pagination %}
+                    {% if cart.attributes.pagination == v %} selected{% endif %}
+                    {% else %}
+                    {% if i == products_limit %} selected{% endif %}
+                    {% endif %}>
+              {{ i }} 
+            </option>
+            {% endfor %}
+          </select>
+          <span>{{ ajax_show_title | slice: 1, 10 }}</span>
+        </div>
+      </div>
+      {%- endif -%}
+    </div>
+  </div>
+
+  <div class="shop-top-bar-right">
+    
+    <div class="shop-tab nav">
+      
+      <a href="#shop-1" {% if section.settings.product_column == 'list_view' %}class="active"{% endif %} data-toggle="tab"><i class=" ti-view-list-alt "></i></a>
+      <a href="#shop-2" {% if section.settings.product_column == '2_coll' %}class="active"{% endif %} data-toggle="tab"><i class="ti-layout-grid2"></i></a>
+      <a href="#shop-3" {% if section.settings.product_column == '3_coll' %}class="active"{% endif %} data-toggle="tab"><i class="ti-layout-grid3"></i></a>
+      {% if section.settings.fullwidth_on %}
+      {% if section.settings.sidebar_handle == 'without_sidebar' %}
+      <a href="#shop-4" {% if section.settings.product_column == '4_coll' %}class="active"{% endif %} data-toggle="tab"><i class="ti-layout-grid4"></i></a>
+      {% endif %}
+      {% endif %}
+    </div>
+    
+ 
+    
+    {%- if section.settings.short_by_enable -%}
+    <div class="short-list shop-short-by ml-40">
+      <span>{{ 'collections.sorting.title' | t }} <i class="fa fa-angle-down angle-down"></i></span>
+      <ul name="SortBy" id="SortBy">
+        <li class="active"><a href="#" value="manual">{{ 'collections.sorting.featured' | t }}</a></li>
+        <li><a href="#" value="best-selling">{{ 'collections.sorting.best_selling' | t }}</a></li>
+        <li><a href="#" value="title-ascending">{{ 'collections.sorting.az' | t }}</a></li>
+        <li><a href="#" value="title-descending">{{ 'collections.sorting.za' | t }}</a></li>
+        <li><a href="#" value="price-ascending">{{ 'collections.sorting.price_ascending' | t }}</a></li>
+        <li><a href="#" value="price-descending">{{ 'collections.sorting.price_descending' | t }}</a></li>
+        <li><a href="#" value="created-descending">{{ 'collections.sorting.date_descending' | t }}</a></li>
+        <li><a href="#" value="created-ascending">{{ 'collections.sorting.date_ascending' | t }}</a></li>
+      </ul>
+    </div>
+    {%- endif -%}
+
+
+
+    <div class="shop-filter ml-25">
+      <a class="shop-filter-active" href="#">Filters <i class="fa fa-angle-down angle-down"></i></a>
+    </div>
+    
+  </div>
+  
+</div>
+
+
+
+{%comment%}
+
+<div class="collection-shorting">
+  {%- if section.settings.tab_bar_enable -%}
+  <div class="short-tab">
+    <button class="change-view{% unless template contains 'list' %} active{% endunless %}" data-view="grid">Grid</button>
+    <button class="change-view{% if template contains 'list' %} active{% endif %}" data-view="list">List</button>
+  </div>
+  {%- endif -%}
+
+
+  {%- if section.settings.showing_product_counter_enable -%}
+  {%- assign paginate_checker = paginate.current_page | times: products_limit -%}
+  {%- if paginate.items > paginate_checker -%}
+  {%- assign paginate_final = paginate_checker -%}
+  {%- else -%}
+  {%- assign paginate_final = paginate.items -%}
+  {%- endif -%}
+  
+  {% assign showing_title = section.settings.showing_title_handle | split: "|" %}
+  <div>{{ showing_title | slice: 0 }} 
+    {{ paginate.current_offset | plus: 1 }} - {{ paginate_final }} 
+    {{ showing_title | slice: 1 }} 
+    {{ paginate.items }} 
+    {{ showing_title | slice: 2 }} 
+  </div>
+  {%- endif -%}
+
+  {%- if section.settings.short_by_enable -%}
+  <div class="short-list">
+    <label for="SortBy">{{ 'collections.sorting.title' | t }}</label>
+    <select name="SortBy" id="SortBy">
+      <option value="manual">{{ 'collections.sorting.featured' | t }}</option>
+      <option value="best-selling">{{ 'collections.sorting.best_selling' | t }}</option>
+      <option value="title-ascending">{{ 'collections.sorting.az' | t }}</option>
+      <option value="title-descending">{{ 'collections.sorting.za' | t }}</option>
+      <option value="price-ascending">{{ 'collections.sorting.price_ascending' | t }}</option>
+      <option value="price-descending">{{ 'collections.sorting.price_descending' | t }}</option>
+      <option value="created-descending">{{ 'collections.sorting.date_descending' | t }}</option>
+      <option value="created-ascending">{{ 'collections.sorting.date_ascending' | t }}</option>
+    </select>
+  </div>
+  {%- endif -%}
+</div>
+
+{%endcomment%}
+
+
+
+
+
+<script>
+  
+  
+  
+  
+  
+  
+  Shopify.queryParams = {};
+  if (location.search.length) {
+    for (var aKeyValue, i = 0, aCouples = location.search.substr(1).split('&'); i < aCouples.length; i++) {
+      aKeyValue = aCouples[i].split('=');
+      if (aKeyValue.length > 1) {
+        Shopify.queryParams[decodeURIComponent(aKeyValue[0])] = decodeURIComponent(aKeyValue[1]);
+      }
+    }
+  }
+
+$(function() {
+    $('#SortBy')
+    .val('{{ collection.sort_by | default: collection.default_sort_by }}')
+         .bind('change', function() {
+      Shopify.queryParams.sort_by = jQuery(this).val();
+      location.search = jQuery.param(Shopify.queryParams);
+    }
+    );
+  });
+
+  
+  {% if section.settings.show_ajax_paginate %}
+  $('#paginateBy').on('change', function(){
+    var val = $(this).val();
+    $.ajax({
+      type: "POST",
+      url: '/cart.js',
+      data: {"attributes[pagination]": val},
+      success: function(d){
+        window.location.reload();
+      },
+      dataType: 'json'
+    });
+  });
+  {% endif %}
+  
+  
+  
+  /*-----------------------
+        Shop filter active 
+    ------------------------- */
+    $('.shop-filter-active').on('click', function(e) {
+      e.preventDefault();
+      $('.product-filter-wrapper').slideToggle();
+    })
+  
+  
+</script>

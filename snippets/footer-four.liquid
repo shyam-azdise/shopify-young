@@ -1,0 +1,112 @@
+<footer class="footer-area pt-35" id="section-{{ section.id }}">
+  <div class="container{% if section.settings.fullwidth_on %}-fluid{% endif %}">
+    <div class="row">
+      {% for block in section.blocks %}
+      {% case block.type %}
+      {% when 'footer_logo' %}
+      <div class="col-xl-3 col-lg-{{ section.settings.logo_col }} col-md-{{ section.settings.logo_col_md }} col-sm-12">
+        {% if block.settings.footer_logo != '' %}
+        <div class="footer-logo organic-footer-logo">
+          <a href="/">
+            <img src="{% if block.settings.footer_logo %}{{ block.settings.footer_logo | img_url: 'master' }}
+                                    {% else %}https://via.placeholder.com/182x67 {% endif %}"  class="lazyload" alt="{{ block.settings.footer_logo.alt }}">
+          </a>
+        </div>
+        {% endif %}
+      </div>
+
+      {% when 'about_us' %}
+      <div class="col-lg-{{ block.settings.about_col_lg }} col-md-{{ block.settings.about_col_md }} col-sm-6 col-12">
+        <div class="footer-widget mb-45">
+          {%- if block.settings.footer_about_title != '' -%}
+          <h3 class="footer-title-4">{{ block.settings.footer_about_title }}</h3>
+          {%- endif -%}
+          <div class="footera-about-2">
+            <p>{{ block.settings.about_support_content }}</p>
+          </div>
+        </div>
+      </div>
+
+      {% when 'contact_info' %}
+      <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
+        <div class="footer-widget mb-45">
+          {%- if block.settings.contact_info_title != '' -%}
+          <h3 class="footer-title-4">{{ block.settings.contact_info_title }}</h3>
+          {%- endif -%}
+          
+          <div class="footer-contact-wrap">
+            {% if block.settings.footer_info_1_content != '' %}
+            <div class="single-footer-contact fc-green-3">
+              {% if block.settings.footer_info_1_icon != '' %}
+              <div class="footer-contact-icon">
+                <i class="fa fa-{{ block.settings.footer_info_1_icon }}"></i>
+              </div>
+              {% endif %}
+              <div class="footer-contact-text">
+                <p>{{ block.settings.footer_info_1_content }}</p>
+              </div>
+            </div>
+            {% endif %}
+			{% if block.settings.footer_info_2_content != '' %}
+            <div class="single-footer-contact fc-green-3">
+              {% if block.settings.footer_info_2_icon != '' %}
+              <div class="footer-contact-icon">
+                <i class="fa fa-{{ block.settings.footer_info_2_icon }}"></i>
+              </div>
+              {% endif %}
+              <div class="footer-contact-text">
+                <p>{{ block.settings.footer_info_2_content }}</p>
+              </div>
+            </div>
+            {% endif %}
+
+            {% if block.settings.footer_info_3_content != '' %}
+            <div class="single-footer-contact fc-green-3">
+              {% if block.settings.footer_info_3_icon != '' %}
+              <div class="footer-contact-icon">
+                <i class="fa fa-{{ block.settings.footer_info_3_icon }}"></i>
+              </div>
+              {% endif %}
+              <div class="footer-contact-text">
+                <p>{{ block.settings.footer_info_3_content }}</p>
+              </div>
+            </div>
+            {% endif %}
+            
+            
+            {% if block.settings.footer_info_4_content != '' %}
+            <div class="single-footer-contact fc-green-3">
+              {% if block.settings.footer_info_4_icon != '' %}
+              <div class="footer-contact-icon">
+                <i class="fa fa-{{ block.settings.footer_info_4_icon }}"></i>
+              </div>
+              {% endif %}
+              <div class="footer-contact-text">
+                <p>{{ block.settings.footer_info_4_content }}</p>
+              </div>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+      {% endcase %}
+      {% endfor %}
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div class="copyright text-center copyright-ptb copyright-uppercase">
+          <p><a target="_blank" href="{{ section.settings.copy_ritht_url }}">{{ section.settings.copy_ritht_text }}</a></p>
+        </div>
+      </div>
+    </div>
+  </div> 
+  
+  {% if section.settings.right_bg_image4 %}
+  <div class="footer-organic-img">
+    <img src="{{ section.settings.right_bg_image4 | img_url: 'master' }}" class="lazyload" alt="">
+  </div>
+  {% endif %}
+  
+  
+</footer>

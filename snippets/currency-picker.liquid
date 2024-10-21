@@ -1,0 +1,15 @@
+<div class="switcher-currency-trigger currency">
+  <ul>
+    <li class="currency-trigger"><a class="current-currency" href="#">{{ shop.currency }} </a><i class="fa fa-angle-down"></i>
+      {% assign currency = settings.supported_currencies | split: '|' %}
+      <ul class="switcher-dropdown" id="currencies">
+        {% for value in currency %}
+        {% assign array = value | split: ',' %}
+        {% assign iso_4217 = array[0] | upcase | strip %}
+        {% assign name = array[1] | strip %}
+        <li data-currency="{{ iso_4217 }}" class="currency__item"><a style="cursor: pointer">{{ name }}</a></li>
+        {% endfor %}
+      </ul>
+    </li>
+  </ul>    
+</div>

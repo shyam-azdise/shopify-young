@@ -1,0 +1,625 @@
+{% comment %} Check the mobile header. If it's similar your theme then use it, otherwise remove it.
+{% include 'mobile-header' %}
+{% endcomment %}
+
+{% if section.settings.header_style == 'header_style_1' %}
+{% include 'header-one' %}
+{% elsif section.settings.header_style == 'header_style_2' %}
+{% include 'header-two' %}
+{% elsif section.settings.header_style == 'header_style_3' %}
+{% include 'header-three' %}
+{% elsif section.settings.header_style == 'header_style_4' %}
+{% include 'header-four' %}
+{% elsif section.settings.header_style == 'header_style_5' %}
+{% include 'header-five' %}
+{% elsif section.settings.header_style == 'header_style_6' %}
+{% include 'header-six' %}
+{% elsif section.settings.header_style == 'header_style_7' %}
+{% include 'header-seven' %}
+{% elsif section.settings.header_style == 'header_style_8' %}
+{% include 'header-eight' %}
+{% elsif section.settings.header_style == 'header_style_9' %}
+{% include 'header-nine' %}
+{% endif %}
+
+
+
+
+<style>
+  .theme-logo img{
+    max-width: {{ section.settings.logo_width }}px;
+  }
+  
+  /* Header Top Bg Color */
+  .bg-gray {
+    background-color: {{ section.settings.header_top_bg_color }};
+  }
+  
+  /* Header Social Icon Style */
+  .social-icon-style.social-font-dec a {
+    font-size: {{ section.settings.Social_Icon_Size }}px;
+    color: {{ section.settings.Social_Icon_color }};
+  }
+  .social-icon-style.social-font-dec a:hover {
+    color: {{ section.settings.Social_Icon_color_hov }};
+  }
+  
+  /* Header Offer Message Style */
+  .free-delivery h4 {
+    font-size: {{ section.settings.Offer_message_Size }}px;
+    color: {{ section.settings.Offer_message_color }};
+  }
+  .free-delivery h4 span {
+    color: {{ section.settings.Offer_message_highlight_color }};
+  }
+  
+  /* Header Top Right Side Style */
+  .same-style-2 ul > li > a {
+    color: {{ section.settings.right_side_color }};
+    font-size: {{ section.settings.right_side_font_size }}px;
+  }
+  .goog-te-gadget-simple .goog-te-menu-value {
+    color: {{ section.settings.right_side_color }};
+    font-size: {{ section.settings.right_side_font_size }}px;
+  }
+  .same-style-2 ul > li > a:hover {
+    color: {{ section.settings.right_side_color_hov }};
+  }
+  .goog-te-gadget-simple .goog-te-menu-value:hover {
+    color: {{ section.settings.right_side_color_hov }};
+  }
+  
+
+
+</style>
+
+{% schema %}
+  {
+    "name": "Header",
+    "settings": [
+		{
+          "type": "select",
+          "id": "header_style",
+          "label": "Select Header Style",
+          "options":[
+            {
+              "value":"header_style_1",
+              "label": "Header Style One"
+            },
+            {
+              "value":"header_style_2",
+              "label": "Header Style Two"
+            },
+			{
+              "value":"header_style_3",
+              "label": "Header Style Three"
+            },
+			{
+              "value":"header_style_4",
+              "label": "Header Style Four"
+            },
+			{
+              "value":"header_style_5",
+              "label": "Header Style Five"
+            },
+			{
+              "value":"header_style_6",
+              "label": "Header Style Six"
+            },
+			{
+              "value":"header_style_7",
+              "label": "Header Style Seven"
+            },
+			{
+              "value":"header_style_8",
+              "label": "Header Style Eight"
+            },
+			{
+              "value":"header_style_9",
+              "label": "Header Style Nine"
+            }
+          ],
+
+          "default": "header_style_1"
+        },
+        {
+          "type": "header",
+          "content": "Header Width Control"
+        },
+        {
+          "type": "checkbox",
+          "id": "fullwidth_on",
+          "label": "Full Width Enable",
+          "default": true,
+          "info": "If you want Full Width click checkbox"
+        },
+		{
+          "type": "image_picker",
+          "id": "logo",
+          "label": "Logo"
+        },
+		{
+          "type": "range",
+          "id": "logo_width",
+          "label": "Custom logo width",
+          "min": 50,
+          "max": 500,
+          "step": 5,
+          "unit": "px",
+          "default": 150
+        },
+		{
+          "type": "checkbox",
+          "id": "ratina_logo_enable",
+          "label": "Retina Logo Enable",
+		  "default": false
+        },
+		{
+          "type": "header",
+          "content": "Offer message"
+        },
+		{
+          "type": "text",
+          "id": "offer_message",
+          "label": "Offer Message",
+		  "default": "Free delivery - <span>On all orders over $90</span>",
+		  "info": "Use <span>On all orders over $90</span> for Highlight"
+        },
+		{
+          "type": "header",
+          "content": "STORES LOCATOR"
+        },
+		{
+          "type": "text",
+          "id": "store_location",
+          "label": "Store Locator",
+		  "default": "STORES LOCATOR"
+        },
+        {
+          "type": "url",
+          "id": "store_location_url",
+          "label": "Store Location URL"
+        },
+		{
+          "type": "header",
+          "content": "Call To Action"
+        },
+		{
+          "type": "text",
+          "id": "call_to_action_icon",
+          "label": "Call To Action Icon",
+		  "default": "mobile",
+		  "info": "Fontawesome Icon [See Icon](https:\/\/fontawesome.com\/v4.7.0\/icons\/)"
+        },
+		{
+          "type": "text",
+          "id": "call_to_action",
+          "label": "Call To Action",
+		  "default": "+44.254.254.86"
+        },
+		{
+          "type": "header",
+          "content": "Google Translate"
+        },
+		{
+          "type": "checkbox",
+          "id": "google_translate_enable",
+          "label": "Google Translate (Language) Enable",
+		  "default": true
+        },
+		
+		{
+          "type": "header",
+          "content": "Mobile Header"
+        },
+		{
+          "type": "checkbox",
+          "id": "mobile_search_field_enable",
+          "label": "Search Bar Enable",
+		  "default": true
+        },
+		{
+          "type": "checkbox",
+          "id": "user_menu_enable",
+          "label": "Show User Menu",
+		  "default": true
+        },
+		{
+          "type": "link_list",
+          "id": "user_menu_handle",
+          "label": "Select User Menu"
+        },
+		{
+          "type": "text",
+          "id": "user_menu_title",
+          "label": "User Menu Title",
+		  "default": "My Account"
+        },
+		{
+          "type": "text",
+          "id": "login_title",
+          "label": "Login Title",
+		  "default": "Login"
+        },
+		{
+          "type": "text",
+          "id": "logout_title",
+          "label": "Logout Title",
+		  "default": "Logout"
+        },
+		{
+          "type": "checkbox",
+          "id": "mobile_header_currency_enable",
+          "label": "Show Currency",
+		  "default": true
+        },
+		{
+          "type": "text",
+          "id": "currency_title",
+          "label": "Currency Title",
+		  "default": "Currency:"
+        },
+		{
+          "type": "text",
+          "id": "mobile_tel_number",
+          "label": "Telephone Number",
+		  "default": "(1245) 2456 012"
+        },
+		{
+          "type": "text",
+          "id": "mobile_email_address",
+          "label": "Email Address",
+		  "default": "info@yourdomain.com"
+        },
+		{
+          "type": "checkbox",
+          "id": "mobile_social_midea_enable",
+          "label": "Social Midea Enable",
+		  "default": true
+        },
+		{
+          "type": "header",
+          "content": "Mini Cart"
+        },
+		{
+          "type": "text",
+          "id": "cart_item_title",
+          "label": "Item Title",
+		  "default": "Item"
+        },
+		{
+          "type": "text",
+          "id": "cart_items_title",
+          "label": "Items Title",
+		  "default": "Items"
+        },
+
+		{
+          "type": "text",
+          "id": "quantity_title",
+          "label": "Quantity Title",
+		  "default": "Qty: "
+        },
+		{
+          "type": "text",
+          "id": "view_cart_title",
+          "label": "View Cart Title",
+		  "default": "View Cart"
+        },
+		{
+          "type": "text",
+          "id": "checkout_title",
+          "label": "Checkout Title",
+		  "default": "Checkout"
+        },
+
+
+
+		{
+          "type": "header",
+          "content": "Hamburger Menu"
+        },
+		{
+          "type": "link_list",
+          "id": "hamburger-menu",
+          "label": "Select Hamburger Menu"
+        },
+		{
+          "type": "header",
+          "content": "Hamburger Payment Icon"
+        },
+		{
+          "type": "checkbox",
+          "id": "hamburger_payment_icon_enable",
+          "label": "Hamburger Payment Icon enable",
+          "default": true,
+          "info": "If you want Payment icon click checkbox"
+        },
+        {
+          "type": "image_picker",
+          "id": "hamburger_payment_icon",
+          "label": "Hamburger Payment Icon",
+          "info": "Recommended Size: 270 x 18px"
+        },
+		{
+          "type": "header",
+          "content": "Hamburger Info"
+        },
+		{
+          "type": "text",
+          "id": "hamburger_info",
+          "label": "Hamburger Info",
+		  "default": "Pellentesque mollis nec orci id tincidunt. Sed mollis risus eu nisi aliquet, sit amet fermentum."
+        },
+        {
+          "type": "text",
+          "id": "open_icon",
+          "label": "Open Close icon",
+          "default": "alarm-clock",
+          "info": "Themify Icon [See Icon](https:\/\/themify.me\/themify-icons)"
+        },
+		{
+          "type": "text",
+          "id": "open_close_time",
+          "label": "Open Close Time",
+		  "default": "Monday - Friday: 9:00 - 19:00"
+        },
+		{
+          "type": "text",
+          "id": "email_icon",
+          "label": "Email icon",
+          "default": "email",
+          "info": "Themify Icon [See Icon](https:\/\/themify.me\/themify-icons)"
+        },
+		{
+          "type": "text",
+          "id": "hamburger_email",
+          "label": "Hamburger Email",
+		  "default": "Info@example.com"
+        },
+		{
+          "type": "text",
+          "id": "hamburger_email_link",
+          "label": "Hamburger email Link",
+		  "default": "Info@example.com"
+        },
+		{
+          "type": "text",
+          "id": "phone_icon",
+          "label": "Phone icon",
+          "default": "mobile",
+          "info": "Themify Icon [See Icon](https:\/\/themify.me\/themify-icons)"
+        },
+		{
+          "type": "text",
+          "id": "hamburger_number",
+          "label": "Hamburger Mobile No",
+		  "default": "(+55) 254. 254. 254"
+        },
+		{
+          "type": "text",
+          "id": "hamburger_number_link",
+          "label": "Hamburger Mobile No Link",
+		  "default": "+55254254254"
+        },
+		{
+          "type": "text",
+          "id": "address_icon",
+          "label": "Address icon",
+          "default": "home",
+          "info": "Themify Icon [See Icon](https:\/\/themify.me\/themify-icons)"
+        },
+		{
+          "type": "text",
+          "id": "hamburger_address",
+          "label": "Hamburger Address",
+		  "default": "Helios Tower 75 Tam Trinh Hoang - Ha Noi - Viet Nam"
+        },
+        {
+          "type": "header",
+          "content": "Social Midea Option"
+        },
+        {
+          "type": "checkbox",
+          "id": "social_midea_enable",
+          "label": "Show Social Midea",
+          "default": true
+        },
+		{
+          "type": "text",
+          "id": "hamburger_copyright",
+          "label": "Hamburger Copyright Content",
+		  "default": "© 2020 Young. All rights reserved."
+        },
+		{
+          "type": "text",
+          "id": "hamburger_copyright_link",
+          "label": "Hamburger Copyright URL"
+        },
+
+
+		{
+          "type": "header",
+          "content": "Caterory Menu"
+        },
+		{
+          "type": "text",
+          "id": "categori_menu_title",
+          "label": "Categori Menu Title",
+		  "default": " Categories"
+        },
+		{
+          "type": "checkbox",
+          "id": "show_category",
+          "label": "Enable Category Menu",
+          "default": false
+        },
+		{
+          "type": "link_list",
+          "id": "catetory_menu",
+          "label": "Select Menu"
+        },
+		{
+          "type": "range",
+          "id": "cat_menu_limit",
+          "min": 1,
+          "max": 15,
+          "step": 1,
+          "label": "Category Menu Limit",
+          "unit": "itm",
+          "default": 12
+        },
+		{
+          "type": "text",
+          "id": "more_cat_title",
+          "label": "More Cat title",
+		  "default": "More Categories"
+        },
+
+
+
+
+
+		{
+          "type": "header",
+          "content": "Header Style"
+        },
+		{
+          "type": "header",
+          "content": "Header Top Background"
+        },
+		{
+          "type": "color",
+          "id": "header_top_bg_color",
+          "label": "Header Top Background Color",
+          "default": "#f9f9f9"
+        },
+		{
+          "type": "header",
+          "content": "Header Eight Background"
+        },
+		{
+          "type": "image_picker",
+          "id": "header_eight_bg_image",
+          "label": "Header Eight Background Image",
+          "info": "Recommended Size: 1731 x 148px"
+        },
+		{
+          "type": "header",
+          "content": "Header Social Icon Style"
+        },
+		{
+            "type":      "range",
+            "id":        "Social_Icon_Size",
+            "min":       10,
+            "max":        60,
+            "step":       1,
+            "unit":       "px",
+            "label":     "Social Icon Size",
+            "default":   14
+        },
+		{
+          "type": "color",
+          "id": "Social_Icon_color",
+          "label": "Social Icon Color",
+          "default": "#191919"
+        },
+		{
+          "type": "color",
+          "id": "Social_Icon_color_hov",
+          "label": "Social Icon Hover Color",
+          "default": "#191919"
+        },
+		{
+          "type": "header",
+          "content": "Header Offer Message Style"
+        },
+		{
+            "type":      "range",
+            "id":        "Offer_message_Size",
+            "min":       10,
+            "max":        60,
+            "step":       1,
+            "unit":       "px",
+            "label":     "Offer Message Font Size",
+            "default":   14
+        },
+		{
+          "type": "color",
+          "id": "Offer_message_color",
+          "label": "Offer Message Color",
+          "default": "#1d1d1d"
+        },
+		{
+          "type": "color",
+          "id": "Offer_message_highlight_color",
+          "label": "Offer Message Highlight Color",
+          "default": "#ff6e21"
+        },
+		{
+          "type": "header",
+          "content": "Header Top Right Side Content"
+        },
+		{
+            "type":      "range",
+            "id":        "right_side_font_size",
+            "min":       10,
+            "max":        60,
+            "step":       1,
+            "unit":       "px",
+            "label":     "Right Side Font Size",
+            "default":   12
+        },
+		{
+          "type": "color",
+          "id": "right_side_color",
+          "label": "Right Side Color",
+          "default": "#1d1d1d"
+        },
+		{
+          "type": "color",
+          "id": "right_side_color_hov",
+          "label": "Right Side Hover Color",
+          "default": "#ff6e21"
+        }
+	],
+    "blocks":[
+		{
+          "type": "header_social_media",
+          "name": "Header Social Icon",
+          "settings": [
+			  {
+                "type": "text",
+                "id": "header_social_media_icon",
+                "label": "header social media icon",
+                "default": "facebook",
+				"info": "Fontawesome Icon [See Icon](https:\/\/fontawesome.com\/v4.7.0\/icons\/)"
+              },
+			  {
+                "type": "url",
+                "id": "header_social_media_url",
+                "label": "header social media URL"
+              }
+          ]
+       },
+	   {
+          "type": "hamburger_social_media",
+          "name": "Hamburger Social Icon",
+          "settings": [
+			  {
+                "type": "text",
+                "id": "hamburger_social_media_icon",
+                "label": "Hamburger social media icon",
+                "default": "facebook",
+				"info": "Fontawesome Icon [See Icon](https:\/\/fontawesome.com\/v4.7.0\/icons\/)"
+              },
+			  {
+                "type": "url",
+                "id": "hamburger_social_media_url",
+                "label": "Hamburger social media URL"
+              }
+          ]
+       }
+    ]
+  }
+{% endschema %}

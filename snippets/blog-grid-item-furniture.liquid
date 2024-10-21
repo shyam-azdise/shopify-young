@@ -1,0 +1,17 @@
+<div class="blog-wrap-3">
+  <div class="blog-img-3">
+    <a href="{{ article.url }}">
+      {{ article | img_url: '560x460', crop:'center' | img_tag: article.title }}
+    </a>
+  </div>
+  <div class="blog-content-3">
+    <h3><a href="{{ article.url }}">{{ article.title }}</a></h3>
+    <div class="blog-meta-3">
+      <ul>
+        <li><a href="#">{{ article.published_at |date: "%d %b, %Y" }}</a></li>
+        <li>-</li>
+        <li>By <a href="#">{{ article.author }}</a></li>
+      </ul>
+    </div>
+  </div>
+</div>

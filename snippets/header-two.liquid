@@ -1,0 +1,87 @@
+<header class="header-area">
+  <div class="header-large-device">
+    <div class="container{% if section.settings.fullwidth_on %}-fluid{% endif %}">
+      <div class="header-ptb-2">
+        <div class="row align-items-center">
+          <div class="col-lg-4">
+            <div class="search-wrap search-wrap-2 search-width-2">
+              {% include 'search-bar' %}
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="logo logo-width-2 text-center">
+              {%- include 'header-logo' -%}
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="header-right-wrap header-right-flex">
+              <div class="same-style same-style-font-dec same-style-mrg-dec-2">
+                {% include 'wishlist-button-top' %}
+              </div>
+              <div class="same-style same-style-font-dec same-style-mrg-dec-2">
+                <a class="cart-active" href="/cart"><i class="fa fa-cart-arrow-down"></i></a>
+              </div>
+              <div class="same-style same-style-font-dec same-style-mrg-dec-2">
+                <a class="clickalbe-button-active" href="#"><i class="fa fa-bars"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row align-items-center">
+        <div class="col-lg-9">
+          <div class="main-menu menu-lh-2 main-menu-padding-2 menu-text-black">
+            {%- include 'main-menu' -%}
+          </div>
+        </div>
+        <div class="col-lg-3">
+          <div class="social-icon-style social-mrg-dec-2 social-font-dec social-icon-right">
+            {% for block in section.blocks %}
+            {%- case block.type -%}
+            {%- when 'header_social_media' -%}
+            <a href="{{ block.settings.header_social_media_url }}"><i class="fa fa-{{ block.settings.header_social_media_icon }}"></i></a>
+            {%- endcase -%}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="header-small-device">
+    <div class="container-fluid">
+      <div class="row align-items-center">
+        <div class="col-6">
+          <div class="mobile-logo mobile-logo-width">
+            {%- include 'header-logo' -%}
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="header-right-wrap header-right-flex">
+            <div class="same-style">
+              {% include 'wishlist-button-top' %}
+            </div>
+            <div class="same-style">
+              <a class="cart-active" href="/cart"><i class="fa fa-cart-arrow-down"></i></a>
+            </div>
+            <div class="same-style">
+              <a class="mobile-menu-button-active" href="#"><i class="fa fa-bars"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="clickalbe-sidebar-wrapper-active clickalbe-sidebar-wrapper-style-1">
+  {%- include 'sidebar-info' -%}
+</div>
+<!-- mini cart start -->
+<div class="sidebar-cart-active">
+  {%- include 'mini-cart' -%}
+</div>
+<!-- Mobile menu start -->
+<div class="mobile-menu-active clickalbe-sidebar-wrapper-style-1">
+  <div class="clickalbe-sidebar-wrap">
+    {%- include 'mobile-header' -%}
+  </div>
+</div>

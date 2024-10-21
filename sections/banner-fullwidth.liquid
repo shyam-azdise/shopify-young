@@ -1,0 +1,890 @@
+{% if section.settings.banner_fullwidth_style == 'banner_fullwidth_style_1' %}
+<div class="banner-gradient-area pt-40 pb-40" id="section-{{ section.id }}">
+  <div class="container{% if section.settings.fullwidth_on %}-fluid{% endif %}">
+    <div class="row align-items-center">
+      <div class="col-lg-6 col-md-6">
+        <div class="banner-zoom-wrap">
+          <a class="zoom-img" href="{{ section.settings.banner_button_url }}">
+            <img src="{% if section.settings.banner_images %}{{ section.settings.banner_images | img_url: 'master' }}{% else %}https://via.placeholder.com/523x365 {% endif %}" class="lazyload" alt="banner">
+            <img src="{% if section.settings.banner_images %}{{ section.settings.banner_images | img_url: 'master' }}{% else %}https://via.placeholder.com/523x365 {% endif %}" class="lazyload" alt="banner">
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6">
+        <div class="banner-zoom-content ml-90">
+          {%if section.settings.banner_title != '' %}
+          <h2>{{ section.settings.banner_title }}</h2>
+          {% endif %}
+          {%if section.settings.banner_button_title != '' %}
+          <div class="btn-style-3 btn-hover-2">
+            <a class="animated bs3-white-text bs3-yellow-bg bs3-ptb bs3-border-radius ptb-2-white-hover" href="{{ section.settings.banner_button_url }}">{{ section.settings.banner_button_title }}</a>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  
+  .banner-zoom-content h2 {
+      color: {{ section.settings.banner_title_color }};
+  }
+  .btn-style-3 a.bs3-yellow-bg {
+    background-color: {{ section.settings.banner_btn_bg }};
+  }
+  .btn-hover-2 a.ptb-2-white-hover::after {
+      background: {{ section.settings.banner_btn_bg_hov }};
+  }
+  .btn-style-3 a.bs3-white-text {
+      color: {{ section.settings.banner_text_color }};
+  }
+  .btn-style-3 a.bs3-white-text:hover {
+      color: {{ section.settings.banner_text_color_hov }};
+  }  
+  
+</style>
+
+
+{% elsif section.settings.banner_fullwidth_style == 'banner_fullwidth_style_2' %}
+
+<div class="banner-bg-area bg-img pt-90 pb-90 book-banner-bg" id="section-{{ section.id }}">
+  <div class="container{% if section.settings.fullwidth_on %}-fluid{% endif %}">
+    <div class="row">
+      <div class="col-xl-5 col-lg-6 col-md-8 col-sm-8 ml-auto">
+        <div class="banner-bg-1-content">
+          {%if section.settings.banner_title2 != '' %}
+          <h3>{{ section.settings.banner_subtitle2 }}</h3>
+          {% endif %}
+          {%if section.settings.banner_title2 != '' %}
+          <h2>{{ section.settings.banner_title2 }}</h2> 
+          {% endif %}
+          {%if section.settings.banner_button_title2 != '' %}
+          <div class="slider-btn-2 btn-hover">
+            <a class="animated slider-btn-2-bg-yellow slider-btn-2-ptb bg-black-hover" href="{{ section.settings.banner_button_url2 }}">{{ section.settings.banner_button_title2 }} </a>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .banner-bg-1-content h3 {
+    color: {{ section.settings.banner_subtitle_color2 }};
+  }
+  .banner-bg-1-content h2 {
+    color: {{ section.settings.banner_title_color2 }};
+  }
+
+  .slider-btn-2 a.slider-btn-2-bg-yellow {
+    background-color: {{ section.settings.banner_btn_bg2 }};
+  }
+  .btn-hover a.bg-black-hover::after {
+    background: {{ section.settings.banner_btn_bg_hov2 }};
+  }
+  .slider-btn-2 a {
+    color: {{ section.settings.banner_text_color2 }};
+  }
+  .btn-hover a:hover {
+    color: {{ section.settings.banner_text_color_hov2 }};
+  }
+</style>
+
+
+{% elsif section.settings.banner_fullwidth_style == 'banner_fullwidth_style_3' %}
+
+<div class="banner-area section-padding-1" id="section-{{ section.id }}">
+  <div class="container{% if section.settings.fullwidth_on %}-fluid{% endif %}">
+    <div class="banner-wrap">
+      <a href="{{ section.settings.banner_button_url3 }}">
+        <img src="{% if section.settings.banner_images3 %}{{ section.settings.banner_images3 | img_url: 'master' }}{% else %}https://via.placeholder.com/1680x185 {% endif %}" class="lazyload" alt="banner">
+      </a>
+      <div class="btn-style-1 banner-btn-position btn-hover">
+        <a class="bg-black-hover" href="{{ section.settings.banner_button_url3 }}">{{ section.settings.banner_button_title3 }}</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<style>
+  .btn-style-1 a {
+    background-color: {{ section.settings.banner_btn_bg3 }};
+  }
+  .btn-hover a.bg-black-hover::after {
+    background: {{ section.settings.banner_btn_bg_hov3 }};
+  }
+  .btn-style-1 a {
+    color: {{ section.settings.banner_text_color3 }};
+  }
+  .btn-style-1 a:hover {
+    color: {{ section.settings.banner_text_color_hov3 }};
+  }
+</style>
+
+
+
+{% elsif section.settings.banner_fullwidth_style == 'banner_fullwidth_style_4' %}
+
+<div class="cake-about-area bg-img cake-about-ptb" id="section-{{ section.id }}">
+  <div class="container{% if section.settings.fullwidth_on %}-fluid{% endif %}">
+    <div class="row">
+      <div class="col-lg-8 ml-auto">
+        <div class="cake-about-content text-center">
+          {%if section.settings.banner_title4 != '' %}
+          <h2>{{ section.settings.banner_title4 }}</h2>
+          {% endif %}
+          {%if section.settings.banner_subtitle4 != '' %}
+          <h3>{{ section.settings.banner_subtitle4 }}</h3>
+          {% endif %}
+          {%if section.settings.banner_desc4 != '' %}
+          <p>{{ section.settings.banner_desc4 }}</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<style>
+  .cake-about-content h2 {
+      color: {{ section.settings.banner_title_color4 }};
+  }
+  .cake-about-content h3 {
+      color: {{ section.settings.banner_subtitle_color4 }};
+  }
+  .cake-about-content p {
+      color: {{ section.settings.banner_desc_color4 }};
+  }
+</style>
+
+{% elsif section.settings.banner_fullwidth_style == 'banner_fullwidth_style_5' %}
+
+
+<div class="banner-bg-2 jarallax jarallax-img default-overlay hamdmade-bg-area hamdmade-bg-overly" id="section-{{ section.id }}">
+  <div class="container{% if section.settings.fullwidth_on %}-fluid{% endif %}">
+    <div class="banner-bg-content-2 text-center">
+      {%if section.settings.banner_title5 != '' %}
+      <h2>{{ section.settings.banner_title5 }}</h2>
+      {% endif %}
+      {%if section.settings.banner_subtitle5 != '' %}
+      <h3>{{ section.settings.banner_subtitle5 }}</h3>
+      {% endif %}
+      {%if section.settings.banner_button_title5 != '' %}
+      <div class="btn-style-3 btn-hover-2">
+        <a class="animated bs3-black-text bs3-weight-dec bs3-white-bg bs3-hover-green2-bg bs3-ptb bs3-border-radius" href="{{ section.settings.banner_button_url5 }}">{{ section.settings.banner_button_title5 }}</a>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<style>
+  .banner-bg-content-2 h2 {
+    color: {{ section.settings.banner_title_color5 }};
+  }
+  .banner-bg-content-2 h3 {
+    color: {{ section.settings.banner_subtitle_color5 }};
+  }
+  
+  
+  .btn-style-3 a.bs3-white-bg {
+    background-color: {{ section.settings.banner_btn_bg5 }};
+  }
+  .btn-style-3 a.bs3-black-text {
+    color: {{ section.settings.banner_text_color5 }};
+  }
+  
+  .btn-hover-2 a.bs3-hover-green2-bg::after {
+    background: {{ section.settings.banner_btn_bg_hov5 }};
+  }
+  .btn-style-3 a.bs3-black-text:hover {
+    color: {{ section.settings.banner_text_color_hov5 }};
+  }
+
+</style>
+
+
+{% elsif section.settings.banner_fullwidth_style == 'banner_fullwidth_style_6' %}
+
+<div class="pets-choose-area pets-choose-ptb bg-img" id="section-{{ section.id }}">
+  <div class="container{% if section.settings.fullwidth_on %}-fluid{% endif %}">
+    <div class="row align-items-center">
+      <div class="col-12">
+        <div class="pets-choose-content">
+          
+          {%if section.settings.banner_title6 != '' %}
+          <h2>{{ section.settings.banner_title6 }}</h2>
+          {% endif %}
+		  {%if section.settings.banner_subtitle6 != '' %}
+          <p>{{ section.settings.banner_subtitle6 }}</p>
+          {% endif %}
+          {%if section.settings.banner_button_title6 != '' %}
+          <div class="btn-style-3 btn-hover-2">
+            <a class="animated bs3-white-text bs3-yellow-bg bs3-ptb bs3-ptb bs3-border-radius ptb-2-white-hover" href="{{ section.settings.banner_button_url6 }}">{{ section.settings.banner_button_title6 }}</a>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .pets-choose-content h2 {
+    color: {{ section.settings.banner_title_color6 }};
+  }
+  .pets-choose-content p {
+    color: {{ section.settings.banner_subtitle_color6 }};
+  }
+  
+  
+  .btn-style-3 a.bs3-white-bg {
+    background-color: {{ section.settings.banner_btn_bg6 }};
+  }
+  .btn-style-3 a.bs3-white-text {
+    color: {{ section.settings.banner_text_color6 }};
+  }
+  
+  .btn-hover-2 a.ptb-2-white-hover::after {
+    background: {{ section.settings.banner_btn_bg_hov6 }};
+  }
+  .btn-style-3 a.bs3-white-text:hover {
+    color: {{ section.settings.banner_text_color_hov6 }};
+  }
+
+</style>
+
+{% endif %}
+
+
+
+
+{%- style -%}
+  #section-{{ section.id }}{
+    {%- for block in section.blocks -%}
+    {%- case block.type -%}
+    {%- when 'section_margin' -%}
+    margin-top: {{ block.settings.section_margin_top }}px;
+    margin-bottom: {{ block.settings.section_margin_bottom }}px;
+    {%- when 'section_padding' -%}
+    padding-top: {{ block.settings.section_padding_top }}px;
+    padding-bottom: {{ block.settings.section_padding_bottom }}px;
+    {%- when 'section_background' -%}    
+    background: {{ block.settings.section_bg_color }} 
+      {%- if block.settings.section_bg_image -%}url("{{ block.settings.section_bg_image | img_url: 'master' }}"){%- endif -%} no-repeat scroll center center / cover;
+    {%- endcase -%}
+    {%- endfor -%}
+  }
+  @media (min-width: 768px) and (max-width: 991px) {
+    #section-{{ section.id }}{
+      {%- for block in section.blocks -%}
+      {% case block.type %}
+      {%- when 'section_margin' -%}
+      margin-top: {{ block.settings.section_margin_top_md }}px;
+      margin-bottom: {{ block.settings.section_margin_bottom_md }}px;
+      {%- when 'section_padding' -%}
+      padding-top: {{ block.settings.section_padding_top_md }}px;
+      padding-bottom: {{ block.settings.section_padding_bottom_md }}px;
+      {%- endcase -%}
+      {%- endfor -%}
+    }
+  }
+  @media (max-width: 767px) {
+    #section-{{ section.id }}{
+      {%- for block in section.blocks -%}
+      {%- case block.type -%}
+      {%- when 'section_margin' -%}
+      margin-top: {{ block.settings.section_margin_top_xs }}px;
+      margin-bottom: {{ block.settings.section_margin_bottom_xs }}px;
+      {%- when 'section_padding' -%}
+      padding-top: {{ block.settings.section_padding_top_xs }}px;
+      padding-bottom: {{ block.settings.section_padding_bottom_xs }}px;
+      {%- endcase -%}
+      {%- endfor -%}
+    }
+  }
+
+{%- endstyle -%}
+
+
+{% schema %}
+  	{
+		"name": "Banner Fullwidth",
+		"settings": [
+            {
+              "type": "select",
+              "id": "banner_fullwidth_style",
+              "label": "Banner Full Width Style",
+              "options":[
+                {
+                  "value":"banner_fullwidth_style_1",
+                  "label": "Banner Full Width Style One"
+                },
+                {
+                  "value":"banner_fullwidth_style_2",
+                  "label": "Banner Full Width Style Two"
+                },
+                {
+                  "value":"banner_fullwidth_style_3",
+                  "label": "Banner Full Width Style Three"
+                },
+                {
+                  "value":"banner_fullwidth_style_4",
+                  "label": "Banner Full Width Style Four"
+                },
+                {
+                  "value":"banner_fullwidth_style_5",
+                  "label": "Banner Full Width Style Five"
+                },
+                {
+                  "value":"banner_fullwidth_style_6",
+                  "label": "Banner Full Width Style Six"
+                },
+                {
+                  "value":"banner_fullwidth_style_7",
+                  "label": "Banner Full Width Style Seven"
+                },
+                {
+                  "value":"banner_fullwidth_style_8",
+                  "label": "Banner Full Width Style Seven"
+                },
+                {
+                  "value":"banner_fullwidth_style_9",
+                  "label": "Banner Full Width Style Seven"
+                }
+              ],
+
+              "default": "banner_fullwidth_style_1"
+            },
+            {
+              "type": "header",
+              "content": "Banner Width Control"
+            },
+            {
+              "type": "checkbox",
+              "id": "fullwidth_on",
+              "label": "Full Width Enable",
+              "default": true,
+              "info": "If you want Full Width click checkbox"
+            },
+			{
+              "type": "header",
+              "content": "Banner Fullwidth Content For Style One"
+            },
+            {
+              "type": "image_picker",
+              "id": "banner_images",
+              "label": "Banner Images",
+              "info": "Recommended Size: 523 x 365px"
+            },
+            {
+              "type": "textarea",
+              "id": "banner_title",
+              "label": "Banner Offer Title",
+              "default": "Minolta 20 Mega Pixels <br/>Wifi Digital Camera"
+            },
+            {
+              "type": "text",
+              "id": "banner_button_title",
+              "label": "Banner Button Title",
+              "default": "Shop Now"
+            },
+            {
+              "type": "url",
+              "id": "banner_button_url",
+              "label": "Banner Button URL"
+            },
+            {
+              "type": "header",
+              "content": "Banner Fullwidth CSS For Style one"
+            },
+            {
+              "type": "color",
+              "id": "banner_title_color",
+              "label": "Banner title Color",
+              "default": "#fff"
+            },
+            {
+              "type": "color",
+              "id": "banner_btn_bg",
+              "label": "Banner Button BG Color",
+              "default": "#ff6e21"
+            },
+            {
+              "type": "color",
+              "id": "banner_btn_bg_hov",
+              "label": "Banner Button Hover BG Color",
+              "default": "#fff"
+            },
+			{
+              "type": "color",
+              "id": "banner_text_color",
+              "label": "Banner Button  text Color",
+              "default": "#fff"
+            },
+            {
+              "type": "color",
+              "id": "banner_text_color_hov",
+              "label": "Banner Button Hover text Color",
+              "default": "#393939"
+            },
+			{
+              "type": "header",
+              "content": "Banner Fullwidth Content For Style Two"
+            },
+			{
+              "type": "text",
+              "id": "banner_title2",
+              "label": "Banner Offer Title",
+              "default": "off 30%"
+            },
+			{
+              "type": "textarea",
+              "id": "banner_subtitle2",
+              "label": "Banner SubTitle",
+              "default": "Flash Books Sales This Week for Kids"
+            },
+            {
+              "type": "text",
+              "id": "banner_button_title2",
+              "label": "Banner Button Title",
+              "default": "Shop Now"
+            },
+            {
+              "type": "url",
+              "id": "banner_button_url2",
+              "label": "Banner Button URL"
+            },
+            {
+              "type": "header",
+              "content": "Banner Fullwidth CSS For Style Two"
+            },
+            {
+              "type": "color",
+              "id": "banner_title_color2",
+              "label": "Banner title Color",
+              "default": "#1b1b1b"
+            },
+			{
+              "type": "color",
+              "id": "banner_subtitle_color2",
+              "label": "Banner sub title Color",
+              "default": "#1b1b1b"
+            },
+            {
+              "type": "color",
+              "id": "banner_btn_bg2",
+              "label": "Banner Button BG Color",
+              "default": "#ff6e21"
+            },
+            {
+              "type": "color",
+              "id": "banner_btn_bg_hov2",
+              "label": "Banner Button Hover BG Color",
+              "default": "#000"
+            },
+			{
+              "type": "color",
+              "id": "banner_text_color2",
+              "label": "Banner Button  text Color",
+              "default": "#fff"
+            },
+            {
+              "type": "color",
+              "id": "banner_text_color_hov2",
+              "label": "Banner Button Hover text Color",
+              "default": "#fff"
+            },
+			{
+              "type": "header",
+              "content": "Banner Fullwidth Content For Style Three"
+            },
+            {
+              "type": "image_picker",
+              "id": "banner_images3",
+              "label": "Banner Images",
+              "info": "Recommended Size: 1680 x 185px"
+            },
+            {
+              "type": "text",
+              "id": "banner_button_title3",
+              "label": "Banner Button Title",
+              "default": "Shop Now"
+            },
+            {
+              "type": "url",
+              "id": "banner_button_url3",
+              "label": "Banner Button URL"
+            },
+            {
+              "type": "header",
+              "content": "Banner Fullwidth CSS For Style Three"
+            },
+            {
+              "type": "color",
+              "id": "banner_btn_bg3",
+              "label": "Banner Button BG Color",
+              "default": "#fff"
+            },
+            {
+              "type": "color",
+              "id": "banner_btn_bg_hov3",
+              "label": "Banner Button Hover BG Color",
+              "default": "#000"
+            },
+			{
+              "type": "color",
+              "id": "banner_text_color3",
+              "label": "Banner Button  text Color",
+              "default": "#1b1b1b"
+            },
+            {
+              "type": "color",
+              "id": "banner_text_color_hov3",
+              "label": "Banner Button Hover text Color",
+              "default": "#fff"
+            },
+			{
+              "type": "header",
+              "content": "Banner Fullwidth Content For Style Four"
+            },
+            {
+              "type": "text",
+              "id": "banner_title4",
+              "label": "Banner Title",
+              "default": "Master Chef Kevin Abbott"
+            },
+			{
+              "type": "text",
+              "id": "banner_subtitle4",
+              "label": "Banner SubTitle",
+              "default": "Made cake with love"
+            },
+			{
+              "type": "textarea",
+              "id": "banner_desc4",
+              "label": "Banner Description",
+              "default": "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas venenatis posuere volutpat. Mauris laore"
+            },
+
+            {
+              "type": "header",
+              "content": "Banner Fullwidth CSS For Style Four"
+            },
+            {
+              "type": "color",
+              "id": "banner_title_color4",
+              "label": "Banner title Color",
+              "default": "#fff"
+            },
+			{
+              "type": "color",
+              "id": "banner_subtitle_color4",
+              "label": "Banner sub title Color",
+              "default": "#ef8da1"
+            },
+			{
+              "type": "color",
+              "id": "banner_desc_color4",
+              "label": "Banner Description Color",
+              "default": "#8b8b8b"
+            },
+			{
+              "type": "header",
+              "content": "Banner Fullwidth Content For Style Five"
+            },
+            {
+              "type": "text",
+              "id": "banner_title5",
+              "label": "Banner Title",
+              "default": "Your Best Source of Handmade Goods"
+            },
+			{
+              "type": "text",
+              "id": "banner_subtitle5",
+              "label": "Banner SubTitle",
+              "default": "Discover Beautiful Products Made With Love"
+            },
+			{
+              "type": "text",
+              "id": "banner_button_title5",
+              "label": "Banner Button Title",
+              "default": "Shop Now"
+            },
+            {
+              "type": "url",
+              "id": "banner_button_url5",
+              "label": "Banner Button URL"
+            },
+            {
+              "type": "header",
+              "content": "Banner Fullwidth CSS For Style Five"
+            },
+            {
+              "type": "color",
+              "id": "banner_title_color5",
+              "label": "Banner title Color",
+              "default": "#fff"
+            },
+			{
+              "type": "color",
+              "id": "banner_subtitle_color5",
+              "label": "Banner sub title Color",
+              "default": "#fff"
+            },
+			{
+              "type": "color",
+              "id": "banner_btn_bg5",
+              "label": "Banner Button BG Color",
+              "default": "#fff"
+            },
+            {
+              "type": "color",
+              "id": "banner_btn_bg_hov5",
+              "label": "Banner Button Hover BG Color",
+              "default": "#52e3b9"
+            },
+			{
+              "type": "color",
+              "id": "banner_text_color5",
+              "label": "Banner Button  text Color",
+              "default": "#1b1b1b"
+            },
+            {
+              "type": "color",
+              "id": "banner_text_color_hov5",
+              "label": "Banner Button Hover text Color",
+              "default": "#fff"
+            },
+
+			{
+              "type": "header",
+              "content": "Banner Fullwidth Content For Style Six"
+            },
+            {
+              "type": "text",
+              "id": "banner_title6",
+              "label": "Banner Title",
+              "default": "Why choose us ?"
+            },
+			{
+              "type": "text",
+              "id": "banner_subtitle6",
+              "label": "Banner Description",
+              "default": "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas venenatis posuere volutpat. Mauris laore Sed non sem blandit, ultrices nisl et, auctor purus. Nunc quam diam, vehicula in metus quis, pulvinar finibus tortor"
+            },
+			{
+              "type": "text",
+              "id": "banner_button_title6",
+              "label": "Banner Button Title",
+              "default": "Shop Now"
+            },
+            {
+              "type": "url",
+              "id": "banner_button_url6",
+              "label": "Banner Button URL"
+            },
+            {
+              "type": "header",
+              "content": "Banner Fullwidth CSS For Style Six"
+            },
+            {
+              "type": "color",
+              "id": "banner_title_color6",
+              "label": "Banner title Color",
+              "default": "#1b1b1b"
+            },
+			{
+              "type": "color",
+              "id": "banner_subtitle_color6",
+              "label": "Banner Description Color",
+              "default": "#1b1b1b"
+            },
+			{
+              "type": "color",
+              "id": "banner_btn_bg6",
+              "label": "Banner Button BG Color",
+              "default": "#ff6e21"
+            },
+            {
+              "type": "color",
+              "id": "banner_btn_bg_hov6",
+              "label": "Banner Button Hover BG Color",
+              "default": "#fff"
+            },
+			{
+              "type": "color",
+              "id": "banner_text_color6",
+              "label": "Banner Button  text Color",
+              "default": "#fff"
+            },
+            {
+              "type": "color",
+              "id": "banner_text_color_hov6",
+              "label": "Banner Button Hover text Color",
+              "default": "#393939"
+            }
+		],
+        "blocks":[
+               {
+                  "type": "section_margin",
+                  "name": "Section Margin",
+                  "limit": 1,
+                  "settings": [
+                    {
+                      "type": "header",
+                      "content": "Large/Desktop/Tablate Device"
+                    },
+                    {
+                      "type": "range",
+                      "id": "section_margin_top",
+                      "min": 0,
+                      "max": 350,
+                      "step": 5,
+                      "label": "Margin Top",
+                      "unit": "px",
+                      "default": 0
+                    },
+                    {
+                      "type": "range",
+                      "id": "section_margin_bottom",
+                      "min": 0,
+                      "max": 350,
+                      "step": 5,
+                      "label": "Margin Bottom",
+                      "unit": "px",
+                      "default": 0
+                    },
+                    {
+                      "type": "header",
+                      "content": "Mobile Device"
+                    },
+                    {
+                      "type": "range",
+                      "id": "section_margin_top_xs",
+                      "min": 0,
+                      "max": 350,
+                      "step": 5,
+                      "label": "Margin Top",
+                      "unit": "px",
+                      "default": 0
+                    },
+                    {
+                      "type": "range",
+                      "id": "section_margin_bottom_xs",
+                      "min": 0,
+                      "max": 350,
+                      "step": 5,
+                      "label": "Margin Bottom",
+                      "unit": "px",
+                      "default": 0
+                    }
+                  ]
+               },
+               {
+                  "type": "section_padding",
+                  "name": "Section Padding",
+                  "limit": 1,
+                  "settings": [
+                    {
+                      "type": "header",
+                      "content": "Large/Desktop/Tablate Device"
+                    },
+                    {
+                      "type": "range",
+                      "id": "section_padding_top",
+                      "min": 0,
+                      "max": 500,
+                      "step": 5,
+                      "label": "Padding Top",
+                      "unit": "px",
+                      "default": 40
+                    },
+                    {
+                      "type": "range",
+                      "id": "section_padding_bottom",
+                      "min": 0,
+                      "max": 500,
+                      "step": 5,
+                      "label": "Padding Bottom",
+                      "unit": "px",
+                      "default": 40
+                    },
+                    {
+                      "type": "header",
+                      "content": "Mobile Device"
+                    },
+                    {
+                      "type": "range",
+                      "id": "section_padding_top_xs",
+                      "min": 0,
+                      "max": 500,
+                      "step": 5,
+                      "label": "Padding Top",
+                      "unit": "px",
+                      "default": 30
+                    },
+                    {
+                      "type": "range",
+                      "id": "section_padding_bottom_xs",
+                      "min": 0,
+                      "max": 500,
+                      "step": 5,
+                      "label": "Padding Bottom",
+                      "unit": "px",
+                      "default": 30
+                    }
+                  ]
+               },
+               {
+                  "type": "section_background",
+                  "name": "Section Background",
+                  "limit": 1,
+                  "settings": [
+                    {
+                      "type": "image_picker",
+                      "id": "section_bg_image",
+                      "label": "BG Image"
+                    },
+                    {
+                      "type": "color",
+                      "id": "section_bg_color",
+                      "label": "BG Color",
+                      "default": "#ffffff"
+                    }
+                  ]
+               }
+
+            ],
+
+        "presets":[
+                {
+                    "name": "Banner Fullwidth",
+                    "category": "2. Banner",
+                    "blocks":[
+						{
+                            "type": "section_padding"
+                        },
+						{
+                            "type": "section_background"
+                        }
+                    ]
+                }
+            ]
+
+
+ 	 }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+
+

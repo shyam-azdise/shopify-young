@@ -1,0 +1,56 @@
+{%- assign on_sale = false -%}
+{%- if product.compare_at_price > product.price -%}
+{%- assign on_sale = true -%}
+{%- endif -%}
+
+{%- assign sold_out = true -%}
+{%- if product.available -%}
+{%- assign sold_out = false -%}
+{%- endif -%}
+
+{%- assign variant = product.selected_or_first_available_variant -%}
+
+{%- if product.available -%}
+{%- assign func = "Shopify.addItem(" | append: variant.id | append: ", 1)" -%}
+{%- endif -%} 
+
+
+{% comment %} "{{ variant.id }}" this Class is needed for Ajax popup cart {% endcomment %}
+
+<!--  Single Grid product Start -->
+
+<div class="{{ variant.id }} product-wrap mb-35">
+  <div class="product-img  product-img-zoom pro-border-none product-border mb-15">
+    {% if product.featured_image.src != blank %}
+    <a href="{{ product.url | within: collection }}">
+      <img src="{{ product.featured_image.src | img_url : 'large' }}" class="lazyload" alt="{{ image.alt | escape }}">
+    </a>
+    {% else %}
+    <a class="image-wrap" href="{{ product.url | within: collection }}" >
+      {% capture current %}{% cycle 1, 2, 3 %}{% endcapture %}
+      <div style="padding: 6px 0;">
+        {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+      </div>
+    </a>
+    {% endif %}
+    {% if settings.product_countdown_enable %}
+      <div class="product-grid-countdown hot-deal-product">
+        {%- if product.description contains '[countdown]' -%}
+        {%- assign count_down_first = product.description | split:'[/countdown]' | first -%}
+        {%- assign count_down_final = count_down_first | split:'[countdown]' | last -%}
+        <div data-countdown="{{ count_down_final }}"></div> 
+        {%- endif -%}
+      </div>
+    {% endif %}
+  </div>
+  <div class="product-content text-{{ settings.product_content_aline }}">
+    <h4><a href="{{ product.url | within: collection }}">{{ product.title }}</a></h4>
+    <div class="product-price price-color-yellow">
+      {% if product.variants.first.compare_at_price > product.variants.first.price %}
+      <span class="old-price discounted-price"> - {{ product.variants.first.compare_at_price | money }}</span>
+      {% endif %}
+      <span class="new-price main-price discounted">{{ product.variants.first.price | money }}</span>
+    </div>
+  </div>
+
+</div>

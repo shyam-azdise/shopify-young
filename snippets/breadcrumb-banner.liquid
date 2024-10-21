@@ -1,0 +1,52 @@
+{% if settings.breadcrumb_style == 'breadcrumb_style_1' %}
+
+<div class="breadcrumbs-section">
+  <div class="breadcrumbs overlay-bg breadcrumb-area section-padding-1 bg-gray breadcrumb-ptb-1">
+    <div class="container-fluid">
+      <div class="breadcrumb-content text-center">
+        <div class="breadcrumb-title breadcrumbs-inner">
+          {% if settings.breadcrub_page_title_enable %}
+          <h2 class="breadcrumbs-title">{{ page_title }}</h2>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% elsif settings.breadcrumb_style == 'breadcrumb_style_2' %}
+
+<div class="breadcrumb-area section-padding-2 breadcrumb-ptb-2">
+  <div class="container-fluid">
+    <div class="breadcrumb-content">
+      {% include 'breadcrumb-builtin' %}
+    </div>
+  </div>
+</div>
+
+{% endif %}
+
+
+
+{%comment%}
+
+<!-- BREADCRUMBS SETCTION START -->
+<div class="breadcrumbs-section">
+  <div class="breadcrumbs overlay-bg">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="breadcrumbs-inner">
+            {% if settings.breadcrub_page_title_enable %}
+            <h1 class="breadcrumbs-title">{{ page_title }}</h1>
+            {% endif %}
+            {% include 'breadcrumb-builtin' %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- BREADCRUMBS SETCTION END -->
+
+{%endcomment%}

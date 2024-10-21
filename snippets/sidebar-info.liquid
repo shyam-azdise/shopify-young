@@ -1,0 +1,56 @@
+<div class="clickalbe-sidebar-wrap clickalbe-sidebar-padding-dec">
+  <a class="sidebar-close"><i class=" ti-close "></i></a>
+  <div class="header-aside-content sidebar-content-100-percent">
+    <div class="header-aside-menu">
+      <nav>
+        {% include 'hamburger-menu' %}
+      </nav>
+    </div>
+
+    {% if section.settings.hamburger_payment_icon_enable %}
+    <div class="header-aside-payment">
+      <img src="{% if section.settings.hamburger_payment_icon %}{{ section.settings.hamburger_payment_icon | img_url: 'master' }}
+                {% else %}https://via.placeholder.com/270x18 {% endif %}" alt="{{ section.settings.hamburger_payment_icon.alt }}">
+    </div>
+    {% endif %}
+    {% if section.settings.hamburger_info != '' %}
+    <p>{{ section.settings.hamburger_info }}</p>
+    {% endif %}
+
+    <div class="aside-contact-info">
+      <ul>
+        {% if section.settings.open_close_time != '' %}
+        <li>{% if section.settings.open_icon != '' %}<i class=" ti-{{ section.settings.open_icon }}"></i>{% endif %}{{ section.settings.open_close_time }}</li>
+        {% endif %}
+
+        {% if section.settings.hamburger_email != '' %}
+        <li>{% if section.settings.email_icon != '' %}<i class=" ti-{{ section.settings.email_icon }}"></i>{% endif %}<a href="mailto:{{ section.settings.hamburger_email_link }}">{{ section.settings.hamburger_email }}</a></li>
+        {% endif %}
+        
+        {% if section.settings.hamburger_number != '' %}
+        <li>{% if section.settings.phone_icon != '' %}<i class=" ti-{{ section.settings.phone_icon }}"></i>{% endif %}<a href="tel:{{ section.settings.hamburger_number_link }}">{{ section.settings.hamburger_number }}</a></li>
+        {% endif %}
+
+        {% if section.settings.hamburger_address != '' %}
+        <li>{% if section.settings.address_icon != '' %}<i class=" ti-{{ section.settings.address_icon }}"></i>{% endif %}{{ section.settings.hamburger_address }}</li>
+        {% endif %}
+      </ul>
+    </div>
+    {% if section.settings.social_midea_enable %}
+    <div class="social-icon-style-2 mb-25">
+      {% for block in section.blocks %}
+      {%- case block.type -%}
+      {%- when 'hamburger_social_media' -%}
+      <a class="{{ block.settings.hamburger_social_media_icon }}" href="{{ block.settings.hamburger_social_media_url }}"><i class="fa fa-{{ block.settings.hamburger_social_media_icon }}"></i></a>
+      {%- endcase -%}
+      {% endfor %}
+    </div>
+    {% endif %}
+    {% if section.settings.hamburger_copyright != '' %}
+    <div class="copyright copyright-gray-2">
+      <p><a target="_blank" href="{{ section.settings.hamburger_copyright_link }}">{{ section.settings.hamburger_copyright }}</a></p>
+    </div>
+    {% endif %}
+
+  </div>
+</div>

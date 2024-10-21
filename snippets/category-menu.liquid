@@ -1,0 +1,167 @@
+{% assign cat_menu_limit = section.settings.cat_menu_limit %}
+<nav>
+  <ul>
+
+    {% assign catetory_menu_handle = section.settings.catetory_menu %}
+    {% for link in linklists[catetory_menu_handle].links limit: cat_menu_limit %}
+    {% assign child_list_handle = link.title | handleize %}
+    {% if linklists[child_list_handle].links != blank %}
+
+    <li class="cr-dropdown"><a href="{{ link.url }}">{{ link.title }} <span class="fa fa-angle-right"></span></a>
+      <!-- categori Mega-Menu Start -->
+      <div class="category-menu-dropdown">
+        <div class="single-category-menu">
+          <ul>
+            {% for childlink in linklists[child_list_handle].links %}
+            {% assign grand_childlist_handle = childlink.title | handleize %}
+            {% if linklists[grand_childlist_handle] and linklists[grand_childlist_handle].links.size > 0 %}
+            <!-- Single Column Start -->
+            <li><h4>{{childlink.title }}</h4>
+              <ul>
+
+                {% for grand_childlist_handle in linklists[grand_childlist_handle].links %}
+                <li><a href="{{grand_childlist_handle.url}}">{{grand_childlist_handle.title}}</a></li>
+                {% endfor %}
+
+              </ul>
+            </li>
+            <!-- Single Column End -->
+            {% elsif childlink.type == "collection_link" and childlink.object.image %}
+            <li class="menu-benner-image"><a href="{{ childlink.url }}"><img src="{{ childlink.object.image | img_url: 'large' }}" alt="{{ childlink.object.image.alt }}"></a></li>
+
+            {% else %}
+            <li><a href="{{ childlink.url }}" class="title">{{ childlink.title }}</a></li>
+            {% endif %}
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+
+      <!-- categori Mega-Menu End -->
+    </li>
+
+    {% else %}
+    <li class="cr-dropdown"><a href="{{ link.url }}">{{ link.title }}</a></li>
+    {% endif %}
+    {% endfor %}
+
+
+    {% if linklists[catetory_menu_handle].links.size > cat_menu_limit %}   
+    <li id="cat_toggle" class="cr-dropdown has-sub"><a href="#"> {{ section.settings.more_cat_title }}</a>
+      <ul class="categorie_sub">
+        {% assign catetory_menu_handle = section.settings.catetory_menu %}
+        {% for link in linklists[catetory_menu_handle].links offset: cat_menu_limit %}
+        <li><a href="{{ link.url }}" >{{ link.title }}</a></li>
+        {% endfor %}
+      </ul>   
+    </li>
+    {% endif %}
+
+
+
+
+  </ul>
+</nav>
+
+{%comment%}
+
+<nav>
+  <ul>
+    <li class="cr-dropdown"><a href="#">Computer <span class="fa fa-angle-right"></span></a>
+      <div class="category-menu-dropdown ct-menu-res-height-1">
+        <div class="single-category-menu ct-menu-mrg-bottom category-menu-border">
+          <h4>Laptop Accessories</h4>
+          <ul>
+            <li><a href="shop-fullwide.html">Laptop Keyboard</a></li>
+            <li><a href="shop-fullwide.html">Laptop Mouse</a></li>
+            <li><a href="shop-fullwide.html">Bluetooth Speaker</a></li>
+            <li><a href="shop-fullwide.html">LED Light</a></li>
+          </ul>
+        </div>
+        <div class="single-category-menu ct-menu-mrg-bottom ct-menu-mrg-left">
+          <h4>Laptop Accessories</h4>
+          <ul>
+            <li><a href="shop-fullwide.html">Laptop Keyboard</a></li>
+            <li><a href="shop-fullwide.html">Laptop Mouse</a></li>
+            <li><a href="shop-fullwide.html">Bluetooth Speaker</a></li>
+            <li><a href="shop-fullwide.html">LED Light</a></li>
+          </ul>
+        </div>
+        <div class="single-category-menu">
+          <h4>Laptop Accessories</h4>
+          <ul>
+            <li><a href="shop-fullwide.html">Laptop Keyboard</a></li>
+            <li><a href="shop-fullwide.html">Laptop Mouse</a></li>
+            <li><a href="shop-fullwide.html">Bluetooth Speaker</a></li>
+            <li><a href="shop-fullwide.html">LED Light</a></li>
+          </ul>
+        </div>
+        <div class="single-category-menu">
+          <a href="#"><img src="assets/images/banner/menu-banner.png" alt=""></a>
+        </div>
+      </div>
+    </li>
+    <li class="cr-dropdown"><a href="#">Accessories <span class="fa fa-angle-right"></span></a>
+      <div class="category-menu-dropdown ct-menu-res-height-2">
+        <div class="single-category-menu">
+          <h4>Laptop Accessories</h4>
+          <ul>
+            <li><a href="shop-fullwide.html">Laptop Keyboard</a></li>
+            <li><a href="shop-fullwide.html">Laptop Mouse</a></li>
+            <li><a href="shop-fullwide.html">Bluetooth Speaker</a></li>
+            <li><a href="shop-fullwide.html">LED Light</a></li>
+          </ul>
+        </div>
+        <div class="single-category-menu ct-menu-mrg-left">
+          <h4>Laptop Accessories</h4>
+          <ul>
+            <li><a href="shop-fullwide.html">Laptop Keyboard</a></li>
+            <li><a href="shop-fullwide.html">Laptop Mouse</a></li>
+            <li><a href="shop-fullwide.html">Bluetooth Speaker</a></li>
+            <li><a href="shop-fullwide.html">LED Light</a></li>
+          </ul>
+        </div>
+      </div>
+    </li>
+    <li class="cr-dropdown"><a href="shop-fullwide.html">Computer Kit</a></li>
+    <li class="cr-dropdown"><a href="shop-fullwide.html">Laptop</a></li>
+    <li class="cr-dropdown"><a href="shop-fullwide.html">Laptop Accessories </a></li>
+    <li class="cr-dropdown"><a href="shop-fullwide.html">Smartwatch</a></li>
+    <li class="cr-dropdown"><a href="shop-fullwide.html">Accessories</a></li>
+    <li class="cr-dropdown"><a href="shop-fullwide.html">Cameras</a></li>
+    <li class="cr-dropdown"><a href="shop-fullwide.html">Mobile Phone</a></li>
+    <li class="cr-dropdown"><a href="shop-fullwide.html">Drone</a></li>
+    <li class="cr-dropdown"><a href="shop-fullwide.html">Drone Cameras</a></li>
+    <li class="cr-dropdown"><a href="shop-fullwide.html">Apple Products </a></li>
+  </ul>
+</nav>
+
+{%endcomment%}
+
+
+<script>
+  
+  $('ul').each(function(){
+    if($(this).children('li.cr-dropdown').length){
+      var ulChildren = $(this).children('li').length;
+      if (ulChildren == 5) {
+        $(this).addClass( "column_5" );
+      }else if (ulChildren == 4) {
+        $(this).addClass( "column_4" );
+      }else if(ulChildren == 3){
+        $(this).addClass( "column_3" );
+      }else if(ulChildren == 2){
+        $(this).addClass( "column_2" );
+      }else if(ulChildren == 1){
+        $(this).addClass( "column_1" );
+      }
+    }
+  });
+  
+  
+  
+  
+</script>
+
+
+

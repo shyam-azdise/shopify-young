@@ -1,0 +1,522 @@
+<div class="author-book-area" id="section-{{ section.id }}">
+  {% if section.settings.animate_img_top_left %}
+  <div class="book-leaf-1">
+    <img src="{{ section.settings.animate_img_top_left | img_url: 'master' }}" class="lazyload" alt="animate_img_top_left">
+  </div>
+  {% endif %}
+  {% if section.settings.animate_img_top_right %}
+  <div class="book-leaf-2">
+    <img src="{{ section.settings.animate_img_top_right | img_url: 'master' }}" class="lazyload" alt="animate_img_top_right">
+  </div>
+  {% endif %}
+  {% if section.settings.animate_img_botton_1 %}
+  <div class="book-leaf-3">
+    <img src="{{ section.settings.animate_img_botton_1 | img_url: 'master' }}" class="lazyload" alt="Animate Image One">
+  </div>
+  {% endif %}
+  {% if section.settings.animate_img_botton_2 %}
+  <div class="book-leaf-4">
+    <img src="{{ section.settings.animate_img_botton_2 | img_url: 'master' }}" class="lazyload" alt="Animate Image Two">
+  </div>
+  {% endif %}
+  {% if section.settings.animate_img_botton_3 %}
+  <div class="book-leaf-5">
+    <img src="{{ section.settings.animate_img_botton_3 | img_url: 'master' }}" class="lazyload" alt="Animate Image Three">
+  </div>
+  {% endif %}
+  {% if section.settings.animate_img_botton_4 %}
+  <div class="book-leaf-6">
+    <img src="{{ section.settings.animate_img_botton_4 | img_url: 'master' }}" class="lazyload" alt="Animate Image Four">
+  </div>
+  {% endif %}
+  {% if section.settings.animate_img_botton_5 %}
+  <div class="book-leaf-7">
+    <img src="{{ section.settings.animate_img_botton_5 | img_url: 'master' }}" class="lazyload" alt="Animate Image Five">
+  </div>
+  {% endif %}
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 col-md-6">
+        <div class="author-book-img">
+          <img src="{% if section.settings.author_img %}{{ section.settings.author_img | img_url: 'master' }}{% else %}https://via.placeholder.com/536x582 {% endif %}" class="lazyload" alt="banner">
+          {% if section.settings.author_inner_img %}
+          <div class="book-leaf-8">
+            <img src="{{ section.settings.author_inner_img | img_url: 'master' }}" class="lazyload" alt="">
+          </div>
+          {% endif %}
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6">
+        <div class="author-book-text">
+          {%if section.settings.author_sub_title != '' %}
+          <span>{{ section.settings.author_sub_title }}</span>
+          {%endif%}
+          {%if section.settings.author_title != '' %}
+          <h2>{{ section.settings.author_title }}</h2>
+          {%endif%}
+          {%if section.settings.author_des != '' %}
+          <p>{{ section.settings.author_des }}</p>
+          {%endif%}
+          <div class="yearly-best-seller">
+            {% if section.settings.year_logo_img %}
+            <div class="yearly-best-seller-img">
+              <img src="{{ section.settings.year_logo_img | img_url: 'master' }}" class="lazyload" alt="">
+            </div>
+            {% endif %}
+            {%if section.settings.bestseller_book != '' %}
+            <div class="yearly-best-seller-content">
+              <h4><a href="{{ section.settings.bestseller_book_url }}">{{ section.settings.bestseller_book }}</a></h4>
+            </div>
+            {% endif %}
+          </div>
+          {%if section.settings.author_button != '' %}
+          <div class="slider-btn-2 btn-hover">
+            <a class="animated slider-btn-2-bg-yellow slider-btn-3-ptb bg-black-hover" href="{{ section.settings.author_button_url }}">{{ section.settings.author_button }} </a>
+          </div>
+          {% endif %}        
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+{%- style -%}
+  #section-{{ section.id }}{
+    {%- for block in section.blocks -%}
+    {%- case block.type -%}
+    {%- when 'section_margin' -%}
+    margin-top: {{ block.settings.section_margin_top }}px;
+    margin-bottom: {{ block.settings.section_margin_bottom }}px;
+    {%- when 'section_padding' -%}
+    padding-top: {{ block.settings.section_padding_top }}px;
+    padding-bottom: {{ block.settings.section_padding_bottom }}px;
+    {%- when 'section_background' -%}    
+    background: {{ block.settings.section_bg_color }} 
+      {%- if block.settings.section_bg_image -%}url("{{ block.settings.section_bg_image | img_url: 'master' }}"){%- endif -%} no-repeat scroll center center / cover;
+    {%- endcase -%}
+    {%- endfor -%}
+  }
+  @media (min-width: 768px) and (max-width: 991px) {
+    #section-{{ section.id }}{
+      {%- for block in section.blocks -%}
+      {% case block.type %}
+      {%- when 'section_margin' -%}
+      margin-top: {{ block.settings.section_margin_top_md }}px;
+      margin-bottom: {{ block.settings.section_margin_bottom_md }}px;
+      {%- when 'section_padding' -%}
+      padding-top: {{ block.settings.section_padding_top_md }}px;
+      padding-bottom: {{ block.settings.section_padding_bottom_md }}px;
+      {%- endcase -%}
+      {%- endfor -%}
+    }
+  }
+  @media (max-width: 767px) {
+    #section-{{ section.id }}{
+      {%- for block in section.blocks -%}
+      {%- case block.type -%}
+      {%- when 'section_margin' -%}
+      margin-top: {{ block.settings.section_margin_top_xs }}px;
+      margin-bottom: {{ block.settings.section_margin_bottom_xs }}px;
+      {%- when 'section_padding' -%}
+      padding-top: {{ block.settings.section_padding_top_xs }}px;
+      padding-bottom: {{ block.settings.section_padding_bottom_xs }}px;
+      {%- endcase -%}
+      {%- endfor -%}
+    }
+  }
+
+
+{% if section.settings.author_content_enable %}
+
+
+  .author-book-text span {
+      color: {{ section.settings.author_sub_title_color }};
+  }
+  .author-book-text h2 {
+      color: {{ section.settings.author_title_color }};
+  }
+  .author-book-text p {
+      color: {{ section.settings.author_discount_color }};
+  }
+  .author-book-text .yearly-best-seller .yearly-best-seller-content h4 a {
+      color: {{ section.settings.bestseller_book_color }};
+  }
+  .slider-btn-2 a.slider-btn-2-bg-yellow {
+      color: {{ section.settings.author_button_color }};
+      background: {{ section.settings.author_button_bg_color }};
+  }
+  .slider-btn-2 a.slider-btn-2-bg-yellow:hover {
+      color: {{ section.settings.author_button_color_hov }};
+  }
+  .btn-hover a.bg-black-hover::after {
+      background: {{ section.settings.author_button_bg_hover_color }};
+  }
+
+
+{%endif%}
+
+{%- endstyle -%}
+
+
+
+{% schema %}
+  {
+    "name": "Featured Author",
+    "settings": [
+		{
+          "type": "text",
+          "id": "author_sub_title",
+          "label": "Sub Title", 
+		  "default": "Featured Author This Month"
+        },
+        {
+          "type": "text",
+          "id": "author_title",
+          "label": "Banner Title",
+          "default": "Susan Choi wins fiction <br>prizefor Trust Exercise"
+        },
+		{
+          "type": "textarea",
+          "id": "author_des",
+          "label": "Description",
+		  "default": "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas venenatis posuere volutpat dauris laore Sed non sem blandit,"
+        },
+		{
+          "type": "text",
+          "id": "bestseller_book",
+          "label": "Bestseller Book",
+          "default": "Bestseller Book of the year"
+        },
+        {
+          "type": "url",
+          "id": "bestseller_book_url",
+          "label": "Bestseller Book URL"
+        },
+        {
+          "type": "text",
+          "id": "author_button",
+          "label": "Button Text",
+          "default": "View Her Books"
+        },
+        {
+          "type": "url",
+          "id": "author_button_url",
+          "label": "Button URL"
+        },
+        {
+          "type": "image_picker",
+          "id": "author_img",
+          "label": "Author Image",
+          "info": "Recommended Size: 536x582px"
+        },
+		{
+          "type": "image_picker",
+          "id": "author_inner_img",
+          "label": "Author inner Image",
+          "info": "Recommended Size: 214x243px"
+        },
+		{
+          "type": "image_picker",
+          "id": "year_logo_img",
+          "label": "Year Logo Image",
+          "info": "Recommended Size: 199x201px"
+        },
+		{
+          "type": "image_picker",
+          "id": "animate_img_top_left",
+          "label": "Animate Img Top Left",
+          "info": "Recommended Size: 461x288px"
+        },
+		{
+          "type": "image_picker",
+          "id": "animate_img_top_right",
+          "label": "Animate Img Top Right",
+          "info": "Recommended Size: 383x351px"
+        },
+		{
+          "type": "image_picker",
+          "id": "animate_img_botton_1",
+          "label": "Animate Img Bottom One",
+          "info": "Recommended Size: 327x529px"
+        },
+		{
+          "type": "image_picker",
+          "id": "animate_img_botton_2",
+          "label": "Animate Img Bottom Two",
+          "info": "Recommended Size: 174x169px"
+        },
+		{
+          "type": "image_picker",
+          "id": "animate_img_botton_3",
+          "label": "Animate Img Bottom Three",
+          "info": "Recommended Size: 138x267px"
+        },
+		{
+          "type": "image_picker",
+          "id": "animate_img_botton_4",
+          "label": "Animate Img Bottom Four",
+          "info": "Recommended Size: 283x198px"
+        },
+		{
+          "type": "image_picker",
+          "id": "animate_img_botton_5",
+          "label": "Animate Img Bottom Five",
+          "info": "Recommended Size: 305x375px"
+        },
+        {
+          "type": "header",
+          "content": "Author Content Style"
+        },
+        {
+          "type": "checkbox",
+          "id": "author_content_enable",
+          "label": "Author Content Style Enable",
+          "default": true
+        },
+		{
+          "type": "color",
+          "id": "author_title_color",
+          "label": "Author Title Color",
+          "default": "#1b1b1b"
+        },
+        {
+          "type": "color",
+          "id": "author_sub_title_color",
+          "label": "Author Sub title Color",
+          "default": "#ff6e21"
+        },
+        {
+          "type": "color",
+          "id": "author_discount_color",
+          "label": "Author Description Color",
+          "default": "#1b1b1b"
+        },
+		{
+          "type": "color",
+          "id": "bestseller_book_color",
+          "label": "Best Seller Book Color",
+          "default": "#1b1b1b"
+        },
+        {
+          "type": "color",
+          "id": "author_button_color",
+          "label": "Author Button Color",
+          "default": "#fff"
+        },
+        {
+          "type": "color",
+          "id": "author_button_bg_color",
+          "label": "Author Button BG Color",
+          "default": "#ff6e21"
+        },
+        {
+          "type": "color",
+          "id": "author_button_color_hov",
+          "label": "Author Button Hover Color",
+          "default": "#fff"
+        },
+        {
+          "type": "color",
+          "id": "author_button_bg_hover_color",
+          "label": "Author Button Hover BG Color",
+          "default": "#000"
+        }
+
+	],
+	"blocks":[
+	   {
+          "type": "section_margin",
+          "name": "Section Margin",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Tablat Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			}
+          ]
+       },
+	   {
+          "type": "section_padding",
+          "name": "Section Padding",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top",
+			  "min": 0,
+			  "max": 250,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 150
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom",
+			  "min": 0,
+			  "max": 250,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 115
+			},
+			{
+			  "type": "header",
+			  "content": "Tablat Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_md",
+			  "min": 0,
+			  "max": 250,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 150
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_md",
+			  "min": 0,
+			  "max": 250,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 65
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 50
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 45
+			}
+          ]
+       },
+	   {
+          "type": "section_background",
+          "name": "Section Background",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "image_picker",
+			  "id": "section_bg_image",
+			  "label": "BG Image"
+			},
+			{
+			  "type": "color",
+			  "id": "section_bg_color",
+			  "label": "BG Color",
+			  "default": "#ffffff"
+			}
+          ]
+       }
+	],
+	"presets": [
+		{
+		  "name": "Featured Author",
+		  "category": "2. Banner",
+		  "blocks":[
+				{
+					"type": "section_padding"
+				}
+			]
+		}
+	]
+  }
+{% endschema %}
+
+
+
+

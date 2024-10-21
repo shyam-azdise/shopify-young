@@ -1,0 +1,369 @@
+<div class="valentine-area" id="section-{{ section.id }}">
+  <div class="valentine-wrap bg-img pt-90 pb-90" style="background-image:url({% if section.settings.valentine_bg_img %}{{ section.settings.valentine_bg_img | img_url: 'master' }}{% else %}https://via.placeholder.com/1115x755{% endif %});">
+    <div class="row no-gutters">
+      <div class="col-lg-12 ml-auto">
+        <div class="valentine-content">
+          {%if section.settings.banner_subtitle != '' %}
+          <span>{{ section.settings.banner_subtitle }}</span>
+          {% endif %}
+		  {%if section.settings.banner_title != '' %}
+          <h3>{{ section.settings.banner_title }}</h3>
+          {% endif %}
+          {%if section.settings.banner_Offer_title != '' %}
+          <h2>{{ section.settings.banner_Offer_title }}</h2>
+          {% endif %}
+          {%if section.settings.banner_desc != '' %}
+          <p>{{ section.settings.banner_desc }}</p>
+          {% endif %}
+          
+          {%if section.settings.banner_button_title != '' %}
+          <div class="btn-style-5 btn-hover">
+            <a class="bs5-white-text bs5-green-bg bs5-ptb-1 bg-black-hover" href="{{ section.settings.banner_button_url }}">{{ section.settings.banner_button_title }}</a>
+          </div>
+          {% endif %}
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+{%- style -%}
+  #section-{{ section.id }}{
+    {%- for block in section.blocks -%}
+    {%- case block.type -%}
+    {%- when 'section_margin' -%}
+    margin-top: {{ block.settings.section_margin_top }}px;
+    margin-bottom: {{ block.settings.section_margin_bottom }}px;
+    {%- when 'section_padding' -%}
+    padding-top: {{ block.settings.section_padding_top }}px;
+    padding-bottom: {{ block.settings.section_padding_bottom }}px;
+    {%- when 'section_background' -%}    
+    background: {{ block.settings.section_bg_color }} 
+      {%- if block.settings.section_bg_image -%}url("{{ block.settings.section_bg_image | img_url: 'master' }}"){%- endif -%} no-repeat scroll center center / cover;
+    {%- endcase -%}
+    {%- endfor -%}
+  }
+  @media (min-width: 768px) and (max-width: 991px) {
+    #section-{{ section.id }}{
+      {%- for block in section.blocks -%}
+      {% case block.type %}
+      {%- when 'section_margin' -%}
+      margin-top: {{ block.settings.section_margin_top_md }}px;
+      margin-bottom: {{ block.settings.section_margin_bottom_md }}px;
+      {%- when 'section_padding' -%}
+      padding-top: {{ block.settings.section_padding_top_md }}px;
+      padding-bottom: {{ block.settings.section_padding_bottom_md }}px;
+      {%- endcase -%}
+      {%- endfor -%}
+    }
+  }
+  @media (max-width: 767px) {
+    #section-{{ section.id }}{
+      {%- for block in section.blocks -%}
+      {%- case block.type -%}
+      {%- when 'section_margin' -%}
+      margin-top: {{ block.settings.section_margin_top_xs }}px;
+      margin-bottom: {{ block.settings.section_margin_bottom_xs }}px;
+      {%- when 'section_padding' -%}
+      padding-top: {{ block.settings.section_padding_top_xs }}px;
+      padding-bottom: {{ block.settings.section_padding_bottom_xs }}px;
+      {%- endcase -%}
+      {%- endfor -%}
+    }
+  }
+
+
+  .valentine-wrap .valentine-content span {
+      color: {{ section.settings.banner_subtitle_color }};
+  }
+  .valentine-wrap .valentine-content h3 {
+      color: {{ section.settings.banner_title_color }};
+  }
+  .valentine-wrap .valentine-content h2 {
+      color: {{ section.settings.banner_offer_color }};
+  }
+  .valentine-wrap .valentine-content p {
+      color: {{ section.settings.banner_desc_color }};
+  }
+
+  .btn-style-5 a.bs5-green-bg {
+      background-color: {{ section.settings.banner_btn_bg }};
+  }
+  .btn-style-5 a.bs5-white-text {
+      color: {{ section.settings.banner_btn_text_color }};
+  }
+
+  .btn-hover a.bg-black-hover::after {
+      background: {{ section.settings.banner_btn_bg_hov }};
+  }
+  .btn-hover a:hover {
+      color: {{ section.settings.banner_btn_text_color_hov }};
+  }
+
+{%- endstyle -%}
+
+{% schema %}
+  	{
+		"name": "Valentine Day Banner",
+		"settings": [
+			{
+              "type": "header",
+              "content": "Banner Full width Two Content"
+            },
+    		{
+              "type": "image_picker",
+              "id": "valentine_bg_img",
+              "label": "Valentine Day BG Image",
+              "info": "Recommended Size: 1115x755px"
+            },
+			{
+              "type": "text",
+              "id": "banner_subtitle",
+              "label": "Banner Subtitle",
+              "default": "HOT PROMOTION"
+            },
+            {
+              "type": "text",
+              "id": "banner_title",
+              "label": "Banner Offer Title",
+              "default": "Happy Valentine Day"
+            },
+			{
+              "type": "text",
+              "id": "banner_Offer_title",
+              "label": "Banner Offer Title",
+              "default": "Sale 39%"
+            },
+			{
+              "type": "textarea",
+              "id": "banner_desc",
+              "label": "Banner Description",
+              "default": "Vestibulum ante ipsum primis in faucibus orci luctus"
+            },
+            {
+              "type": "text",
+              "id": "banner_button_title",
+              "label": "Banner Button Title",
+              "default": "Shop Now"
+            },
+            {
+              "type": "url",
+              "id": "banner_button_url",
+              "label": "Banner Button URL"
+            },
+            {
+              "type": "header",
+              "content": "Banner Fullwidth Style"
+            },
+			{
+              "type": "color",
+              "id": "banner_subtitle_color",
+              "label": "Banner sub title Color",
+              "default": "#654600"
+            },
+            {
+              "type": "color",
+              "id": "banner_title_color",
+              "label": "Banner title Color",
+              "default": "#1b1b1b"
+            },
+			{
+              "type": "color",
+              "id": "banner_offer_color",
+              "label": "Banner Offer Color",
+              "default": "#ff6e21"
+            },
+			{
+              "type": "color",
+              "id": "banner_desc_color",
+              "label": "Banner Description Color",
+              "default": "#393939"
+            },
+            {
+              "type": "color",
+              "id": "banner_btn_bg",
+              "label": "Banner Button BG Color",
+              "default": "#3ad9b1"
+            },
+            {
+              "type": "color",
+              "id": "banner_btn_bg_hov",
+              "label": "Banner Button Hover BG Color",
+              "default": "#000"
+            },
+			{
+              "type": "color",
+              "id": "banner_btn_text_color",
+              "label": "Banner Button  text Color",
+              "default": "#fff"
+            },
+            {
+              "type": "color",
+              "id": "banner_btn_text_color_hov",
+              "label": "Banner Button Hover text Color",
+              "default": "#fff"
+            }
+		],
+        "blocks":[
+               {
+                  "type": "section_margin",
+                  "name": "Section Margin",
+                  "limit": 1,
+                  "settings": [
+                    {
+                      "type": "header",
+                      "content": "Large/Desktop/Tablate Device"
+                    },
+                    {
+                      "type": "range",
+                      "id": "section_margin_top",
+                      "min": 0,
+                      "max": 150,
+                      "step": 5,
+                      "label": "Margin Top",
+                      "unit": "px",
+                      "default": 0
+                    },
+                    {
+                      "type": "range",
+                      "id": "section_margin_bottom",
+                      "min": 0,
+                      "max": 150,
+                      "step": 5,
+                      "label": "Margin Bottom",
+                      "unit": "px",
+                      "default": 0
+                    },
+                    {
+                      "type": "header",
+                      "content": "Mobile Device"
+                    },
+                    {
+                      "type": "range",
+                      "id": "section_margin_top_xs",
+                      "min": 0,
+                      "max": 150,
+                      "step": 5,
+                      "label": "Margin Top",
+                      "unit": "px",
+                      "default": 0
+                    },
+                    {
+                      "type": "range",
+                      "id": "section_margin_bottom_xs",
+                      "min": 0,
+                      "max": 150,
+                      "step": 5,
+                      "label": "Margin Bottom",
+                      "unit": "px",
+                      "default": 0
+                    }
+                  ]
+               },
+               {
+                  "type": "section_padding",
+                  "name": "Section Padding",
+                  "limit": 1,
+                  "settings": [
+                    {
+                      "type": "header",
+                      "content": "Large/Desktop/Tablate Device"
+                    },
+                    {
+                      "type": "range",
+                      "id": "section_padding_top",
+                      "min": 0,
+                      "max": 150,
+                      "step": 5,
+                      "label": "Padding Top",
+                      "unit": "px",
+                      "default": 90
+                    },
+                    {
+                      "type": "range",
+                      "id": "section_padding_bottom",
+                      "min": 0,
+                      "max": 150,
+                      "step": 5,
+                      "label": "Padding Bottom",
+                      "unit": "px",
+                      "default": 90
+                    },
+                    {
+                      "type": "header",
+                      "content": "Mobile Device"
+                    },
+                    {
+                      "type": "range",
+                      "id": "section_padding_top_xs",
+                      "min": 0,
+                      "max": 150,
+                      "step": 5,
+                      "label": "Padding Top",
+                      "unit": "px",
+                      "default": 40
+                    },
+                    {
+                      "type": "range",
+                      "id": "section_padding_bottom_xs",
+                      "min": 0,
+                      "max": 150,
+                      "step": 5,
+                      "label": "Padding Bottom",
+                      "unit": "px",
+                      "default": 40
+                    }
+                  ]
+               },
+               {
+                  "type": "section_background",
+                  "name": "Section Background",
+                  "limit": 1,
+                  "settings": [
+                    {
+                      "type": "image_picker",
+                      "id": "section_bg_image",
+                      "label": "BG Image"
+                    },
+                    {
+                      "type": "color",
+                      "id": "section_bg_color",
+                      "label": "BG Color",
+                      "default": "#ffffff"
+                    }
+                  ]
+               }
+
+            ],
+
+        "presets":[
+                {
+                    "name": "Valentine Day Banner",
+                    "category": "2. Banner",
+                    "blocks":[
+						{
+                            "type": "section_padding"
+                        },
+						{
+                            "type": "section_background"
+                        }
+                    ]
+                }
+            ]
+
+
+ 	 }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+
+

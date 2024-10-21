@@ -1,0 +1,76 @@
+<header class="header-area section-padding-1">
+  <div class="header-large-device">
+    <div class="container-fluid">
+      <div class="header-ptb">
+        <div class="row align-items-center">
+          <div class="col-lg-6">
+            <div class="logo logo-width">
+              {%- include 'header-logo' -%}
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="header-right-wrap header-right-flex">
+              <div class="search-wrap same-style search-width-1 same-style-mrg-dec">
+                {% include 'search-bar' %}
+              </div>
+              <div class="same-style">
+                {% include 'wishlist-button-top' %}
+              </div>
+              <div class="same-style">
+                <a class="cart-active" href="/cart"><i class="fa fa-cart-arrow-down"></i></a>
+              </div>
+              <div class="same-style">
+                <a class="clickalbe-button-active" href="#"><i class="fa fa-bars"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="header-small-device">
+    <div class="container-fluid">
+      <div class="row align-items-center">
+        <div class="col-6">
+          <div class="mobile-logo mobile-logo-width">
+            {%- include 'header-logo' -%}
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="header-right-wrap header-right-flex">
+            <div class="same-style">
+              {% include 'wishlist-button-top' %}
+            </div>
+            <div class="same-style">
+              <a class="cart-active" href="/cart"><i class="fa fa-cart-arrow-down"></i></a>
+            </div>
+            <div class="same-style">
+              <a class="mobile-menu-button-active" href="#"><i class="fa fa-bars"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="clickalbe-sidebar-wrapper-active clickalbe-sidebar-wrapper-style-1">
+  <div class="clickalbe-sidebar-wrap">
+    <a class="sidebar-close"><i class=" ti-close "></i></a>
+    <div class="clickable-mainmenu-wrap clickable-mainmenu-style1 sidebar-content-100-percent">
+      {% include 'mobile-menu' %}
+    </div>
+  </div>
+</div>
+
+<!-- mini cart start -->
+<div class="sidebar-cart-active">
+  {%- include 'mini-cart' -%}
+</div>
+
+<!-- Mobile menu start -->
+<div class="mobile-menu-active clickalbe-sidebar-wrapper-style-1">
+  <div class="clickalbe-sidebar-wrap">
+    {%- include 'mobile-header' -%}
+  </div>
+</div>

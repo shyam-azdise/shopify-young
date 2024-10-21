@@ -1,0 +1,82 @@
+<header class="header-area section-padding-1">
+  <div class="header-large-device">
+    <div class="container{% if section.settings.fullwidth_on %}-fluid{% endif %}">
+      <div class="row align-items-center">
+        <div class="col-xl-3 col-lg-2">
+          <div class="logo logo-res-lg">
+            {%- include 'header-logo' -%}
+          </div>
+        </div>
+        <div class="col-xl-6 col-lg-8">
+          <div class="main-menu menu-lh-3 main-menu-padding-1 menu-text-black text-center">
+            {%- include 'main-menu' -%}
+          </div>
+        </div>
+        <div class="col-xl-3 col-lg-2">
+          <div class="header-right-wrap header-right-flex hr-mrg-handmade">
+            <div class="same-style same-style-mrg-dec search-3-area">
+              <a class="search-toggle" href="#">
+                <i class="lnr lnr-magnifier s-open"></i>
+                <i class="ti-close s-close"></i>
+              </a>
+              <div class="search-wrap-3">
+                {% include 'search-bar' %}
+              </div>
+            </div>
+            <div class="same-style same-style-mrg-dec">
+              {% include 'wishlist-button-top' %}
+            </div>
+            <div class="same-style same-style-mrg-dec">
+              <a class="cart-active" href="/cart"><i class="fa fa-cart-arrow-down"></i></a>
+            </div>
+            <div class="same-style same-style-mrg-dec">
+              <a class="clickalbe-button-active" href="#"><i class="fa fa-bars"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="header-small-device">
+    <div class="container-fluid">
+      <div class="row align-items-center">
+        <div class="col-6">
+          <div class="mobile-logo mobile-logo-width">
+            {%- include 'header-logo' -%}
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="header-right-wrap header-right-flex">
+            <div class="same-style">
+              {% include 'wishlist-button-top' %}
+            </div>
+            <div class="same-style">
+              <a class="cart-active" href="/cart"><i class="fa fa-cart-arrow-down"></i></a>
+            </div>
+            <div class="same-style">
+              <a class="mobile-menu-button-active" href="#"><i class="fa fa-bars"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="clickalbe-sidebar-wrapper-active clickalbe-sidebar-wrapper-style-1">
+  {%- include 'sidebar-info' -%}
+</div>
+
+
+<!-- mini cart start -->
+<div class="sidebar-cart-active">
+  {%- include 'mini-cart' -%}
+</div>
+
+
+<!-- Mobile menu start -->
+<div class="mobile-menu-active clickalbe-sidebar-wrapper-style-1">
+  <div class="clickalbe-sidebar-wrap">
+    {%- include 'mobile-header' -%}
+  </div>
+</div>

@@ -1,0 +1,474 @@
+{% if section.settings.service_style == 'service_style_1' %}
+<div class="service-area bg-gray-2 section-padding-1" id="section-{{ section.id }}">
+  <div class="container{% if section.settings.fullwidth_on %}-fluid{% endif %}">
+    <div class="row">
+
+      {% for block in section.blocks %}
+      {%- case block.type -%}
+      {%- when 'services' -%}
+      <div class="col-xl-{{ section.settings.service_col_xl }} col-lg-{{ section.settings.service_col_lg }} col-md-{{ section.settings.service_col_md }}">
+        <div class="single-service text-center service-mrg-left mb-30">
+          {% if block.settings.service_icon != blank %}
+          <div class="service-icon">
+            <i class="{{ block.settings.service_icon }}"></i>
+          </div>
+          {%endif%}
+          <div class="service-content">
+            {% if block.settings.service_title != blank %}
+            <h4>{{ block.settings.service_title }}</h4>
+            {%endif%}
+            {% if block.settings.service_desc != blank %}
+            <p>{{ block.settings.service_desc }}</p>
+            {%endif%}
+          </div>
+
+        </div>
+      </div>
+      {%- endcase -%}
+      {% endfor %}
+
+    </div>
+  </div>
+</div>
+
+
+  <style>
+
+    .single-service .service-icon i {
+      color: {{ section.settings.service_icon_color }};
+      font-size: {{ section.settings.service_icon_size }}px;
+      line-height: normal;
+    }
+    .single-service .service-content h4 {
+      font-size: {{ section.settings.service_title_size }}px;
+      color: {{ section.settings.service_title_color }};
+      line-height: normal;
+    }
+    .single-service .service-content p {
+      color: {{ section.settings.service_content_color }};
+      font-size: {{ section.settings.service_content_size }}px;
+      line-height: normal;
+    }
+
+  </style>
+
+
+
+{% elsif section.settings.service_style == 'service_style_2' %}
+
+<div class="service-area pt-105 pb-70" id="section-{{ section.id }}">
+  <div class="container{% if section.settings.fullwidth_on %}-fluid{% endif %}">
+    {% if section.settings.section_title != blank %}
+    <div class="section-title-9 text-center mb-45">
+      <h2>{{ section.settings.section_title }}</h2>
+    </div>
+    {%endif%}
+    <div class="service-wrap-3">
+      <div class="row">
+        {% for block in section.blocks %}
+        {%- case block.type -%}
+      	{%- when 'services' -%}
+        <div class="col-xl-{{ section.settings.service_col_xl }} col-lg-{{ section.settings.service_col_lg }} col-md-{{ section.settings.service_col_md }}">
+          <div class="single-service-3 text-center mb-30">
+            <div class="service-icon-3">
+              <img src="{% if block.settings.service_img %}{{ block.settings.service_img | img_url: 'master' }}{% else %}https://via.placeholder.com/234x270 {% endif %}" class="lazyload" alt="{{ block.settings.service_img.alt }}">
+            </div>
+            <div class="service-content-3">
+              {% if block.settings.service_title != blank %}
+              <h3>{{ block.settings.service_title }}</h3>
+              {%endif%}
+              {% if block.settings.service_desc != blank %}
+              <p>{{ block.settings.service_desc }}</p>
+              {%endif%}
+            </div>
+          </div>
+        </div>
+        {%- endcase -%}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endif %}
+
+{%- style -%}
+  #section-{{ section.id }}{
+    {%- for block in section.blocks -%}
+    {%- case block.type -%}
+    {%- when 'section_margin' -%}
+    margin-top: {{ block.settings.section_margin_top }}px;
+    margin-bottom: {{ block.settings.section_margin_bottom }}px;
+    {%- when 'section_padding' -%}
+    padding-top: {{ block.settings.section_padding_top }}px;
+    padding-bottom: {{ block.settings.section_padding_bottom }}px;
+    {%- when 'section_background' -%}    
+    background: {{ block.settings.section_bg_color }} 
+      {%- if block.settings.section_bg_image -%}url("{{ block.settings.section_bg_image | img_url: 'master' }}"){%- endif -%} no-repeat scroll center center / cover;
+    {%- endcase -%}
+    {%- endfor -%}
+  }
+  @media (min-width: 768px) and (max-width: 991px) {
+    #section-{{ section.id }}{
+      {%- for block in section.blocks -%}
+      {% case block.type %}
+      {%- when 'section_margin' -%}
+      margin-top: {{ block.settings.section_margin_top_md }}px;
+      margin-bottom: {{ block.settings.section_margin_bottom_md }}px;
+      {%- when 'section_padding' -%}
+      padding-top: {{ block.settings.section_padding_top_md }}px;
+      padding-bottom: {{ block.settings.section_padding_bottom_md }}px;
+      {%- endcase -%}
+      {%- endfor -%}
+    }
+  }
+  @media (max-width: 767px) {
+    #section-{{ section.id }}{
+      {%- for block in section.blocks -%}
+      {%- case block.type -%}
+      {%- when 'section_margin' -%}
+      margin-top: {{ block.settings.section_margin_top_xs }}px;
+      margin-bottom: {{ block.settings.section_margin_bottom_xs }}px;
+      {%- when 'section_padding' -%}
+      padding-top: {{ block.settings.section_padding_top_xs }}px;
+      padding-bottom: {{ block.settings.section_padding_bottom_xs }}px;
+      {%- endcase -%}
+      {%- endfor -%}
+    }
+  }
+
+{%- endstyle -%}
+
+
+
+
+{% schema %}
+  	{
+		"name": "Services",
+		"settings": [
+                  {
+                    "type": "header",
+                    "content": "Service Style"
+                  },
+          		  {
+                    "type": "select",
+                    "id": "service_style",
+                    "label": "Select Service Style",
+                    "options":[
+                      {
+                        "value":"service_style_1",
+                        "label": "Service Style One"
+                      },
+                      {
+                        "value":"service_style_2",
+                        "label": "Service Style Two"
+                      }
+                    ],
+
+                    "default": "service_style_1"
+                  },
+          		  {
+                      "type": "checkbox",
+                      "id": "fullwidth_on",
+                      "label": "Full Width Enable",
+                      "default": false,
+                      "info": "If you want Full Width click checkbox"
+                  },
+                  {
+                    "type": "text",
+                    "id": "section_title",
+                    "label": "Section Title",
+                    "default": "Pet care services"
+                  },
+					{
+                        "type": "select",
+                        "id": "service_col_xl",
+                        "label": "Extra Large Skin",
+                        "options":[
+                              {
+                                  "label": "2",
+                                  "value": "6"
+                              },
+                              {
+                                  "label": "3",
+                                  "value": "4"
+                              },
+                              {
+                                  "label": "4",
+                                  "value": "3"
+                              }
+                          ],
+                          "default": "3"
+                      },
+                      {
+                        "type": "select",
+                        "id": "service_col_lg",
+                        "label": "Large Skin",
+                        "options":[
+                              {
+                                  "label": "2",
+                                  "value": "6"
+                              },
+                              {
+                                  "label": "3",
+                                  "value": "4"
+                              },
+                              {
+                                  "label": "4",
+                                  "value": "3"
+                              }
+                          ],
+                          "default": "3"
+                      },
+                      {
+                        "type": "select",
+                        "id": "service_col_md",
+                        "label": "Desktop",
+                        "options":[
+                              {
+                                  "label": "2",
+                                  "value": "6"
+                              },
+                              {
+                                  "label": "3",
+                                  "value": "4"
+                              },
+                              {
+                                  "label": "4",
+                                  "value": "3"
+                              }
+                          ],
+                          "default": "6"
+                      },
+                  {
+                    "type": "color",
+                    "id": "service_icon_color",
+                    "label": "Service Icon Color", 
+                    "default": "#ff6e21"
+                  },
+                  {
+                    "type": "text",
+                    "id": "service_icon_size",
+                    "label": "Service Icon Size", 
+                    "default": "66"
+                  },
+                  {
+                    "type": "color",
+                    "id": "service_title_color",
+                    "label": "Service Title Color", 
+                    "default": "#262626"
+                  },
+                  {
+                    "type": "text",
+                    "id": "service_title_size",
+                    "label": "Service Title Size", 
+                    "default": "16"
+                  },
+                  {
+                    "type": "color",
+                    "id": "service_content_color",
+                    "label": "Service Content Color", 
+                    "default": "#777777"
+                  },
+                  {
+                    "type": "text",
+                    "id": "service_content_size",
+                    "label": "Service Content Size", 
+                    "default": "12"
+                  }
+		],
+        "blocks":[
+              {
+                  "type": "services",
+                  "name": "Services",
+                  "settings": [
+					  {
+                        "type": "text",
+                        "id": "service_icon",
+                        "label": "Icon Name",
+                        "default": "ti-truck"
+                      },
+                      {
+                        "type": "image_picker",
+                        "id": "service_img",
+                        "label": "Service Image",
+                        "info": "Recommended Size: 234x270px"
+                      },
+                      {
+                        "type": "textarea",
+                        "id": "service_title",
+                        "label": "Service Title",
+                        "default": "Freeship Wordwide"
+                      },
+					  {
+                        "type": "textarea",
+                        "id": "service_desc",
+                        "label": "Service Description",
+                        "default": "In ac hendrerit turpis. Aliquam ultrices dolor dolor, at commodo diam feugiat"
+                      }
+                  ]
+               },				
+               {
+                  "type": "section_margin",
+                  "name": "Section Margin",
+                  "limit": 1,
+                  "settings": [
+                    {
+                      "type": "header",
+                      "content": "Large/Desktop/Tablate Device"
+                    },
+                    {
+                      "type": "range",
+                      "id": "section_margin_top",
+                      "min": 0,
+                      "max": 150,
+                      "step": 5,
+                      "label": "Margin Top",
+                      "unit": "px",
+                      "default": 0
+                    },
+                    {
+                      "type": "range",
+                      "id": "section_margin_bottom",
+                      "min": 0,
+                      "max": 150,
+                      "step": 5,
+                      "label": "Margin Bottom",
+                      "unit": "px",
+                      "default": 0
+                    },
+                    {
+                      "type": "header",
+                      "content": "Mobile Device"
+                    },
+                    {
+                      "type": "range",
+                      "id": "section_margin_top_xs",
+                      "min": 0,
+                      "max": 150,
+                      "step": 5,
+                      "label": "Margin Top",
+                      "unit": "px",
+                      "default": 0
+                    },
+                    {
+                      "type": "range",
+                      "id": "section_margin_bottom_xs",
+                      "min": 0,
+                      "max": 150,
+                      "step": 5,
+                      "label": "Margin Bottom",
+                      "unit": "px",
+                      "default": 0
+                    }
+                  ]
+               },
+               {
+                  "type": "section_padding",
+                  "name": "Section Padding",
+                  "limit": 1,
+                  "settings": [
+                    {
+                      "type": "header",
+                      "content": "Large/Desktop/Tablate Device"
+                    },
+                    {
+                      "type": "range",
+                      "id": "section_padding_top",
+                      "min": 0,
+                      "max": 150,
+                      "step": 5,
+                      "label": "Padding Top",
+                      "unit": "px",
+                      "default": 70
+                    },
+                    {
+                      "type": "range",
+                      "id": "section_padding_bottom",
+                      "min": 0,
+                      "max": 150,
+                      "step": 5,
+                      "label": "Padding Bottom",
+                      "unit": "px",
+                      "default": 35
+                    },
+                    {
+                      "type": "header",
+                      "content": "Mobile Device"
+                    },
+                    {
+                      "type": "range",
+                      "id": "section_padding_top_xs",
+                      "min": 0,
+                      "max": 150,
+                      "step": 5,
+                      "label": "Padding Top",
+                      "unit": "px",
+                      "default": 50
+                    },
+                    {
+                      "type": "range",
+                      "id": "section_padding_bottom_xs",
+                      "min": 0,
+                      "max": 150,
+                      "step": 5,
+                      "label": "Padding Bottom",
+                      "unit": "px",
+                      "default": 20
+                    }
+                  ]
+               },
+               {
+                  "type": "section_background",
+                  "name": "Section Background",
+                  "limit": 1,
+                  "settings": [
+                    {
+                      "type": "image_picker",
+                      "id": "section_bg_image",
+                      "label": "BG Image"
+                    },
+                    {
+                      "type": "color",
+                      "id": "section_bg_color",
+                      "label": "BG Color",
+                      "default": "#ffffff"
+                    }
+                  ]
+               }
+
+            ],
+
+        "presets":[
+                {
+                    "name": "Services",
+                    "category": "6. Services",
+                    "blocks":[
+                        {
+                            "type": "services"
+                        },
+						{
+                            "type": "services"
+                        },
+						{
+                            "type": "services"
+                        },
+						{
+                            "type": "services"
+                        },
+						{
+                            "type": "section_padding"
+                        }
+                    ]
+                }
+            ]
+
+
+ 	 }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

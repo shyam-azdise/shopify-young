@@ -1,0 +1,17 @@
+<section class="single-product ">
+  <div class="container-fluid">
+    <div class="row {% if settings.sidebar_handle == 'left_sidebar_handle' %}flex-row-reverse{% endif %}">
+      <div class="{% if settings.sidebar_handle == 'without_sidebar' %}col-lg-12{% else %}col-lg-9{% endif %} col-12">
+        <div class="row">
+          {% section 'product-template' %}
+          {% section 'single-product-tab' %}
+          {% section 'related-product' %}
+          {% section 'custom-collection' %}
+        </div>
+      </div>
+      {%- unless settings.sidebar_handle == 'without_sidebar' -%}
+        {% section 'product-sidebar' %}
+      {%- endunless -%}
+    </div>
+  </div>
+</section>

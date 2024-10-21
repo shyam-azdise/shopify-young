@@ -1,0 +1,43 @@
+<div class="contact-info-top">
+  {% if section.settings.address_1_enable %}
+  <div class="sin-contact-info-wrap mb-25">
+    {% if section.settings.address_title_1 != '' %}
+    <div class="contact-address">
+      <i class="ti-home"></i>
+      <span>{{ section.settings.address_title_1 }}</span>
+    </div>
+    {% endif %}
+    {% if section.settings.address_content_1 != '' %}
+    <p>{{ section.settings.address_content_1 }}</p>
+    {% endif %}
+  </div>
+  {% endif %}
+  {% if section.settings.address_2_enable %}
+  <div class="sin-contact-info-wrap">
+    {% if section.settings.address_title_2 != '' %}
+    <div class="contact-address">
+      <i class="ti-home"></i>
+      <span>{{ section.settings.address_title_2 }}</span>
+    </div>
+    {% endif %}
+    {% if section.settings.address_content_2 != '' %}
+    <p>{{ section.settings.address_content_2 }}</p>
+    {% endif %}
+  </div>
+  {% endif %}
+</div>
+<div class="contact-info-bottom">
+  <ul>
+    {% if section.settings.email_content != '' %}
+    <li><i class=" ti-email "></i>{{ section.settings.email_content }}</li>
+    {% endif %}
+    {% if section.settings.phone_number_content != '' %}
+    <li><i class="ti-mobile"></i>{{ section.settings.phone_number_content }}</li>
+    {% endif %}
+  </ul>
+  
+  <div class="contact-info-social">
+    {% include 'footer-social-media' %}
+  </div>
+  
+</div>

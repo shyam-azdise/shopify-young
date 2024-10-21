@@ -1,0 +1,60 @@
+<!-- Menu Type #2 -->
+  <ul>
+    {%- for link in linklists[section.settings.hamburger-menu].links -%}
+    {%- assign childlink_handle = link.title | handle -%}
+    
+    {%- if settings.megamenu_title == link.title -%}
+    <li><a href="{{ link.url }}">{{ link.title }}</a>
+      <ul class="">        
+        {%- assign megamenu_column_1 = linklists[settings.megamenu_column_1_handle] -%}
+        {%- if megamenu_column_1 != empty -%}
+        <li class="mega-menu-li"><a href="{{ megamenu_column_1.url }}">{{ megamenu_column_1.title }}</a>
+          <ul>
+            {%- for link in megamenu_column_1.links -%}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+            {%- endfor -%}
+          </ul>
+        </li>
+        {%- endif -%}
+        {%- assign megamenu_column_2 = linklists[settings.megamenu_column_2_handle] -%}
+        {%- if megamenu_column_2 != empty -%}
+        <li class="mega-menu-li"><a href="{{ megamenu_column_2.url }}">{{ megamenu_column_2.title }}</a>
+          <ul>
+            {%- for link in megamenu_column_2.links -%}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+            {%- endfor -%}
+          </ul>
+        </li>
+        {%- endif -%}
+        {%- assign megamenu_column_3 = linklists[settings.megamenu_column_3_handle] -%}
+        {%- if megamenu_column_3 != empty -%}
+        <li class="mega-menu-li"><a href="{{ megamenu_column_3.url }}">{{ megamenu_column_3.title }}</a>
+          <ul>
+            {%- for link in megamenu_column_3.links -%}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+            {%- endfor -%}
+          </ul>
+        </li>
+        {%- endif -%}
+        {%- if settings.megamenu_image -%}
+        <li class="mega-menu-li"><a href="{{ settings.megamenu_image_url }}"> <img src="{{ settings.megamenu_image | img_url: 'large' }}" alt="" /></a></li>
+        {%- endif -%}
+      </ul>
+    </li>
+    {%- else -%}
+    <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+    {%- endif -%}
+    {%- endfor -%}
+  </ul>
+
+
+
+<script>	
+  $('.mega-menu-li').parent('ul').addClass('mega-menu');
+  $('.sub-menu-li').parent('ul').addClass('sub-menu');
+</script>
+
+
+
+
+

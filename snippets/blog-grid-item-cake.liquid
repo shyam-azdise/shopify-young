@@ -1,0 +1,22 @@
+<div class="blog-wrap-2 mb-30">
+  {% if article.image %}
+  <div class="blog-img-2">
+    <a href="{{ article.url }}">{{ article | img_url: '370x343', crop:'center' | img_tag: article.title }}</a>
+  </div>
+  {% endif %}
+  <div class="blog-content-2 bc-padding-left">
+    {% include 'tags-article' %}
+    <h3 class="signpainter-font"><a href="{{ article.url }}">{{ article.title }}</a></h3>
+    <div class="blog-meta-2 blog-meta-pink">
+      <ul>
+        <li>By <a href="#"> {{ article.author }}</a></li>
+        <li>-</li>
+        <li><a href="#">{{ article.published_at |date: "%d %b, %Y" }}</a></li>
+      </ul>
+    </div>
+    <p>{{ article.content | strip_html | truncatewords: 20 }}</p>
+    <div class="btn-style-4 btn-style-4-ptb1 btn-hover">
+      <a class="bg-black-hover" href="{{ article.url }}">{{ 'blogs.article.read_more' | t }}</a>
+    </div>
+  </div>
+</div>

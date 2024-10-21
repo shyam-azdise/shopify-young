@@ -1,0 +1,470 @@
+<div class="deal-area pt-95 pb-95 bg-img" id="section-{{ section.id }}">
+
+  {% if section.settings.animate_img_top_left %}
+  <div class="kids-pattern-1">
+    <img src="{{ section.settings.animate_img_top_left | img_url: 'master' }}" class="lazyload" alt="kids">
+  </div>
+  {% endif %}
+
+  {% if section.settings.animate_img_top_right %}
+  <div class="kids-pattern-2">
+    <img src="{{ section.settings.animate_img_top_right | img_url: 'master' }}" class="lazyload" alt="kids">
+  </div>
+  {% endif %}
+  
+  {% if section.settings.animate_img_botton_1 %}
+  <div class="kids-pattern-3">
+    <img src="{{ section.settings.animate_img_botton_1 | img_url: 'master' }}" class="lazyload" alt="kids">
+  </div>
+  {% endif %}
+
+  {% if section.settings.animate_img_botton_2 %}
+  <div class="kids-pattern-4">
+    <img src="{{ section.settings.animate_img_botton_2 | img_url: 'master' }}" class="lazyload" alt="kids">
+  </div>
+  {% endif %}
+
+  {% if section.settings.animate_img_botton_3 %}
+  <div class="kids-pattern-5">
+    <img src="{{ section.settings.animate_img_botton_3 | img_url: 'master' }}" class="lazyload" alt="kids">
+  </div>
+  {% endif %}
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-5 col-md-5 col-12">
+        <div class="kids-deal-img">
+          <a href="#">
+            <img src="{% if section.settings.author_img %}{{ section.settings.author_img | img_url: 'master' }}{% else %}https://via.placeholder.com/520x522 {% endif %}" class="lazyload" alt="banner">
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-7 col-md-7 col-12">
+        <div class="kids-deal-content text-center">
+          {% if section.settings.section_title != '' %}
+          <h2>{{ section.settings.section_title }}</h2>
+          {%endif%}
+          {% if section.settings.author_title != '' %}
+          <p>{{ section.settings.author_title }}</p>
+          {%endif%}
+          {% if section.settings.deal_date != '' %}
+          <div class="timer-style-2">
+            <div data-countdown="{{ section.settings.deal_date }}"></div>
+          </div>
+          {%endif%}
+          {% if section.settings.deal_date != '' %}
+          <div class="btn-style-3 btn-hover-2">
+            <a class="animated bs3-black-text bs3-ptb-4 bs3-border-radius bs3-border-2-pixel ptb-2-yellow-2-hover" href="{{ section.settings.author_button_url }}">{{ section.settings.author_button }}</a>
+          </div>
+          {%endif%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  
+  /*---------------------
+        Countdown
+      --------------------- */
+    $('[data-countdown-5555]').each(function() {
+        var $this = $(this),
+            finalDate = $(this).data('countdown');
+        $this.countdown(finalDate, function(event) {
+            $this.html(event.strftime('<span class="cdown day"> <span>%-D </span><p>Days</p></span> <span class="cdown hour"> <span> %-H</span> <p>Hours</p></span> <span class="cdown minutes"><span>%M</span> <p>Mins</p></span class="cdown second"> <span> <span>%S</span> <p>Secs</p></span>'));
+        });
+    });
+
+</script>
+
+{%- style -%}
+  #section-{{ section.id }}{
+    {%- for block in section.blocks -%}
+    {%- case block.type -%}
+    {%- when 'section_margin' -%}
+    margin-top: {{ block.settings.section_margin_top }}px;
+    margin-bottom: {{ block.settings.section_margin_bottom }}px;
+    {%- when 'section_padding' -%}
+    padding-top: {{ block.settings.section_padding_top }}px;
+    padding-bottom: {{ block.settings.section_padding_bottom }}px;
+    {%- when 'section_background' -%}    
+    background: {{ block.settings.section_bg_color }} 
+      {%- if block.settings.section_bg_image -%}url("{{ block.settings.section_bg_image | img_url: 'master' }}"){%- endif -%} no-repeat scroll center center / cover;
+    {%- endcase -%}
+    {%- endfor -%}
+  }
+  @media (min-width: 768px) and (max-width: 991px) {
+    #section-{{ section.id }}{
+      {%- for block in section.blocks -%}
+      {% case block.type %}
+      {%- when 'section_margin' -%}
+      margin-top: {{ block.settings.section_margin_top_md }}px;
+      margin-bottom: {{ block.settings.section_margin_bottom_md }}px;
+      {%- when 'section_padding' -%}
+      padding-top: {{ block.settings.section_padding_top_md }}px;
+      padding-bottom: {{ block.settings.section_padding_bottom_md }}px;
+      {%- endcase -%}
+      {%- endfor -%}
+    }
+  }
+  @media (max-width: 767px) {
+    #section-{{ section.id }}{
+      {%- for block in section.blocks -%}
+      {%- case block.type -%}
+      {%- when 'section_margin' -%}
+      margin-top: {{ block.settings.section_margin_top_xs }}px;
+      margin-bottom: {{ block.settings.section_margin_bottom_xs }}px;
+      {%- when 'section_padding' -%}
+      padding-top: {{ block.settings.section_padding_top_xs }}px;
+      padding-bottom: {{ block.settings.section_padding_bottom_xs }}px;
+      {%- endcase -%}
+      {%- endfor -%}
+    }
+  }
+
+
+{% if section.settings.author_content_enable %}
+
+  .kids-deal-content h2 {
+      color: {{ section.settings.section_title_color }};
+  }
+  .kids-deal-content > p {
+      color: {{ section.settings.author_title_color }};
+  }
+
+  .btn-style-3 a.bs3-border-2-pixel {
+      border: 2px solid {{ section.settings.author_button_bg_color }};
+  }
+  .btn-style-3 a.bs3-black-text {
+      color: {{ section.settings.author_button_color }};
+  }
+
+  .btn-hover-2 a.ptb-2-yellow-2-hover::after {
+      background: {{ section.settings.author_button_bg_hover_color }};
+  }
+  .btn-style-3 a.bs3-black-text:hover {
+      color: {{ section.settings.author_button_color_hov }};
+  }
+
+
+{%endif%}
+
+{%- endstyle -%}
+
+
+
+{% schema %}
+  {
+    "name": "Hot Deal Banner",
+    "settings": [
+	    {
+          "type": "text",
+          "id": "section_title",
+          "label": "Section Title",
+          "default": "Hot Deal"
+      	},
+        {
+          "type": "text",
+          "id": "author_title",
+          "label": "Product Title",
+          "default": "Dealone 2-Piece Baby Boys Girls Stripes Long Pants Set Fox Knit Sweaters Sweatshirt Suit"
+        },
+		{
+          "type": "text",
+          "id": "deal_date",
+          "label": "Offer Date",
+          "default": "2020/06/01"
+        },
+        {
+          "type": "text",
+          "id": "author_button",
+          "label": "Button Text",
+          "default": "Shop Now"
+        },
+        {
+          "type": "url",
+          "id": "author_button_url",
+          "label": "Button URL"
+        },
+        {
+          "type": "image_picker",
+          "id": "author_img",
+          "label": "Product Image",
+          "info": "Recommended Size: 520x522px"
+        },
+		{
+          "type": "image_picker",
+          "id": "animate_img_top_left",
+          "label": "Animate Img Top Left",
+          "info": "Recommended Size: 249x222px"
+        },
+		{
+          "type": "image_picker",
+          "id": "animate_img_top_right",
+          "label": "Animate Img Top Center",
+          "info": "Recommended Size: 148x118px"
+        },
+		{
+          "type": "image_picker",
+          "id": "animate_img_botton_1",
+          "label": "Animate Img Top Right",
+          "info": "Recommended Size: 262x158px"
+        },
+		{
+          "type": "image_picker",
+          "id": "animate_img_botton_2",
+          "label": "Animate Img Right Bottom",
+          "info": "Recommended Size: 157x198px"
+        },
+		{
+          "type": "image_picker",
+          "id": "animate_img_botton_3",
+          "label": "Animate Img Left Bottom",
+          "info": "Recommended Size: 157x153px"
+        },
+        {
+          "type": "header",
+          "content": "Author Content Style"
+        },
+        {
+          "type": "checkbox",
+          "id": "author_content_enable",
+          "label": "Author Content Style Enable",
+          "default": true
+        },
+		{
+          "type": "color",
+          "id": "section_title_color",
+          "label": "Section Title Color",
+          "default": "#1b1b1b"
+        },
+		{
+          "type": "color",
+          "id": "author_title_color",
+          "label": "Product Title Color",
+          "default": "#1b1b1b"
+        },
+
+        {
+          "type": "color",
+          "id": "author_button_color",
+          "label": "Author Button Color",
+          "default": "#1b1b1b"
+        },
+        {
+          "type": "color",
+          "id": "author_button_bg_color",
+          "label": "Author Button Border Color",
+          "default": "#1b1b1b"
+        },
+        {
+          "type": "color",
+          "id": "author_button_color_hov",
+          "label": "Author Button Hover Color",
+          "default": "#fff"
+        },
+        {
+          "type": "color",
+          "id": "author_button_bg_hover_color",
+          "label": "Author Button Hover BG Color",
+          "default": "#f2c456"
+        }
+
+	],
+	"blocks":[
+	   {
+          "type": "section_margin",
+          "name": "Section Margin",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Tablat Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			}
+          ]
+       },
+	   {
+          "type": "section_padding",
+          "name": "Section Padding",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top",
+			  "min": 0,
+			  "max": 250,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 150
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom",
+			  "min": 0,
+			  "max": 250,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 115
+			},
+			{
+			  "type": "header",
+			  "content": "Tablat Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_md",
+			  "min": 0,
+			  "max": 250,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 150
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_md",
+			  "min": 0,
+			  "max": 250,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 65
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 50
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 45
+			}
+          ]
+       },
+	   {
+          "type": "section_background",
+          "name": "Section Background",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "image_picker",
+			  "id": "section_bg_image",
+			  "label": "BG Image"
+			},
+			{
+			  "type": "color",
+			  "id": "section_bg_color",
+			  "label": "BG Color",
+			  "default": "#ffffff"
+			}
+          ]
+       }
+	],
+	"presets": [
+		{
+		  "name": "Hot Deal Banner",
+		  "category": "2. Banner",
+		  "blocks":[
+				{
+					"type": "section_background"
+				}
+			]
+		}
+	]
+  }
+{% endschema %}
+
+
+
+
+

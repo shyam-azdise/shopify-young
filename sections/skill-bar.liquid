@@ -1,0 +1,361 @@
+{% if section.settings.progress_enable %}
+<div class="about-us-skill pb-120" id="section-{{ section.id }}">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 col-md-6 align-self-center">
+        <div class="skill-content">
+          {% if section.settings.progress_bar_top_title !='' %}
+          <h2>{{ section.settings.progress_bar_top_title }}</h2>
+          {% endif %}          
+          <div class="skill-bar">
+            {% for block in section.blocks %}
+            <div id="skill-{{ block.id }}" class="skill-bar-item">
+              {% if block.settings.progress_title !='' %}
+              <span>{{ block.settings.progress_title }} </span>
+              {% endif %}
+              {% if block.settings.progress_value !='' %}
+              <div class="progress">
+                <div class="progress-bar wow  {% if settings.rtl_enable %} fadeInRight {% else %} fadeInLeft {% endif %}  " data-progress="{{ block.settings.progress_value }}%" style="width: {{ block.settings.progress_value }}%; visibility: visible; animation-duration: 1.5s; animation-delay: 1.2s; animation-name: {% if settings.rtl_enable %} fadeInRight {% else %} fadeInLeft {% endif %};"
+                     data-wow-duration="1.5s" data-wow-delay="1.2s">
+                  <span class="text-top">{{ block.settings.progress_value }}%</span>
+                </div>
+              </div>
+              {% endif %}
+              <style>
+                .skill-bar #skill-{{ block.id }}.skill-bar-item > span {
+                  color: {{ block.settings.text_color }};
+                }
+                .skill-bar #skill-{{ block.id }}.skill-bar-item .progress .progress-bar span.text-top {
+                  color: {{ block.settings.text_color }};
+                }
+                .skill-bar #skill-{{ block.id }}.skill-bar-item .progress .progress-bar {
+                  background-color: {{ block.settings.progress_color }};
+                }
+              </style> 
+            </div>
+            {%  endfor %}
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6">
+        <div class="skill-img">
+          <img src="{% if section.settings.prog_right_img %}{{ section.settings.prog_right_img | img_url: 'master' }}{% else %}https://via.placeholder.com/520x475 {% endif %}" class="lazyload img-fluid" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+
+<style>
+  #section-{{ section.id }}{
+    {%- for block in section.blocks -%}
+    {%- case block.type -%}
+    {%- when 'section_margin' -%}
+    margin-top: {{ block.settings.section_margin_top }}px;
+    margin-bottom: {{ block.settings.section_margin_bottom }}px;
+    {%- when 'section_padding' -%}
+    padding-top: {{ block.settings.section_padding_top }}px;
+    padding-bottom: {{ block.settings.section_padding_bottom }}px;
+    {%- when 'section_background' -%}    
+    background: {{ block.settings.section_bg_color }} 
+      {%- if block.settings.section_bg_image -%}url("{{ block.settings.section_bg_image | img_url: 'master' }}"){%- endif -%} no-repeat scroll center center / cover;
+    {%- endcase -%}
+    {%- endfor -%}
+  }
+  @media (min-width: 768px) and (max-width: 991px) {
+    #section-{{ section.id }}{
+      {%- for block in section.blocks -%}
+      {% case block.type %}
+      {%- when 'section_margin' -%}
+      margin-top: {{ block.settings.section_margin_top_md }}px;
+      margin-bottom: {{ block.settings.section_margin_bottom_md }}px;
+      {%- when 'section_padding' -%}
+      padding-top: {{ block.settings.section_padding_top_md }}px;
+      padding-bottom: {{ block.settings.section_padding_bottom_md }}px;
+      {%- endcase -%}
+      {%- endfor -%}
+    }
+  }
+  @media (max-width: 767px) {
+    #section-{{ section.id }}{
+      {%- for block in section.blocks -%}
+      {%- case block.type -%}
+      {%- when 'section_margin' -%}
+      margin-top: {{ block.settings.section_margin_top_xs }}px;
+      margin-bottom: {{ block.settings.section_margin_bottom_xs }}px;
+      {%- when 'section_padding' -%}
+      padding-top: {{ block.settings.section_padding_top_xs }}px;
+      padding-bottom: {{ block.settings.section_padding_bottom_xs }}px;
+      {%- endcase -%}
+      {%- endfor -%}
+    }
+  }
+  
+  
+  
+  
+  
+  
+  
+</style>
+
+
+{% schema %}
+  {
+    "name": "Progress Bar",
+    "settings": [
+	 {
+    	"type": "header",
+    	"content": "Progress Bar Section"
+     },
+	 {
+        "type": "checkbox",
+        "id": "progress_enable",
+        "label": "Show Progress Bar Section",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Progress Right Image"
+      },
+      {
+        "type": "image_picker",
+        "id": "prog_right_img",
+        "label": "Right Image",
+        "info": "Image Size 520 X 475 px"
+      },
+      {
+        "type": "text",
+        "id": "progress_bar_top_title",
+        "label": "Skill Bar Title",
+        "default": "Young Skill"
+      }
+	],
+    "blocks": [
+      {
+        "type": "progress_bar_area",
+        "name": "Progress Bar",
+        "settings": [
+    
+          {
+            "type": "text",
+            "id": "progress_title",
+            "label": "Progress Bar Title",
+            "default": "WEB DESIGN"
+          },
+          {
+            "type": "text",
+            "id": "progress_value",
+            "label": "Progress Bar Value",
+            "default": "95"
+          },
+          {
+            "type": "color",
+            "id": "text_color",
+            "label": "Text Color",
+            "default": "#262626"
+          },
+          {
+            "type": "color",
+            "id": "progress_color",
+            "label": "Progress Bar Color",
+            "default": "#ff6e21"
+          }
+        ]
+      },
+	  {
+          "type": "section_margin",
+          "name": "Section Margin",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Tablate Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			}
+          ]
+       },
+	   {
+          "type": "section_padding",
+          "name": "Section Padding",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 100
+			},
+			{
+			  "type": "header",
+			  "content": "Tablate Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 80
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 60
+			}
+          ]
+       },
+	   {
+          "type": "section_background",
+          "name": "Section Background",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "image_picker",
+			  "id": "section_bg_image",
+			  "label": "BG Image"
+			},
+			{
+			  "type": "color",
+			  "id": "section_bg_color",
+			  "label": "BG Color",
+			  "default": "#ffffff"
+			}
+          ]
+       }
+    ],
+    "presets":[
+        {
+            "name": "Progress bar",
+            "category": "7. About Page"
+        }
+    ]
+
+
+
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

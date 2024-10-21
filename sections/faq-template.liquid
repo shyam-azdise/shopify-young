@@ -1,0 +1,398 @@
+<div class="faq-area">
+  <div class="single-faq-wrap pt-120 pb-100" id="section-{{ section.id }}">
+    <div class="container">
+      {% if section.settings.section_title !='' %}
+      <div class="faq-title mb-60">
+        <h2>{{ section.settings.section_title }}</h2>
+      </div>
+      {% endif %}
+      <div class="row">
+        {% if section.settings.left_column_enable %}
+        <div class="col-lg-{{ section.settings.left_col }}">
+          <div class="panel-group" id="accordion">
+            {% assign i = 1 %}
+            {% for block in section.blocks %}
+            {% case block.type %}
+            {% when 'left_column' %}            
+            <div class="panel faq-accordion mb-20">
+              <div class="panel-heading" id="headingOne-{{ i }}">
+                <h4 class="panel-title">
+                  <a class="collapsed" data-toggle="collapse" data-target="#collapseOne-{{ i }}" href="#collapseOne-{{ i }}">
+                    {{ block.settings.accordion_title }}
+                  </a>
+                </h4>
+              </div>              
+              <div id="collapseOne-{{ i }}" data-parent="#accordion" class="panel-collapse collapse" aria-labelledby="headingOne-{{ i }}">
+                <div class="panel-body">
+                  <p> {{ block.settings.accordion_content }}</p>
+                </div>
+              </div>
+            </div>
+            {% endcase %}
+            {% assign i = i | plus: 1 %}  
+            {%  endfor %}
+          </div>
+        </div>
+        {% endif %}
+        {% if section.settings.right_column_enable %}
+        <div class="col-lg-{{ section.settings.right_col }}">
+          <div class="panel-group" id="accordion2">
+            {% assign i = 1 %}
+            {% for block in section.blocks %}
+            {% case block.type %}
+            {% when 'right_column' %}
+            <div class="panel faq-accordion mb-20">
+              <div class="panel-heading" id="headingtwo-{{ i }}">
+                <h4 class="panel-title">
+                  <a class="collapsed" data-toggle="collapse" data-target="#collapsetwo-{{ i }}" href="#collapsetwo-{{ i }}">
+                    {{ block.settings.payment_accordion_title }}
+                  </a>
+                </h4>
+              </div>
+              <div id="collapsetwo-{{ i }}" data-parent="#accordion2" class="panel-collapse collapse" aria-labelledby="headingtwo-{{ i }}">
+                <div class="panel-body">
+                  <p>{{ block.settings.payment_accordion_content }}</p>
+                </div>
+              </div>
+            </div>
+            {% endcase %}
+            {% assign i = i | plus: 1 %}  
+            {%  endfor %}            
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<style>
+  #section-{{ section.id }}{
+    {%- for block in section.blocks -%}
+    {%- case block.type -%}
+    {%- when 'section_margin' -%}
+    margin-top: {{ block.settings.section_margin_top }}px;
+    margin-bottom: {{ block.settings.section_margin_bottom }}px;
+    {%- when 'section_padding' -%}
+    padding-top: {{ block.settings.section_padding_top }}px;
+    padding-bottom: {{ block.settings.section_padding_bottom }}px;
+    {%- when 'section_background' -%}    
+    background: {{ block.settings.section_bg_color }} 
+      {%- if block.settings.section_bg_image -%}url("{{ block.settings.section_bg_image | img_url: 'master' }}"){%- endif -%} no-repeat scroll center center / cover;
+    {%- endcase -%}
+    {%- endfor -%}
+  }
+  @media (min-width: 768px) and (max-width: 991px) {
+    #section-{{ section.id }}{
+      {%- for block in section.blocks -%}
+      {% case block.type %}
+      {%- when 'section_margin' -%}
+      margin-top: {{ block.settings.section_margin_top_md }}px;
+      margin-bottom: {{ block.settings.section_margin_bottom_md }}px;
+      {%- when 'section_padding' -%}
+      padding-top: {{ block.settings.section_padding_top_md }}px;
+      padding-bottom: {{ block.settings.section_padding_bottom_md }}px;
+      {%- endcase -%}
+      {%- endfor -%}
+    }
+  }
+  @media (max-width: 767px) {
+    #section-{{ section.id }}{
+      {%- for block in section.blocks -%}
+      {%- case block.type -%}
+      {%- when 'section_margin' -%}
+      margin-top: {{ block.settings.section_margin_top_xs }}px;
+      margin-bottom: {{ block.settings.section_margin_bottom_xs }}px;
+      {%- when 'section_padding' -%}
+      padding-top: {{ block.settings.section_padding_top_xs }}px;
+      padding-bottom: {{ block.settings.section_padding_bottom_xs }}px;
+      {%- endcase -%}
+      {%- endfor -%}
+    }
+  }
+</style>
+
+
+{% schema %}
+  {
+    "name": "Faq Accordion",
+    "settings": [
+	 {
+    	"type": "header",
+    	"content": "Left Column"
+     },
+	 {
+        "type": "text",
+        "id": "section_title",
+        "label": "Section Title",
+        "default": "GENERAL QUESTION"
+      },
+	 {
+    	"type": "header",
+    	"content": "Left Column"
+     },
+      {
+        "type": "text",
+        "id": "left_col",
+        "label": "Column",
+        "default": "6",
+        "info": "Follow Bootstrap-4 Column"
+      },
+	 {
+        "type": "checkbox",
+        "id": "left_column_enable",
+        "label": "Show Left Column",
+        "default": true
+      },
+       {
+          "type": "header",
+          "content": "Right Column"
+       },
+      {
+        "type": "text",
+        "id": "right_col",
+        "label": "Column",
+        "default": "6",
+        "info": "Follow Bootstrap-4 Column"
+      },
+	 {
+        "type": "checkbox",
+        "id": "right_column_enable",
+        "label": "Show Right Column",
+        "default": true
+      }
+
+	],
+    "blocks": [
+      {
+        "type": "left_column",
+        "name": "Left Column",
+        "settings": [
+          {
+            "type": "text",
+            "id": "accordion_title",
+            "label": "Accordion Title",
+            "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit,"
+          },
+          {
+            "type": "textarea",
+            "id": "accordion_content",
+            "label": "Accordion Content",
+            "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+          }
+        ]
+      },
+	  {
+        "type": "right_column",
+        "name": "Right Column",
+        "settings": [
+          {
+            "type": "text",
+            "id": "payment_accordion_title",
+            "label": "Accordion Title",
+            "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit,"
+          },
+          {
+            "type": "textarea",
+            "id": "payment_accordion_content",
+            "label": "Accordion Content",
+            "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+          }
+        ]
+      },
+	  {
+          "type": "section_margin",
+          "name": "Section Margin",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Tablate Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			}
+          ]
+       },
+	   {
+          "type": "section_padding",
+          "name": "Section Padding",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 100
+			},
+			{
+			  "type": "header",
+			  "content": "Tablate Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 80
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 60
+			}
+          ]
+       },
+	   {
+          "type": "section_background",
+          "name": "Section Background",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "image_picker",
+			  "id": "section_bg_image",
+			  "label": "BG Image"
+			},
+			{
+			  "type": "color",
+			  "id": "section_bg_color",
+			  "label": "BG Color",
+			  "default": "#ffffff"
+			}
+          ]
+       }
+    ],
+    "presets":[
+        {
+            "name": "Accordion",
+            "category": "9. faq Page"
+        }
+    ]
+
+
+
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+

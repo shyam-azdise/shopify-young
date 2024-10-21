@@ -1,0 +1,241 @@
+<header class="header-area">
+  <div class="header-large-device">
+
+    <div class="header-top section-padding-2 bg-gray">
+      <div class="container{% if section.settings.fullwidth_on %}-fluid{% endif %}">
+        <div class="row align-items-center">
+          <div class="col-lg-4">
+            <div class="social-icon-style social-mrg-dec social-font-dec">
+              {% for block in section.blocks %}
+              {%- case block.type -%}
+              {%- when 'header_social_media' -%}
+              <a href="{{ block.settings.header_social_media_url }}"><i class="fa fa-{{ block.settings.header_social_media_icon }}"></i></a>
+              {%- endcase -%}
+              {% endfor %}
+            </div>
+          </div>
+          
+          <div class="col-lg-4">
+            {% if section.settings.offer_message != '' %}
+            <div class="free-delivery text-center">
+              <h4>{{ section.settings.offer_message }}</h4>
+            </div>
+            {%endif%} 
+          </div>
+          
+          <div class="col-lg-4">
+            <div class="header-right-wrap header-right-flex">
+              {% if section.settings.store_location != '' %}
+              <div class="store-wrap same-style-2">
+                <ul>
+                  <li><a href="{{ section.settings.store_location_url }}">{{ section.settings.store_location }}</a></li>
+                </ul>
+              </div>
+              {%endif%}
+			  {%- if settings.currency_enable -%}
+              <div class="currency-wrap same-style-2">
+                {%- include 'currency-picker' -%}
+              </div>
+              {%- endif -%}
+
+              
+              {%- if section.settings.google_translate_enable -%}
+              <div class="language-wrap same-style-2">
+                {% include 'google-translate' %}
+              </div>
+              {%- endif -%}
+
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+    
+    
+    
+    <div class="header-middle section-padding-2">
+      <div class="container{% if section.settings.fullwidth_on %}-fluid{% endif %}">
+        <div class="header-ptb">
+          <div class="row align-items-center">
+            
+            <div class="col-xl-4 col-lg-5">
+              {% if section.settings.call_to_action != '' %}
+              <div class="header-cll">
+                <span> <i class="fa fa-{{ section.settings.call_to_action_icon }}"></i> {{ section.settings.call_to_action }}</span>
+              </div>
+              {%endif%} 
+            </div>
+
+            <div class="col-xl-4 col-lg-2">
+              <div class="logo logo-res-lg text-center">
+                {%- include 'header-logo' -%}
+              </div>
+            </div>
+            
+            <div class="col-xl-4 col-lg-5">
+              <div class="header-right-wrap header-right-flex">
+                
+                <div class="search-wrap same-style search-width-1 same-style-mrg-dec">
+                  {% include 'search-bar' %}
+                </div>
+
+                <div class="same-style same-style-mrg-dec">
+                  {% include 'wishlist-button-top' %}
+                </div>
+
+                
+                <div class="same-style same-style-mrg-dec">
+                  <a class="cart-active" href="/cart"><i class="fa fa-cart-arrow-down"></i></a>
+                </div>
+                
+                <div class="same-style same-style-mrg-dec">
+                  <a class="clickalbe-button-active" href="#"><i class="fa fa-bars"></i></a>
+                </div>
+                
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+    <div class="header-bottom">
+      <div class="container">
+        <div class="row no-gutters hb-negative-mrg">
+          <div class="col-lg-3">
+            <div class="category-menu-wrap bg-theme-color-yellow">
+              <h3 class="showcat"><a href="#"><i class="lnr lnr-menu"></i> {{ section.settings.categori_menu_title }}</a></h3>
+              <div class="category-menu hidecat">
+                {% include 'category-menu' %}
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-9">
+            <div class="main-menu menu-lh-1 main-menu-padding-1 bg-blue menu-text-white main-menu-padding1">
+              {%- include 'main-menu' -%}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  
+  <div class="header-small-device">
+    <div class="container-fluid">
+      <div class="row align-items-center">
+        <div class="col-6">
+          <div class="mobile-logo mobile-logo-width">
+            {%- include 'header-logo' -%}
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="header-right-wrap header-right-flex">
+            <div class="same-style">
+              {% include 'wishlist-button-top' %}
+            </div>
+            <div class="same-style">
+              <a class="cart-active" href="/cart"><i class="fa fa-cart-arrow-down"></i></a>
+            </div>
+            <div class="same-style">
+              <a class="mobile-menu-button-active" href="#"><i class="fa fa-bars"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="category-menu-wrap bg-theme-color-yellow">
+            <h3><a class="showcat" href="#"><i class="lnr lnr-menu"></i> {{ section.settings.categori_menu_title }}</a></h3>
+            <div class="category-menu mobile-category-menu hidecat">
+              {% include 'mobile-category-menu' %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+
+
+<div class="clickalbe-sidebar-wrapper-active clickalbe-sidebar-wrapper-style-1">
+  {%- include 'sidebar-info' -%}
+</div>
+<!-- mini cart start -->
+<div class="sidebar-cart-active">
+  {%- include 'mini-cart' -%}
+</div>
+
+<!-- Mobile menu start -->
+<div class="mobile-menu-active clickalbe-sidebar-wrapper-style-1">
+  <div class="clickalbe-sidebar-wrap">
+    {%- include 'mobile-header' -%}
+  </div>
+</div>
+
+
+
+
+{% comment %}
+
+
+<div class="container{% if section.settings.fullwidth_on %}-fluid{% endif %}">
+  <div class="row">
+    
+    <div class="col-sm-12">
+      <div class="row">
+        {%- if shop.customer_accounts_enabled and customer -%}
+        <div class="col-6">
+          Welcome <strong>{{ customer.first_name }}</strong>
+          {{ 'layout.customer.log_out' | t | customer_logout_link }}
+        </div>
+        {%- else -%}
+        <div class="col-6">
+          Welcome our store
+          {{ 'layout.customer.log_in' | t | customer_login_link }}
+          or
+          {{ 'layout.customer.create_account' | t | customer_register_link }}
+        </div>
+        {%- endif -%}
+        
+        {%- if section.settings.google_translate_enable -%}
+        <div class="col-6">
+          {% include 'google-translate' %}
+        </div>
+        {%- endif -%}
+      </div>
+    </div>
+    
+    
+    <div class="col">
+      {%- include 'header-logo' -%}
+    </div>
+
+    {%- if settings.currency_enable -%}
+    <div class="col">
+      {%- include 'currency-picker' -%}
+    </div>
+    {%- endif -%}
+    
+    <div>
+      {% include 'search-bar' %}
+    </div>
+
+    <div class="col">
+      <div class="right">    
+        {%- include 'mini-cart' -%}
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    {% include 'main-menu' %}
+  </div>
+</div>
+
+{% endcomment %}

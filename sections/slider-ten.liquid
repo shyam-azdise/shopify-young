@@ -1,0 +1,486 @@
+<div class="slider-area pet-slider-area section-padding-6 bg-light-yellow-2" id="section-{{ section.id }}">
+  <div class="container-fluid">
+    <div class="bg-img pet-single-slider-wrap slider-height-7" style="background-image:url({% if section.settings.slider_img %}{{ section.settings.slider_img | img_url: 'master' }}{% else %}https://via.placeholder.com/1920x795{% endif %});">
+      <div class="single-main-slider slider-animated-1 align-items-center custom-d-flex single-main-slider-gradient">
+        <div class="row no-gutters width-100-percent">
+          <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+            <div class="main-hero-content-5 text-center">
+              {%if section.settings.slider_title != '' %}
+              <h1 class="animated wow fadeInDown" data-wow-delay=".5s">{{ section.settings.slider_title }}</h1>
+              {%endif%}
+              {% if section.settings.slider_button != '' %}
+              <div class="btn-style-3 btn-hover-2 wow fadeInUp" data-wow-delay=".5s">
+                <a class="animated bs3-white-text bs3-yellow-bg bs3-ptb bs3-ptb bs3-border-radius ptb-2-white-hover" href="{{ section.settings.slider_button_url }}">{{ section.settings.slider_button }}</a>
+              </div>
+              {%endif%}
+            </div>
+          </div>
+        </div>
+        <div class="slider-pet-img wow fadeInRight" data-wow-delay=".5s">
+          <img src="{% if section.settings.slider_thumb_img %}{{ section.settings.slider_thumb_img | img_url: 'master' }}{% else %}https://via.placeholder.com/983x806 {% endif %}" class="lazyload" alt="{{ section.settings.slider_thumb_img.alt }}">
+        </div>
+      </div>
+    </div>
+    <div class="pets-contact-wrap">
+      <div class="pets-social">
+
+        {% if section.settings.slider_social_1 %}
+        <a class="pets-facebook" href="{{ section.settings.slider_social_1_url }}">
+          <img src="{{ section.settings.social_icon_1 | img_url: 'master' }}" class="lazyload" alt="Icon">
+          {{ section.settings.slider_social_1 }}
+        </a>
+        {% endif %}
+
+        {% if section.settings.slider_social_2 %}
+        <a class="pets-instagram" href="{{ section.settings.slider_social_2_url }}">
+          <img src="{{ section.settings.social_icon_2 | img_url: 'master' }}" class="lazyload" alt="Icon">
+          {{ section.settings.slider_social_2 }}
+        </a>
+        {% endif %}
+        
+		{% if section.settings.slider_social_3 %}
+        <a class="pets-twitter" href="{{ section.settings.slider_social_3_url }}">
+          <img src="{{ section.settings.social_icon_3 | img_url: 'master' }}" class="lazyload" alt="Icon">
+          {{ section.settings.slider_social_3 }}
+        </a>
+        {% endif %}
+
+      </div>
+      
+      {% if section.settings.slider_social_4 %}
+      <div class="pets-phn-number">
+        <p>
+          <img src="{{ section.settings.social_icon_4 | img_url: 'master' }}" class="lazyload" alt="Icon">
+          {{ section.settings.slider_social_4 }}
+        </p>
+      </div>
+      {% endif %}
+      
+    </div>
+  </div>
+  
+  <div class="pets-slider-shape">
+    <img src="{% if section.settings.slider_btm_shap %}{{ section.settings.slider_btm_shap | img_url: 'master' }}{% else %}https://via.placeholder.com/1920x190 {% endif %}" class="lazyload" alt="{{ section.settings.slider_thumb_img.alt }}">
+  </div>
+  
+</div>
+
+
+
+
+{%- style -%}
+  #section-{{ section.id }}{
+    {%- for block in section.blocks -%}
+    {%- case block.type -%}
+    {%- when 'section_margin' -%}
+    margin-top: {{ block.settings.section_margin_top }}px;
+    margin-bottom: {{ block.settings.section_margin_bottom }}px;
+    {%- when 'section_padding' -%}
+    padding-top: {{ block.settings.section_padding_top }}px;
+    padding-bottom: {{ block.settings.section_padding_bottom }}px;
+    {%- when 'section_background' -%}    
+    background: {{ block.settings.section_bg_color }} 
+      {%- if block.settings.section_bg_image -%}url("{{ block.settings.section_bg_image | img_url: 'master' }}"){%- endif -%} no-repeat scroll center center / cover;
+    {%- endcase -%}
+    {%- endfor -%}
+  }
+  @media (min-width: 768px) and (max-width: 991px) {
+    #section-{{ section.id }}{
+      {%- for block in section.blocks -%}
+      {% case block.type %}
+      {%- when 'section_margin' -%}
+      margin-top: {{ block.settings.section_margin_top_md }}px;
+      margin-bottom: {{ block.settings.section_margin_bottom_md }}px;
+      {%- when 'section_padding' -%}
+      padding-top: {{ block.settings.section_padding_top_md }}px;
+      padding-bottom: {{ block.settings.section_padding_bottom_md }}px;
+      {%- endcase -%}
+      {%- endfor -%}
+    }
+  }
+  @media (max-width: 767px) {
+    #section-{{ section.id }}{
+      {%- for block in section.blocks -%}
+      {%- case block.type -%}
+      {%- when 'section_margin' -%}
+      margin-top: {{ block.settings.section_margin_top_xs }}px;
+      margin-bottom: {{ block.settings.section_margin_bottom_xs }}px;
+      {%- when 'section_padding' -%}
+      padding-top: {{ block.settings.section_padding_top_xs }}px;
+      padding-bottom: {{ block.settings.section_padding_bottom_xs }}px;
+      {%- endcase -%}
+      {%- endfor -%}
+    }
+  }
+
+
+{% if section.settings.slider_content_enable %}
+
+  #section-{{ section.id }} .main-hero-content-5 h1 {
+      color: {{ section.settings.slider_title_color }};
+  }
+  #section-{{ section.id }} .btn-style-3 a.bs3-yellow-bg {
+      background-color: {{ section.settings.slider_button_bg_color }};
+  }
+  #section-{{ section.id }} .btn-style-3 a.bs3-white-text {
+      color: {{ section.settings.slider_button_color }};
+  }
+
+  #section-{{ section.id }} .btn-hover-2 a.ptb-2-white-hover::after {
+      background: {{ section.settings.slider_button_bg_hover_color }};
+  }
+  #section-{{ section.id }} .btn-style-3 a.bs3-white-text:hover {
+      color: {{ section.settings.slider_button_color_hov }};
+  }
+
+{%endif%}
+
+{%- endstyle -%}
+
+
+
+{% schema %}
+  {
+    "name": "Slider Ten",
+    "settings": [
+        {
+          "type": "image_picker",
+          "id": "slider_img",
+          "label": "Slide Image",
+          "info": "Recommended Size: 1920x795px"
+        },
+		{
+          "type": "image_picker",
+          "id": "slider_thumb_img",
+          "label": "Slide Thumbnail Image",
+          "info": "Recommended Size: 983x806px"
+        },
+        {
+          "type": "text",
+          "id": "slider_title",
+          "label": "Banner Title",
+          "default": "A pet store with <br>everything you need."
+        },
+        {
+          "type": "text",
+          "id": "slider_button",
+          "label": "Button Text",
+          "default": "Shop now"
+        },
+        {
+          "type": "url",
+          "id": "slider_button_url",
+          "label": "Button URL"
+        },
+		{
+          "type": "header",
+          "content": "Slider social Media"
+        },
+		{
+          "type": "image_picker",
+          "id": "social_icon_1",
+          "label": "Social Icon Image",
+          "info": "Recommended Size: 39x33px"
+        },
+		{
+          "type": "text",
+          "id": "slider_social_1",
+          "label": "Slider Social One",
+          "default": "Facebook"
+        },
+		{
+          "type": "url",
+          "id": "slider_social_1_url",
+          "label": "Slider Social One URL"
+        },
+		{
+          "type": "image_picker",
+          "id": "social_icon_2",
+          "label": "Social Icon Image",
+          "info": "Recommended Size: 39x33px"
+        },
+		{
+          "type": "text",
+          "id": "slider_social_2",
+          "label": "Slider Social Two",
+          "default": "Facebook"
+        },
+		{
+          "type": "url",
+          "id": "slider_social_2_url",
+          "label": "Slider Social Two URL"
+        },
+		{
+          "type": "image_picker",
+          "id": "social_icon_3",
+          "label": "Social Icon Image",
+          "info": "Recommended Size: 39x33px"
+        },
+		{
+          "type": "text",
+          "id": "slider_social_3",
+          "label": "Slider Social Three",
+          "default": "Facebook"
+        },
+		{
+          "type": "url",
+          "id": "slider_social_3_url",
+          "label": "Slider Social Three URL"
+        },
+		{
+          "type": "header",
+          "content": "Slider Call To Action"
+        },
+		{
+          "type": "image_picker",
+          "id": "social_icon_4",
+          "label": "Call To Action Icon Image",
+          "info": "Recommended Size: 39x33px"
+        },
+		{
+          "type": "text",
+          "id": "slider_social_4",
+          "label": "Call To Action Text",
+          "default": "Call: +55.32593"
+        },
+		{
+          "type": "header",
+          "content": "Slider Bottom Shap"
+        },
+		{
+          "type": "image_picker",
+          "id": "slider_btm_shap",
+          "label": "Slider Bottom Shap",
+          "info": "Recommended Size: 1920x190px"
+        },
+        {
+          "type": "header",
+          "content": "Slider Content Style"
+        },
+        {
+          "type": "checkbox",
+          "id": "slider_content_enable",
+          "label": "Slider Content Style Enable",
+          "default": true
+        },
+		{
+          "type": "color",
+          "id": "slider_title_color",
+          "label": "Slider Title Color",
+          "default": "#1b1b1b"
+        },
+        {
+          "type": "color",
+          "id": "slider_button_color",
+          "label": "Slider Button Color",
+          "default": "#fff"
+        },
+        {
+          "type": "color",
+          "id": "slider_button_bg_color",
+          "label": "Slider Button BG Color",
+          "default": "#ff6e21"
+        },
+        {
+          "type": "color",
+          "id": "slider_button_color_hov",
+          "label": "Slider Button Hover Color",
+          "default": "#393939"
+        },
+        {
+          "type": "color",
+          "id": "slider_button_bg_hover_color",
+          "label": "Slider Button Hover BG Color",
+          "default": "#fff"
+        }
+
+	],
+	"blocks":[
+	   {
+          "type": "section_margin",
+          "name": "Section Margin",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Tablat Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			}
+          ]
+       },
+	   {
+          "type": "section_padding",
+          "name": "Section Padding",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Tablat Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 0
+			}
+          ]
+       },
+	   {
+          "type": "section_background",
+          "name": "Section Background",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "image_picker",
+			  "id": "section_bg_image",
+			  "label": "BG Image"
+			},
+			{
+			  "type": "color",
+			  "id": "section_bg_color",
+			  "label": "BG Color",
+			  "default": "#ffffff"
+			}
+          ]
+       }
+	],
+	"presets": [
+		{
+		  "name": "Slider Ten",
+		  "category": "1. slideshow",
+		  "blocks":[
+				
+			]
+		}
+	]
+  }
+{% endschema %}

@@ -1,0 +1,142 @@
+<footer class="footer-area border-top-2 bg-img section-padding-1" id="section-{{ section.id }}">
+  <div class="container{% if section.settings.fullwidth_on %}-fluid{% endif %}">
+    <div class="footer-top pt-80 pb-25">
+      <div class="row align-items-center">
+        {% for block in section.blocks %}
+        {% case block.type %}
+        {% when 'footer_logo' %}
+        <div class="col-lg-{{ section.settings.logo_col }} col-md-{{ section.settings.logo_col_md }}">
+          {% if block.settings.footer_logo != '' %}
+          <div class="footer-logo footer-logo-ngtv-mrg">
+            <a href="/">
+              <img src="{% if block.settings.footer_logo %}{{ block.settings.footer_logo | img_url: 'master' }}
+                                    {% else %}https://via.placeholder.com/182x67 {% endif %}"  class="lazyload" alt="{{ block.settings.footer_logo.alt }}">
+            </a>
+          </div>
+          {% endif %}
+        </div>
+        
+        
+        <div class="col-lg-{{ section.settings.menu_col }} col-md-{{ section.settings.menu_col_md }}">
+          <div class="footer-ml-30">
+            <div class="row">
+              
+              {% when 'footer_menu' %}
+              <div class="col-xl-{{ block.settings.menu_col_lg }} col-md-{{ block.settings.menu_col_md }} col-sm-6 col-6">
+                <div class="footer-widget {{ block.settings.widget_margin }} mb-55">
+                  {% if block.settings.footer_menu_title != '' %}
+                  <h3 class="footer-title-3">{{ block.settings.footer_menu_title }}</h3>
+                  {% endif %}
+                  <div class="footer-info-list-2">
+                    <ul>
+                      {% assign footer_menu = block.settings.footer_menu_handle %}
+                      {% for link in linklists[footer_menu].links %}
+                      <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                      {% endfor %}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              {% when 'about_us' %}
+              <div class="col-lg-{{ block.settings.about_col_lg }} col-md-{{ block.settings.about_col_md }} col-sm-6 col-12">
+                <div class="footer-widget {{ block.settings.widget_margin }} mb-55">
+                  {%- if block.settings.footer_about_title != '' -%}
+                  <h3 class="footer-title-3">{{ block.settings.footer_about_title }}</h3>
+                  {%- endif -%}
+                  <div class="footera-about">
+                    <p>{{ block.settings.about_support_content }}</p>
+                  </div>
+                </div>
+              </div>
+              
+              
+              {% when 'contact_info' %}
+              <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                <div class="footer-widget mb-55">
+                  {%- if block.settings.contact_info_title != '' -%}
+                  <h3 class="footer-title-3">{{ block.settings.contact_info_title }}</h3>
+                  {%- endif -%}
+                  <div class="footer-contact-wrap">
+                    
+                    {% if block.settings.footer_info_1_content != '' %}
+                    <div class="single-footer-contact">
+                      {% if block.settings.footer_info_1_icon != '' %}
+                      <div class="footer-contact-icon">
+                        <i class="fa fa-{{ block.settings.footer_info_1_icon }}"></i>
+                      </div>
+                      {% endif %}
+                      <div class="footer-contact-text">
+                        <p>{{ block.settings.footer_info_1_content }}</p>
+                      </div>
+                    </div>
+                    {% endif %}
+                    
+					{% if block.settings.footer_info_2_content != '' %}
+                    <div class="single-footer-contact">
+                      {% if block.settings.footer_info_2_icon != '' %}
+                      <div class="footer-contact-icon">
+                        <i class="fa fa-{{ block.settings.footer_info_2_icon }}"></i>
+                      </div>
+                      {% endif %}
+                      <div class="footer-contact-text">
+                        <p>{{ block.settings.footer_info_2_content }}</p>
+                      </div>
+                    </div>
+                    {% endif %}
+                    
+                    {% if block.settings.footer_info_3_content != '' %}
+                    <div class="single-footer-contact">
+                      {% if block.settings.footer_info_3_icon != '' %}
+                      <div class="footer-contact-icon">
+                        <i class="fa fa-{{ block.settings.footer_info_3_icon }}"></i>
+                      </div>
+                      {% endif %}
+                      <div class="footer-contact-text">
+                        <p>{{ block.settings.footer_info_3_content }}</p>
+                      </div>
+                    </div>
+                    {% endif %}
+                    
+                    {% if block.settings.footer_info_4_content != '' %}
+                    <div class="single-footer-contact">
+                      {% if block.settings.footer_info_4_icon != '' %}
+                      <div class="footer-contact-icon">
+                        <i class="fa fa-{{ block.settings.footer_info_4_icon }}"></i>
+                      </div>
+                      {% endif %}
+                      <div class="footer-contact-text">
+                        <p>{{ block.settings.footer_info_4_content }}</p>
+                      </div>
+                    </div>
+                    {% endif %}
+
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+        {% endcase %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom footer-bottom-ptb border-top-3 section-padding-1">
+    <div class="container{% if section.settings.fullwidth_on %}-fluid{% endif %}">
+      <div class="row align-items-center">
+        <div class="col-md-6 col-12">
+          <div class="copyright copyright-gray">
+            <p><a target="_blank" href="https://hasthemes.com/">{{ section.settings.copy_ritht_text }}</a></p>
+          </div>
+        </div>
+        <div class="col-md-6 col-12">
+          <div class="social-icon-style social-icon-white social-icon-right res-xs-mt-10">
+            {% include 'footer-social-media' %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

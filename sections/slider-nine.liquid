@@ -1,0 +1,360 @@
+<div class="slider-area" id="section-{{ section.id }}">
+  <div class="single-main-slider bg-img slider-height-9 align-items-center custom-d-flex" style="background-image:url({% if section.settings.slider_img %}{{ section.settings.slider_img | img_url: 'master' }}{% else %}https://via.placeholder.com/1920x1093{% endif %});">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="main-hero-content-7 text-center">            
+            <div class="organic-leaf-img wow fadeInDown">
+                <img src="{% if section.settings.slider_thumb_img %}{{ section.settings.slider_thumb_img | img_url: 'master' }}{% else %}https://via.placeholder.com/535x265 {% endif %}" class="lazyload" alt="{{ section.settings.slider_thumb_img.alt }}">
+            </div>
+            {%if section.settings.slider_title != '' %}
+            <h1 class="wow fadeInLeft">{{ section.settings.slider_title }}</h1>
+            {%endif%}
+            {% if section.settings.slider_button != '' %}
+            <div class="btn-style-3 btn-hover-2 wow fadeInUp">
+              <a class=" bs3-white-text bs3-green3-bg bs3-ptb-4 bs3-border-radius hover-text-white ptb-3-black-hover" href="{{ section.settings.slider_button_url }}">{{ section.settings.slider_button }}</a>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{%- style -%}
+  #section-{{ section.id }}{
+    {%- for block in section.blocks -%}
+    {%- case block.type -%}
+    {%- when 'section_margin' -%}
+    margin-top: {{ block.settings.section_margin_top }}px;
+    margin-bottom: {{ block.settings.section_margin_bottom }}px;
+    {%- when 'section_padding' -%}
+    padding-top: {{ block.settings.section_padding_top }}px;
+    padding-bottom: {{ block.settings.section_padding_bottom }}px;
+    {%- when 'section_background' -%}    
+    background: {{ block.settings.section_bg_color }} 
+      {%- if block.settings.section_bg_image -%}url("{{ block.settings.section_bg_image | img_url: 'master' }}"){%- endif -%} no-repeat scroll center center / cover;
+    {%- endcase -%}
+    {%- endfor -%}
+  }
+  @media (min-width: 768px) and (max-width: 991px) {
+    #section-{{ section.id }}{
+      {%- for block in section.blocks -%}
+      {% case block.type %}
+      {%- when 'section_margin' -%}
+      margin-top: {{ block.settings.section_margin_top_md }}px;
+      margin-bottom: {{ block.settings.section_margin_bottom_md }}px;
+      {%- when 'section_padding' -%}
+      padding-top: {{ block.settings.section_padding_top_md }}px;
+      padding-bottom: {{ block.settings.section_padding_bottom_md }}px;
+      {%- endcase -%}
+      {%- endfor -%}
+    }
+  }
+  @media (max-width: 767px) {
+    #section-{{ section.id }}{
+      {%- for block in section.blocks -%}
+      {%- case block.type -%}
+      {%- when 'section_margin' -%}
+      margin-top: {{ block.settings.section_margin_top_xs }}px;
+      margin-bottom: {{ block.settings.section_margin_bottom_xs }}px;
+      {%- when 'section_padding' -%}
+      padding-top: {{ block.settings.section_padding_top_xs }}px;
+      padding-bottom: {{ block.settings.section_padding_bottom_xs }}px;
+      {%- endcase -%}
+      {%- endfor -%}
+    }
+  }
+
+
+{% if section.settings.slider_content_enable %}
+
+  .main-hero-content-7 h1 {
+      color: {{ section.settings.slider_title_color }};
+  }
+  .btn-style-3 a.bs3-green3-bg {
+      background-color: {{ section.settings.slider_button_bg_color }};
+  }
+  .btn-style-3 a.bs3-white-text {
+      color: {{ section.settings.slider_button_color }};
+  }
+  .btn-hover-2 a.ptb-3-black-hover::after {
+      background: {{ section.settings.slider_button_bg_hover_color }};
+  }
+  .btn-style-3 a.bs3-ptb-4.hover-text-white:hover {
+      color: {{ section.settings.slider_button_color_hov }};
+  }
+
+{%endif%}
+
+{%- endstyle -%}
+
+
+
+{% schema %}
+  {
+    "name": "Slider Nine",
+    "settings": [
+        {
+          "type": "image_picker",
+          "id": "slider_img",
+          "label": "Slide Image",
+          "info": "Recommended Size: 1920x1093px"
+        },
+		{
+          "type": "image_picker",
+          "id": "slider_thumb_img",
+          "label": "Slide Thumbnail Image",
+          "info": "Recommended Size: 535x265px"
+        },
+        {
+          "type": "text",
+          "id": "slider_title",
+          "label": "Banner Title",
+          "default": "Eat clean and green. Eat Organic."
+        },
+        {
+          "type": "text",
+          "id": "slider_button",
+          "label": "Button Text",
+          "default": "Shop now"
+        },
+        {
+          "type": "url",
+          "id": "slider_button_url",
+          "label": "Button URL"
+        },
+        {
+          "type": "header",
+          "content": "Slider Content Style"
+        },
+        {
+          "type": "checkbox",
+          "id": "slider_content_enable",
+          "label": "Slider Content Style Enable",
+          "default": true
+        },
+		{
+          "type": "color",
+          "id": "slider_title_color",
+          "label": "Slider Title Color",
+          "default": "#1b1b1b"
+        },
+        {
+          "type": "color",
+          "id": "slider_button_color",
+          "label": "Slider Button Color",
+          "default": "#fff"
+        },
+        {
+          "type": "color",
+          "id": "slider_button_bg_color",
+          "label": "Slider Button BG Color",
+          "default": "#3cd53f"
+        },
+        {
+          "type": "color",
+          "id": "slider_button_color_hov",
+          "label": "Slider Button Hover Color",
+          "default": "#fff"
+        },
+        {
+          "type": "color",
+          "id": "slider_button_bg_hover_color",
+          "label": "Slider Button Hover BG Color",
+          "default": "#1b1b1b"
+        }
+
+		
+	],
+	"blocks":[
+	   {
+          "type": "section_margin",
+          "name": "Section Margin",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Tablat Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			}
+          ]
+       },
+	   {
+          "type": "section_padding",
+          "name": "Section Padding",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Tablat Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 0
+			}
+          ]
+       },
+	   {
+          "type": "section_background",
+          "name": "Section Background",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "image_picker",
+			  "id": "section_bg_image",
+			  "label": "BG Image"
+			},
+			{
+			  "type": "color",
+			  "id": "section_bg_color",
+			  "label": "BG Color",
+			  "default": "#ffffff"
+			}
+          ]
+       }
+	],
+	"presets": [
+		{
+		  "name": "Slider Nine",
+		  "category": "1. slideshow",
+		  "blocks":[
+				
+			]
+		}
+	]
+  }
+{% endschema %}

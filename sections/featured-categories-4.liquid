@@ -1,0 +1,435 @@
+<div class="organic-categories-area section-padding-3" id="section-{{ section.id }}">
+  <div class="container{% if section.settings.fullwidth_on %}-fluid{% endif %}">
+    {% if section.settings.section_title != blank %}
+    <div class="section-title-11 mb-60 text-center">
+      <h2>{{ section.settings.section_title }}</h2>
+      {% if section.settings.section_icon_img_enable %}
+      <img src="{% if section.settings.video_icon_image %}{{ section.settings.video_icon_image | img_url: 'master' }}{% else %}https://via.placeholder.com/220x46 {% endif %}" class="lazyload" alt="banner">
+      {% endif %}
+    </div>
+    {% endif %}
+    <div class="organic-categories-active owl-carousel">
+      {% for block in section.blocks %}
+      {% case block.type %}
+      {% when 'single_ctg' %}
+      
+      <div class="organic-categories-wrap text-center">
+        <a href="{{ block.settings.button_url }}">
+          <img src="{% if block.settings.banner_img %}{{ block.settings.banner_img | img_url: 'master' }}{% else %}https://via.placeholder.com/210x183 {% endif %}" class="lazyload" alt="product">
+        </a>
+        {% if block.settings.category_title != blank %}
+        <h3><a href="{{ block.settings.button_url }}">{{ block.settings.category_title }}</a></h3>
+        {%endif%}
+      </div>
+      
+      {% endcase %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+
+<script>
+  /* Organic categories active */
+    $('.organic-categories-active').owlCarousel({
+        loop: true,
+        nav: false,
+        autoplay: false,
+        autoplayTimeout: 5000,
+        item: 5,
+        margin: 90,
+        responsive: {
+            0: {
+                items: 1
+            },
+            576: {
+                items: 2,
+                margin: 30,
+            },
+            768: {
+                items: 3,
+                margin: 50,
+            },
+            992: {
+                items: 3
+            },
+            1200: {
+                items: 4,
+            },
+            1600: {
+                items: 5,
+            }
+        }
+    })
+</script>
+
+
+{%- style -%}
+  #section-{{ section.id }}{
+    {%- for block in section.blocks -%}
+    {%- case block.type -%}
+    {%- when 'section_margin' -%}
+    margin-top: {{ block.settings.section_margin_top }}px;
+    margin-bottom: {{ block.settings.section_margin_bottom }}px;
+    {%- when 'section_padding' -%}
+    padding-top: {{ block.settings.section_padding_top }}px;
+    padding-bottom: {{ block.settings.section_padding_bottom }}px;
+    {%- when 'section_background' -%}    
+    background: {{ block.settings.section_bg_color }} 
+      {%- if block.settings.section_bg_image -%}url("{{ block.settings.section_bg_image | img_url: 'master' }}"){%- endif -%} no-repeat scroll center center / cover;
+    {%- endcase -%}
+    {%- endfor -%}
+  }
+  @media (min-width: 768px) and (max-width: 991px) {
+    #section-{{ section.id }}{
+      {%- for block in section.blocks -%}
+      {% case block.type %}
+      {%- when 'section_margin' -%}
+      margin-top: {{ block.settings.section_margin_top_md }}px;
+      margin-bottom: {{ block.settings.section_margin_bottom_md }}px;
+      {%- when 'section_padding' -%}
+      padding-top: {{ block.settings.section_padding_top_md }}px;
+      padding-bottom: {{ block.settings.section_padding_bottom_md }}px;
+      {%- endcase -%}
+      {%- endfor -%}
+    }
+  }
+  @media (max-width: 767px) {
+    #section-{{ section.id }}{
+      {%- for block in section.blocks -%}
+      {%- case block.type -%}
+      {%- when 'section_margin' -%}
+      margin-top: {{ block.settings.section_margin_top_xs }}px;
+      margin-bottom: {{ block.settings.section_margin_bottom_xs }}px;
+      {%- when 'section_padding' -%}
+      padding-top: {{ block.settings.section_padding_top_xs }}px;
+      padding-bottom: {{ block.settings.section_padding_bottom_xs }}px;
+      {%- endcase -%}
+      {%- endfor -%}
+    }
+  }
+
+{% if section.settings.category_content_enable %}
+
+
+.section-title-11 h2 {
+    color: {{ section.settings.section_title_color }};
+}
+.organic-categories-active.owl-carousel .owl-item .organic-categories-wrap h3 a {
+    color: {{ section.settings.pro_cat_title_color }};
+}
+.organic-categories-active.owl-carousel .owl-item .organic-categories-wrap h3 a:hover {
+    color: {{ section.settings.pro_cat_title_color_hov }};
+}
+
+
+{%endif%}
+
+
+{%- endstyle -%}
+
+
+
+{% schema %}
+{
+  "name": "Featured Categories Four",
+  "settings": [ 
+        {
+          "type": "checkbox",
+          "id": "fullwidth_on",
+          "label": "Full Width Enable",
+          "default": false,
+          "info": "If you want Full Width click checkbox"
+        },
+		{
+          "type": "checkbox",
+          "id": "section_icon_img_enable",
+          "label": "Section Title Icom Image Enable",
+          "default": true,
+          "info": "If you want Section Title Icon Image click checkbox"
+        },
+        {
+          "type": "image_picker",
+          "id": "video_icon_image",
+          "label": "Video Thumbnail Image",
+		  "info": "Recommended Size: 120x46px"
+      	},
+        {
+          "type": "text",
+          "id": "section_title",
+          "label": "Section Title", 
+          "default": "Popular Caegories"
+        },
+		{
+          "type": "text",
+          "id": "section_subtitle",
+          "label": "Section Subtitle"
+        },
+		{
+          "type": "header",
+          "content": "Content Style"
+        },
+        {
+          "type": "checkbox",
+          "id": "category_content_enable",
+          "label": "Category / Product Content Style Enable",
+          "default": true
+        },
+		{
+          "type": "color",
+          "id": "section_title_color",
+          "label": "Section Title Color",
+          "default": "#1b1b1b"
+        },
+		{
+          "type": "color",
+          "id": "pro_cat_title_color",
+          "label": "Product / Category Title Color",
+          "default": "#1b1b1b"
+        },
+		{
+          "type": "color",
+          "id": "pro_cat_title_color_hov",
+          "label": "Product / Category Title Hover Color",
+          "default": "#3cd53f"
+        }
+
+  ],
+  "blocks":[
+      {
+          "type": "single_ctg",
+          "name": "Single Collections",
+          "settings": [
+            {
+              "type": "image_picker",
+              "id": "banner_img",
+              "label": "Product / Category Image",
+              "info": "Recommended Size: 210 x 183px"
+            },
+            {
+              "type": "text",
+              "id": "category_title",
+              "label": "Product / Category Title", 
+              "default": "Fruits"
+            },
+			{
+              "type": "text",
+              "id": "category_desc",
+              "label": "Product / Category Description"
+            },
+			{
+              "type": "url",
+              "id": "button_url",
+              "label": "Product / Category URL"
+            }
+
+          ]
+        },
+	   	{
+          "type": "section_margin",
+          "name": "Section Margin",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Tablet Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			}
+          ]
+       },
+	   {
+          "type": "section_padding",
+          "name": "Section Padding",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 115
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 120
+			},
+			{
+			  "type": "header",
+			  "content": "Tablet Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 80
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 90
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 50
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 60
+			}
+          ]
+       },
+	   {
+          "type": "section_background",
+          "name": "Section Background",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "image_picker",
+			  "id": "section_bg_image",
+			  "label": "BG Image"
+			},
+			{
+			  "type": "color",
+			  "id": "section_bg_color",
+			  "label": "BG Color",
+			  "default": "#ffffff"
+			}
+          ]
+       }
+  ],
+  "presets":[
+    {
+      "name": "Featured Categories Four",
+	  "category": "3. collections",
+      "blocks":[
+        {
+          "type": "single_ctg"
+        },        
+		{
+          "type": "single_ctg"
+        },
+        {
+          "type": "single_ctg"
+        },
+		{
+          "type": "single_ctg"
+        },
+		{
+          "type": "single_ctg"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

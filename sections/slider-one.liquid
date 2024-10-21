@@ -1,0 +1,648 @@
+<div class="slider-area" id="section-{{ section.id }}">
+  <div class="container{% if section.settings.fullwidth_on %}-fluid{% endif %} p-0">
+    <div class="main-slider-active-1 owl-carousel slider-nav-position-2 slider-nav-style-2">
+      {%- assign sset = section.settings -%}
+      {%- assign header_font = sset.header_font -%}
+      {%- assign sub_header_font = sset.sub_header_font -%}
+      {%- assign paragraph_font = sset.paragraph_font -%}
+      {%- assign button_font = sset.button_font -%}
+
+
+      {% for block in section.blocks %} 
+      {%- case block.type -%}
+      {%- when 'slide' -%}
+      <div class="single-main-slider slider-animated-2 bg-img slider-height-2" style="background-image:url({% if block.settings.slider_img %}{{ block.settings.slider_img | img_url: 'master' }}{% else %}https://via.placeholder.com/1920x943{% endif %});">
+        <div class="row no-gutters">
+          <div class="col-12">
+            <div class="main-slider-content-2 ssc-{{ block.id }} {{block.settings.content_alignment}}">
+              {%if block.settings.slider_sub_title != '' %}
+              <h3 class="animated">{{ block.settings.slider_sub_title }}</h3>
+              {%endif%}
+              {%if block.settings.slider_title != '' %}
+              <h1 class="animated">{{ block.settings.slider_title }}</h1>
+              {%endif%}
+              {%if block.settings.slider_des != '' %}
+              <p class="animated">{{ block.settings.slider_des }}</p>
+              {%endif%}
+              {% if block.settings.slider_button != '' %}
+              <div class="btn-style-3 btn-hover-2">
+                <a class="animated bs3-white-text bs3-yellow-bg bs3-ptb bs3-ptb bs3-border-radius ptb-2-white-hover" href="{{ block.settings.slider_button_url }}">{{ block.settings.slider_button }}</a>
+              </div>
+              {% endif %}
+              
+              <style>
+
+                {% if block.settings.content_color_enable %}
+
+                .main-slider-content-2.ssc-{{ block.id }} h1 {
+                  color: {{ block.settings.slider_title_color }};
+                }
+                .main-slider-content-2.ssc-{{ block.id }} h3 {
+                  color: {{ block.settings.slider_sub_title_color }};
+                }
+                .main-slider-content-2.ssc-{{ block.id }} p {
+                  color: {{ block.settings.slider_discount_color }};
+                }
+                .main-slider-content-2.ssc-{{ block.id }} p span {
+                  color: {{ block.settings.slider_discount_hilight_color }};
+                }
+
+                .main-slider-content-2.ssc-{{ block.id }} a {
+                  color: {{ block.settings.slider_button_color }};
+                  background: {{ block.settings.slider_button_bg_color }};
+                }
+
+                .main-slider-content-2.ssc-{{ block.id }} a:hover {
+                  color: {{ block.settings.slider_button_color_hov }};
+                  background-color: {{ block.settings.slider_button_bg_hover_color }};
+                }
+
+                .owl-item.active .slider-animated-2 .ssc-{{ block.id }} h1, .owl-item.active .slider-animated-2  .ssc-{{ block.id }} h3, .owl-item.active .slider-animated-2 .ssc-{{ block.id }} p, .owl-item.active .slider-animated-2 .ssc-{{ block.id }} a {
+                  -webkit-animation-name: {{block.settings.slider_animation_animation}};
+                  animation-name: {{block.settings.slider_animation_animation}};
+                }
+
+                {% endif %}
+
+              </style>
+              
+              
+            </div>
+          </div>
+        </div>
+      </div>
+      {%- endcase -%}
+      {% endfor %}
+      
+    </div>
+  </div>
+</div>
+
+
+{%- style -%}
+  #section-{{ section.id }}{
+    {%- for block in section.blocks -%}
+    {%- case block.type -%}
+    {%- when 'section_margin' -%}
+    margin-top: {{ block.settings.section_margin_top }}px;
+    margin-bottom: {{ block.settings.section_margin_bottom }}px;
+    {%- when 'section_padding' -%}
+    padding-top: {{ block.settings.section_padding_top }}px;
+    padding-bottom: {{ block.settings.section_padding_bottom }}px;
+    {%- when 'section_background' -%}    
+    background: {{ block.settings.section_bg_color }} 
+      {%- if block.settings.section_bg_image -%}url("{{ block.settings.section_bg_image | img_url: 'master' }}"){%- endif -%} no-repeat scroll center center / cover;
+    {%- endcase -%}
+    {%- endfor -%}
+  }
+  @media (min-width: 768px) and (max-width: 991px) {
+    #section-{{ section.id }}{
+      {%- for block in section.blocks -%}
+      {% case block.type %}
+      {%- when 'section_margin' -%}
+      margin-top: {{ block.settings.section_margin_top_md }}px;
+      margin-bottom: {{ block.settings.section_margin_bottom_md }}px;
+      {%- when 'section_padding' -%}
+      padding-top: {{ block.settings.section_padding_top_md }}px;
+      padding-bottom: {{ block.settings.section_padding_bottom_md }}px;
+      {%- endcase -%}
+      {%- endfor -%}
+    }
+  }
+  @media (max-width: 767px) {
+    #section-{{ section.id }}{
+      {%- for block in section.blocks -%}
+      {%- case block.type -%}
+      {%- when 'section_margin' -%}
+      margin-top: {{ block.settings.section_margin_top_xs }}px;
+      margin-bottom: {{ block.settings.section_margin_bottom_xs }}px;
+      {%- when 'section_padding' -%}
+      padding-top: {{ block.settings.section_padding_top_xs }}px;
+      padding-bottom: {{ block.settings.section_padding_bottom_xs }}px;
+      {%- endcase -%}
+      {%- endfor -%}
+    }
+  }
+{% if section.settings.slider_content_enable %}
+
+  {{ header_font | font_face }}
+  {{ sub_header_font | font_face }}
+  {{ paragraph_font | font_face }}
+  {{ button_font | font_face }}
+
+
+  .text-right {
+      text-align: right!important;
+  }
+  .main-slider-content-2 h1 {
+    font-family: {{ header_font.family }}, {{ header_font.fallback_families }};
+    font-size: {{ section.settings.title_font_size }}px;
+    line-height: normal;
+    font-style: {{ header_font.style }};
+  }
+  .main-slider-content-2 h3 {
+	font-family: {{ sub_header_font.family }}, {{ sub_header_font.fallback_families }};
+    font-size: {{ section.settings.sub_title_font_size }}px;
+    line-height: normal;
+  }
+  .main-slider-content-2 p {
+    font-family: {{ paragraph_font.family }}, {{ paragraph_font.fallback_families }};
+    font-size: {{ section.settings.content_font_size }}px;
+    line-height: normal;
+  }
+  .btn-style-3 a a {
+	  font-family: {{ button_font.family }}, {{ button_font.fallback_families }};
+      font-size: {{ section.settings.button_font_size }}px;
+	  line-height: normal;
+  }
+
+{%endif%}
+
+
+{%- endstyle -%}
+
+<script>
+  
+  /* main slider active 1 */
+    $('.main-slider-active-1').owlCarousel({
+        loop: true,
+        nav: true,
+        navText: ['<i class="lnr lnr-arrow-left"></i>', '<i class="lnr lnr-arrow-right"></i>'],
+        autoplay: {{ section.settings.slider_auto_play }},
+        autoplayTimeout: 5000,
+        animateOut: 'fadeOut',
+        {%- if settings.rtl_enable -%}
+        rtl: true,
+        {%- else -%}
+        fade: false,
+        {%- endif -%}
+        animateIn: 'fadeIn',
+        item: 1,
+        responsive: {
+            0: {
+                items: 1
+            },
+            576: {
+                items: 1
+            },
+            768: {
+                items: 1
+            },
+            992: {
+                items: 1
+            }
+        }
+    })
+
+</script>
+
+{% schema %}
+  {
+    "name": "Slider One",
+    "settings": [
+        {
+          "type": "header",
+          "content": "Slider Width Control"
+        },
+        {
+          "type": "checkbox",
+          "id": "fullwidth_on",
+          "label": "Full Width Enable",
+          "default": true,
+          "info": "If you want Full Width click checkbox"
+        },
+        {
+          "type": "header",
+          "content": "Slider Content Style"
+        },
+        {
+          "type": "checkbox",
+          "id": "slider_content_enable",
+          "label": "Slider Content Style Enable",
+          "default": true
+        },
+		{
+          "type": "font_picker",
+          "id": "sub_header_font",
+          "label": "Font Family: Slider Sub Title",
+          "default": "poppins_n5"
+        },
+		{
+          "type": "font_picker",
+          "id": "header_font",
+          "label": "Font Family: Slider Title",
+          "default": "poppins_n6"
+        },
+		{
+          "type": "font_picker",
+          "id": "paragraph_font",
+          "label": "Font Family: Slider Description",
+          "default": "poppins_n4"
+        },
+		{
+          "type": "font_picker",
+          "id": "button_font",
+          "label": "Font Family: Slider Button",
+          "default": "poppins_n4"
+        },
+		{
+          "type": "range",
+          "id": "sub_title_font_size",
+          "label": "Sub Title Font size",
+          "default": 35,
+          "min": 10,
+          "max": 100,
+          "step": 1,
+          "unit": "px"
+        },
+		{
+          "type": "range",
+          "id": "title_font_size",
+          "label": "Title Font size",
+          "default": 64,
+          "min": 20,
+          "max": 100,
+          "step": 1,
+          "unit": "px"
+        },
+		{
+          "type": "range",
+          "id": "content_font_size",
+          "label": "Content Font size",
+          "default": 18,
+          "min": 10,
+          "max": 100,
+          "step": 1,
+          "unit": "px"
+        },
+		{
+          "type": "range",
+          "id": "button_font_size",
+          "label": "Button Font size",
+          "default": 16,
+          "min": 10,
+          "max": 100,
+          "step": 1,
+          "unit": "px"
+        },
+		{
+              "type": "select",
+              "id": "slider_auto_play",
+              "label": "Slider Auto Play",
+              "options": [
+				{
+                 "label": "ON",
+                 "value": "true"
+                },
+                {
+                 "label": "OFF",
+                 "value": "false"
+                }         
+
+                ],
+                 "default": "false"
+          }
+		
+	],
+	"blocks":[
+		{
+          "type": "slide",
+          "name": "Slide",
+          "settings": [
+              {
+                  "type": "image_picker",
+                  "id": "slider_img",
+                  "label": "Slide Image",
+                  "info": "Recommended Size: 1920x943px"
+              },
+              {
+              "type": "select",
+              "id": "content_alignment",
+              "label": "Content Alignment",
+              "options": [
+                {
+                 "label": "Text left",
+                 "value": "text-left"
+                },
+				{
+                 "label": "Text Right",
+                 "value": "text-right"
+                },
+                {
+                 "label": "Text Center",
+                 "value": "text-center"
+                }         
+
+                ],
+                 "default": "text-center"
+              },
+              {
+                  "type": "textarea",
+                  "id": "slider_sub_title",
+                  "label": "Sub Title"
+              },
+              {
+                  "type": "textarea",
+                  "id": "slider_title",
+                  "label": "Title",
+                  "default": "HTphone 11 Promax"
+              },
+
+              {
+                  "type": "textarea",
+                  "id": "slider_des",
+                  "label": "Slider Description",
+                  "default": "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae"
+              },
+
+              {
+                  "type": "text",
+                  "id": "slider_button",
+                  "label": "Button Text",
+                  "default": "Shop now"
+              },
+
+              {
+                  "type": "url",
+                  "id": "slider_button_url",
+                  "label": "Button URL"
+              },
+              {
+                "type": "header",
+                "content": "Slider Content Color"
+              },
+              {
+                "type": "checkbox",
+                "id": "content_color_enable",
+                "label": "Slider Content Color Enable",
+                "default": false
+              },
+
+              {
+                "type": "color",
+                "id": "slider_title_color",
+                "label": "Slider Title Color",
+                "default": "#fff"
+              },
+			  {
+                "type": "color",
+                "id": "slider_sub_title_color",
+                "label": "Slider Sub title Color",
+                "default": "#fff"
+              },
+			  {
+                "type": "color",
+                "id": "slider_discount_color",
+                "label": "Slider Discount Color",
+                "default": "#fff"
+              },
+              {
+                "type": "color",
+                "id": "slider_button_color",
+                "label": "Slider Button Color",
+                "default": "#fff"
+              },
+              {
+                "type": "color",
+                "id": "slider_button_bg_color",
+                "label": "Slider Button BG Color",
+                "default": "#FF6E21"
+              },
+			  {
+                "type": "color",
+                "id": "slider_button_color_hov",
+                "label": "Slider Button Hover Color",
+                "default": "#393939"
+              },
+              {
+                "type": "color",
+                "id": "slider_button_bg_hover_color",
+                "label": "Slider Button Hover BG Color",
+                "default": "#FEFEFE"
+              },
+			  {
+                "type": "header",
+                "content": "Slider Content Animation"
+              },
+			  {
+              "type": "select",
+              "id": "slider_animation_animation",
+              "label": "Slider Content Animation",
+              "options": [
+                {
+                 "label": "Slide left",
+                 "value": "fadeInLeft"
+                },
+				{
+                 "label": "Slide Right",
+                 "value": "fadeInRight"
+                },
+				{
+                 "label": "Slide Up",
+                 "value": "fadeInUp"
+                },
+                {
+                 "label": "Slide Down",
+                 "value": "fadeInDown"
+                }         
+
+                ],
+                 "default": "fadeInUp"
+              }
+
+          ]
+      },
+	   {
+          "type": "section_margin",
+          "name": "Section Margin",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Tablat Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			}
+          ]
+       },
+	   {
+          "type": "section_padding",
+          "name": "Section Padding",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Tablat Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 0
+			}
+          ]
+       },
+	   {
+          "type": "section_background",
+          "name": "Section Background",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "image_picker",
+			  "id": "section_bg_image",
+			  "label": "BG Image"
+			},
+			{
+			  "type": "color",
+			  "id": "section_bg_color",
+			  "label": "BG Color",
+			  "default": "#ffffff"
+			}
+          ]
+       }
+	],
+	"presets": [
+		{
+		  "name": "Slider One",
+		  "category": "1. slideshow",
+		  "blocks":[
+				{
+					"type": "slide"
+				},
+				{
+					"type": "slide"
+				}
+			]
+		}
+	]
+  }
+{% endschema %}
+

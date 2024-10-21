@@ -1,0 +1,9 @@
+{% if customer %}
+<a class="favorite-icon action-wishlist tile-actions--btn flex wishlist-btn wishlist" href="#" data-product-handle="{{ product.handle }}">
+  <span class="add-wishlist"><i class="fa fa-heart-o"></i></span>
+  <span class="loading-wishlist  animated infinite rotateOut"><i class="fa fa-spinner"></i></span>
+  <span class="remove-wishlist"><i class="fa fa-heart"></i></span>
+</a>
+{% else %}
+<a href="/account/login" class="favorite-icon" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a>
+{% endif %}

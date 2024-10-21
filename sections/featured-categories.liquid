@@ -1,0 +1,415 @@
+<div class="featured-categories section-padding-1" id="section-{{ section.id }}">
+  <div class="container{% if section.settings.fullwidth_on %}-fluid{% endif %}">
+    
+    {% if section.settings.section_title != blank %}
+    <div class="section-title-2 text-center mb-60">
+      <h2>{{ section.settings.section_title }}</h2>
+    </div>
+    {%endif%}
+
+    <div class="featured-categories-active owl-carousel slick-dot-style-1">
+
+      {% for block in section.blocks %}
+      {% case block.type %}
+      {% when 'single_ctg' %}
+      {%assign collection_receive_1 = collections[block.settings.collection_handle_1] %}
+
+      <div class="featured-categories-wrap">
+        <div class="single-featured-categories mb-25">
+          <div class="featured-categories-content">
+            <h3><a href="{{ collection_receive_1.url }}">{%if collection_receive_1.title != empty %} {{ collection_receive_1.title }} {%else%} Collection Name{%endif%}</a></h3>
+            <p>{{ collection_receive_1.products_count }} products </p>
+            <div class="btn-style-3 btn-hover-2">
+              <a class="animated bs3-gray-text bs3-gray-bg bs3-ptb-3 bs3-border-radius ptb-2-theme-hover font-dec" href="{{ collection_receive_1.url }}">{{ block.settings.button_title }}</a>
+            </div>
+          </div>
+          <div class="featured-categories-img">
+            <a href="{{ collection_receive_1.url }}">
+              {% assign collection = link.object %}
+              {% if collection_receive_1.image %}
+              <img src="{{ collection_receive_1 | img_url: 'master' }}" class="lazyload" alt="collection image">
+              {% else %}
+              <img src="{% if block.settings.banner_double_img_1 %}
+                        {{ block.settings.banner_double_img_1 | img_url: 'master' }}{% else %}https://via.placeholder.com/212x152{% endif %}" class="lazyload" alt="Collection Images">
+              {% endif %}
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {% endcase %}
+      {% endfor %}
+
+    </div>
+
+  </div>
+</div>
+
+
+{%- style -%}
+  #section-{{ section.id }}{
+    {%- for block in section.blocks -%}
+    {%- case block.type -%}
+    {%- when 'section_margin' -%}
+    margin-top: {{ block.settings.section_margin_top }}px;
+    margin-bottom: {{ block.settings.section_margin_bottom }}px;
+    {%- when 'section_padding' -%}
+    padding-top: {{ block.settings.section_padding_top }}px;
+    padding-bottom: {{ block.settings.section_padding_bottom }}px;
+    {%- when 'section_background' -%}    
+    background: {{ block.settings.section_bg_color }} 
+      {%- if block.settings.section_bg_image -%}url("{{ block.settings.section_bg_image | img_url: 'master' }}"){%- endif -%} no-repeat scroll center center / cover;
+    {%- endcase -%}
+    {%- endfor -%}
+  }
+  @media (min-width: 768px) and (max-width: 991px) {
+    #section-{{ section.id }}{
+      {%- for block in section.blocks -%}
+      {% case block.type %}
+      {%- when 'section_margin' -%}
+      margin-top: {{ block.settings.section_margin_top_md }}px;
+      margin-bottom: {{ block.settings.section_margin_bottom_md }}px;
+      {%- when 'section_padding' -%}
+      padding-top: {{ block.settings.section_padding_top_md }}px;
+      padding-bottom: {{ block.settings.section_padding_bottom_md }}px;
+      {%- endcase -%}
+      {%- endfor -%}
+    }
+  }
+  @media (max-width: 767px) {
+    #section-{{ section.id }}{
+      {%- for block in section.blocks -%}
+      {%- case block.type -%}
+      {%- when 'section_margin' -%}
+      margin-top: {{ block.settings.section_margin_top_xs }}px;
+      margin-bottom: {{ block.settings.section_margin_bottom_xs }}px;
+      {%- when 'section_padding' -%}
+      padding-top: {{ block.settings.section_padding_top_xs }}px;
+      padding-bottom: {{ block.settings.section_padding_bottom_xs }}px;
+      {%- endcase -%}
+      {%- endfor -%}
+    }
+  }
+{%- endstyle -%}
+
+<script>
+  
+  /*--------------------------------
+        Featured categories active
+    -----------------------------------*/
+    $('.featured-categories-active').slick({
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        loop: true,
+        dots: true,
+        arrows: false,
+        rows:2,
+        responsive: [{
+                breakpoint: 1500,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 1,
+                }
+            },
+            {
+                breakpoint: 1199,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
+                }
+            },
+            {
+                breakpoint: 991,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
+                }
+            },
+            {
+                breakpoint: 767,
+                settings: {
+                    autoplay: false,
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                }
+            }
+        ]
+    });
+  
+  
+</script>
+
+{% schema %}
+{
+  "name": "Featured Collections",
+  "settings": [ 
+		{
+            "type": "checkbox",
+            "id": "fullwidth_on",
+            "label": "Full Width Enable",
+            "default": true,
+            "info": "If you want Full Width click checkbox"
+        },
+        {
+          "type": "text",
+          "id": "section_title",
+          "label": "Section Title", 
+          "default": "Featured Categories"
+        }
+  ],
+  "blocks":[
+	   		{
+          "type": "section_margin",
+          "name": "Section Margin",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Tablet Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			}
+          ]
+       },
+	   {
+          "type": "section_padding",
+          "name": "Section Padding",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 110
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 120
+			},
+			{
+			  "type": "header",
+			  "content": "Tablet Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 80
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 90
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 50
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 60
+			}
+          ]
+       },
+	   {
+          "type": "section_background",
+          "name": "Section Background",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "image_picker",
+			  "id": "section_bg_image",
+			  "label": "BG Image"
+			},
+			{
+			  "type": "color",
+			  "id": "section_bg_color",
+			  "label": "BG Color",
+			  "default": "#ffffff"
+			}
+          ]
+       },
+
+    {
+      "type": "single_ctg",
+      "name": "Single Collections",
+      "settings": [
+
+        {
+          "type": "image_picker",
+          "id": "banner_double_img_1",
+          "label": "Banner Double Image 1",
+          "info": "Recommended Size: 120 x 120px"
+        },
+        {
+          "type": "collection",
+          "id": "collection_handle_1",	
+          "label": "Choose Collection"
+        },
+		{
+          "type": "text",
+          "id": "button_title",
+          "label": "Button Title", 
+          "default": "Shop Now"
+        }
+
+      ]
+    }
+
+
+
+  ],
+  "presets":[
+    {
+      "name": "Featured Categories",
+	  "category": "3. collections",
+      "blocks":[
+        {
+          "type": "single_ctg"
+        },        
+		{
+          "type": "single_ctg"
+        },
+        {
+          "type": "single_ctg"
+        },         
+		{
+          "type": "single_ctg"
+        },        
+		{
+          "type": "single_ctg"
+        },
+		{
+          "type": "single_ctg"
+        },
+        {
+          "type": "single_ctg"
+        },         
+		{
+          "type": "single_ctg"
+        },        
+		{
+          "type": "single_ctg"
+        },
+        {
+          "type": "single_ctg"
+        },
+		{
+          "type": "section_padding"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

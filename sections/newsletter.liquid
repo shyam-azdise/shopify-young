@@ -1,0 +1,918 @@
+{% if section.settings.newsletter_style == 'newsletter_style_1' %}
+<div class="subscribe-area bg-theme-color-yellow subscribe-pt subscribe-pb" id="section-{{ section.id }}">
+  <div class="container{% if section.settings.fullwidth_on %}-fluid{%endif%}">
+    <div class="row">
+      <div class="col-lg-8 ml-auto mr-auto">
+        {% if section.settings.newsletter_title != '' %}
+        <div class="subscribe-title-2 text-center">
+          <h3>{{ section.settings.newsletter_title }}</h3>
+          {% if section.settings.newsletter_sub_title != '' %}
+          <p>{{ section.settings.newsletter_sub_title }}</p>
+          {% endif %} 
+        </div>
+        {% endif %}
+
+        {%- if settings.newsletter_system == 'by_shopify_form' -%}
+
+        {%- assign formId = 'Contact_' | append: section.id -%}
+        {%- form 'customer', id: formId -%}
+        {%- if form.posted_successfully? -%}
+        <p class="form-message form-message--success form-success">{{ 'general.newsletter_form.confirmation'| t }}</p>
+        {%- else -%}
+
+        {%- if form.errors -%}
+        <div class="form-message form-message--error">
+          {{ form.errors | default_errors }}
+        </div>
+        {%- endif -%}
+        
+        <div id="mc_embed_signup" class="subscribe-form-2">
+          <div id="mc-form" class="mc-form mc-form-2">
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            <input class="email input-field subscribe" type="email" name="contact[email]" id="Email" value="{% if customer %}{{ customer.email }}{% endif %}"
+             placeholder="{{ section.settings.email_placeholder }}" aria-label="{{ section.settings.email_placeholder }}" {% if form.errors %}aria-invalid="true"{% endif %} autocorrect="off" autocapitalize="off">
+            <button id="Subscribe" type="submit" name="commit" class="submit subscribe-btn">{{ section.settings.button_title }}</button>
+          </div>
+        </div>
+        {%- endif -%}
+        {%- endform -%}
+        
+        {%- elsif settings.newsletter_system == 'by_mailchimp' -%}
+        <div id="mc_embed_signup" class="subscribe-form-2">
+          <form action="{{ settings.newsletter_action }}" method="post" id="mc-form" name="mc-embedded-subscribe-form" class="validate subscribe-form-style-2 newsletter-form validate mc-form-2" target="_blank" novalidate>
+            <input type="email" value="" name="EMAIL" class="email input-field subscribe" id="mce-EMAIL" placeholder="{{ section.settings.email_placeholder }}" required>
+            <button type="submit" name="subscribe" id="mc-embedded-subscribe" class="submit subscribe-btn">{{ section.settings.button_title }}</button>
+          </form>
+          <div class="mailchimp-alerts">
+            <div class="mailchimp-submitting"></div>
+            <div class="mailchimp-success"></div>
+            <div class="mailchimp-error"></div>
+          </div>
+        </div>
+        {%- endif -%}
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .subscribe-title-2 h3 {
+    color: {{ section.settings.newsletter_title_color }};
+  }
+  .subscribe-title-2 p {
+    color: {{ section.settings.newsletter_desc_color }};
+    margin-bottom: 35px;
+  }
+  
+  .subscribe-form-2 .mc-form-2 button.subscribe-btn {
+    color: {{ section.settings.newsletter_btn_color }};
+    background-color: {{ section.settings.newsletter_btn_bg_color }};
+  }
+  .subscribe-form-2 .mc-form-2 button.subscribe-btn:hover {
+    color: {{ section.settings.newsletter_btn_hover_color }};
+    background-color: {{ section.settings.newsletter_btn_bg_color_hov }};
+  }
+  
+</style>
+
+
+{% elsif section.settings.newsletter_style == 'newsletter_style_2' %}
+
+<div class="subscribe-area bg-tan pt-100 pb-100" id="section-{{ section.id }}">
+  <div class="container{% if section.settings.fullwidth_on %}-fluid{%endif%}">
+    <div class="row">
+      <div class="col-lg-8 ml-auto mr-auto">
+        {% if section.settings.newsletter_title != '' %}
+        <div class="subscribe-title-3 mb-30 text-center">
+          <h3>{{ section.settings.newsletter_title }}</h3>
+          {% if section.settings.newsletter_sub_title != '' %}
+          <p>{{ section.settings.newsletter_sub_title }}</p>
+          {% endif %} 
+        </div>
+        {% endif %}
+        
+        
+        {%- if settings.newsletter_system == 'by_shopify_form' -%}
+
+        {%- assign formId = 'Contact_' | append: section.id -%}
+        {%- form 'customer', id: formId -%}
+        {%- if form.posted_successfully? -%}
+        <p class="form-message form-message--success form-success">{{ 'general.newsletter_form.confirmation'| t }}</p>
+        {%- else -%}
+
+        {%- if form.errors -%}
+        <div class="form-message form-message--error">
+          {{ form.errors | default_errors }}
+        </div>
+        {%- endif -%}
+        
+        <div id="mc_embed_signup" class="subscribe-form-3">
+          <div id="mc-form" class="mc-form mc-form-3">
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            <input class="email input-field subscribe" type="email" name="contact[email]" id="Email" value="{% if customer %}{{ customer.email }}{% endif %}"
+                   placeholder="{{ section.settings.email_placeholder }}" aria-label="{{ section.settings.email_placeholder }}" {% if form.errors %}aria-invalid="true"{% endif %} autocorrect="off" autocapitalize="off">
+            <div class="clear-3">
+              <input id="Subscribe" class="button submit subscribe-btn" type="submit" name="subscribe" value="{{ section.settings.button_title }}">
+            </div>
+          </div>
+        </div>
+        {%- endif -%}
+        {%- endform -%}
+        
+        {%- elsif settings.newsletter_system == 'by_mailchimp' -%}
+        <div id="mc_embed_signup" class="subscribe-form-3">
+          <form action="{{ settings.newsletter_action }}" method="post" id="mc-form" name="mc-embedded-subscribe-form" class="validate subscribe-form-style-2 newsletter-form validate mc-form-2" target="_blank" novalidate>
+            <input type="email" value="" name="EMAIL" class="email input-field subscribe" id="mce-EMAIL" placeholder="{{ section.settings.email_placeholder }}" required>
+            <div class="clear-3">
+              <input id="mc-embedded-subscribe" class="button submit subscribe-btn" type="submit" name="subscribe" value="{{ section.settings.button_title }}">
+            </div>
+          </form>
+          <div class="mailchimp-alerts">
+            <div class="mailchimp-submitting"></div>
+            <div class="mailchimp-success"></div>
+            <div class="mailchimp-error"></div>
+          </div>
+        </div>
+        {%- endif -%}
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .subscribe-title-2 h3 {
+    color: {{ section.settings.newsletter_title_color }};
+  }
+  .subscribe-title-2 p {
+    color: {{ section.settings.newsletter_desc_color }};
+    margin-bottom: 35px;
+  }
+  
+  .subscribe-form-2 .mc-form-2 button.subscribe-btn {
+    color: {{ section.settings.newsletter_btn_color }};
+    background-color: {{ section.settings.newsletter_btn_bg_color }};
+  }
+  .subscribe-form-2 .mc-form-2 button.subscribe-btn:hover {
+    color: {{ section.settings.newsletter_btn_hover_color }};
+    background-color: {{ section.settings.newsletter_btn_bg_color_hov }};
+  }
+  
+</style>
+
+
+{% elsif section.settings.newsletter_style == 'newsletter_style_3' %}
+
+<div class="subscribe-area bg-black pt-70 pb-80 default-mlr-120" id="section-{{ section.id }}">
+  <div class="container{% if section.settings.fullwidth_on %}-fluid{%endif%}">
+    <div class="row align-items-center">
+      {% if section.settings.newsletter_title != '' %}
+      <div class="col-lg-3">
+        <div class="subscribe-title">
+          <h3>{{ section.settings.newsletter_title }}</h3>
+        </div>
+      </div>
+      {% endif %}
+      <div class="col-lg-9">
+
+        
+        {%- if settings.newsletter_system == 'by_shopify_form' -%}
+
+        {%- assign formId = 'Contact_' | append: section.id -%}
+        {%- form 'customer', id: formId -%}
+        {%- if form.posted_successfully? -%}
+        <p class="form-message form-message--success form-success">{{ 'general.newsletter_form.confirmation'| t }}</p>
+        {%- else -%}
+
+        {%- if form.errors -%}
+        <div class="form-message form-message--error">
+          {{ form.errors | default_errors }}
+        </div>
+        {%- endif -%}
+        
+        <div id="mc_embed_signup" class="subscribe-form subscribe-mrg-1">
+          <div id="mc-form" class="mc-form mc-form-3">
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            <input class="email input-field subscribe" type="email" name="contact[email]" id="Email" value="{% if customer %}{{ customer.email }}{% endif %}"
+                   placeholder="{{ section.settings.email_placeholder }}" aria-label="{{ section.settings.email_placeholder }}" {% if form.errors %}aria-invalid="true"{% endif %} autocorrect="off" autocapitalize="off">
+            <div class="clear">
+              <input id="Subscribe" class="button submit subscribe-btn" type="submit" name="subscribe" value="{{ section.settings.button_title }}">
+            </div>
+          </div>
+        </div>
+        {%- endif -%}
+        {%- endform -%}
+        
+        {%- elsif settings.newsletter_system == 'by_mailchimp' -%}
+        <div id="mc_embed_signup" class="subscribe-form subscribe-mrg-1">
+          <form action="{{ settings.newsletter_action }}" method="post" id="mc-form" name="mc-embedded-subscribe-form" class="validate subscribe-form-style subscribe-form-style-2 newsletter-form validate mc-form-2" target="_blank" novalidate>
+            <input type="email" value="" name="EMAIL" class="email input-field subscribe" id="mce-EMAIL" placeholder="{{ section.settings.email_placeholder }}" required>
+            <div class="clear">
+              <input id="mc-embedded-subscribe" class="button submit subscribe-btn" type="submit" name="subscribe" value="{{ section.settings.button_title }}">
+            </div>
+          </form>
+          <div class="mailchimp-alerts">
+            <div class="mailchimp-submitting"></div>
+            <div class="mailchimp-success"></div>
+            <div class="mailchimp-error"></div>
+          </div>
+        </div>
+        {%- endif -%}
+        
+
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<style>
+  .subscribe-title h3 {
+    color: {{ section.settings.newsletter_title_color }};
+  }
+  .subscribe-title2 p {
+    color: {{ section.settings.newsletter_desc_color }};
+    margin-bottom: 35px;
+  }
+  
+  .subscribe-form .mc-form .clear input {
+    color: {{ section.settings.newsletter_btn_color }};
+  }
+  .subscribe-form .mc-form .clear input:hover {
+    color: {{ section.settings.newsletter_btn_hover_color }};
+  }
+  
+</style>
+
+
+
+{% elsif section.settings.newsletter_style == 'newsletter_style_4' %}
+
+
+<div class="subscribe-area bg-theme-color-green-2 pt-90 pb-100" id="section-{{ section.id }}">
+  <div class="container{% if section.settings.fullwidth_on %}-fluid{%endif%}">
+    <div class="row">
+      <div class="col-lg-8 ml-auto mr-auto">
+        {% if section.settings.newsletter_title != '' %}
+        <div class="section-title-6 text-center mb-55">
+          <h2>{{ section.settings.newsletter_title }}</h2>
+          {% if section.settings.newsletter_sub_title != '' %}
+          <p>{{ section.settings.newsletter_sub_title }}</p>
+          {% endif %} 
+        </div>
+        {% endif %}
+
+        {%- if settings.newsletter_system == 'by_shopify_form' -%}
+
+        {%- assign formId = 'Contact_' | append: section.id -%}
+        {%- form 'customer', id: formId -%}
+        {%- if form.posted_successfully? -%}
+        <p class="form-message form-message--success form-success">{{ 'general.newsletter_form.confirmation'| t }}</p>
+        {%- else -%}
+
+        {%- if form.errors -%}
+        <div class="form-message form-message--error">
+          {{ form.errors | default_errors }}
+        </div>
+        {%- endif -%}
+        
+        <div id="mc_embed_signup" class="subscribe-form-4">
+          <div id="mc-form" class="mc-form mc-form-4">
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            <input class="email input-field subscribe" type="email" name="contact[email]" id="Email" value="{% if customer %}{{ customer.email }}{% endif %}"
+                   placeholder="{{ section.settings.email_placeholder }}" aria-label="{{ section.settings.email_placeholder }}" {% if form.errors %}aria-invalid="true"{% endif %} autocorrect="off" autocapitalize="off">
+            <div class="clear-4">
+              <input id="Subscribe" class="button submit subscribe-btn" type="submit" name="subscribe" value="{{ section.settings.button_title }}">
+            </div>
+          </div>
+        </div>
+        {%- endif -%}
+        {%- endform -%}
+        
+        {%- elsif settings.newsletter_system == 'by_mailchimp' -%}
+        <div id="mc_embed_signup" class="subscribe-form-4">
+          <form action="{{ settings.newsletter_action }}" method="post" id="mc-form" name="mc-embedded-subscribe-form" class="validate subscribe-form-style-4 newsletter-form validate mc-form-4" target="_blank" novalidate>
+            <input type="email" value="" name="EMAIL" class="email input-field subscribe" id="mce-EMAIL" placeholder="{{ section.settings.email_placeholder }}" required>
+            <div class="clear-4">
+              <input id="mc-embedded-subscribe" class="button submit subscribe-btn" type="submit" name="subscribe" value="{{ section.settings.button_title }}">
+            </div>
+          </form>
+          <div class="mailchimp-alerts">
+            <div class="mailchimp-submitting"></div>
+            <div class="mailchimp-success"></div>
+            <div class="mailchimp-error"></div>
+          </div>
+        </div>
+        {%- endif -%}
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .section-title-6 h2 {
+    color: {{ section.settings.newsletter_title_color }};
+  }
+  .section-title-6 p {
+    color: {{ section.settings.newsletter_desc_color }};
+    margin-bottom: 35px;
+  }
+  
+  .subscribe-form-4 .mc-form-4 .clear-4 input {
+    color: {{ section.settings.newsletter_btn_color }};
+  }
+  .subscribe-form-4 .mc-form-4 .clear-4 input:hover {
+    color: {{ section.settings.newsletter_btn_hover_color }};
+  }
+  
+</style>
+
+
+{% elsif section.settings.newsletter_style == 'newsletter_style_5' %}
+
+<div class="subscribe-area pt-100 pb-100" id="section-{{ section.id }}">
+  <div class="container{% if section.settings.fullwidth_on %}-fluid{%endif%}">
+    <div class="row">
+      <div class="col-lg-8 ml-auto mr-auto">
+        {% if section.settings.newsletter_title != '' %}
+        <div class="subscribe-title-2 text-center">
+          <h3>{{ section.settings.newsletter_title }}</h3>
+          {% if section.settings.newsletter_sub_title != '' %}
+          <p>{{ section.settings.newsletter_sub_title }}</p>
+          {% endif %} 
+        </div>
+        {% endif %}
+
+        {%- if settings.newsletter_system == 'by_shopify_form' -%}
+
+        {%- assign formId = 'Contact_' | append: section.id -%}
+        {%- form 'customer', id: formId -%}
+        {%- if form.posted_successfully? -%}
+        <p class="form-message form-message--success form-success">{{ 'general.newsletter_form.confirmation'| t }}</p>
+        {%- else -%}
+
+        {%- if form.errors -%}
+        <div class="form-message form-message--error">
+          {{ form.errors | default_errors }}
+        </div>
+        {%- endif -%}
+        
+        <div id="mc_embed_signup" class="subscribe-form-2">
+          <div id="mc-form" class="mc-form mc-form-2 mc-form-2-modify">
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            <input class="email input-field subscribe" type="email" name="contact[email]" id="Email" value="{% if customer %}{{ customer.email }}{% endif %}"
+             placeholder="{{ section.settings.email_placeholder }}" aria-label="{{ section.settings.email_placeholder }}" {% if form.errors %}aria-invalid="true"{% endif %} autocorrect="off" autocapitalize="off">
+            <button id="Subscribe" type="submit" name="commit" class="submit subscribe-btn">{{ section.settings.button_title }}</button>
+          </div>
+        </div>
+        {%- endif -%}
+        {%- endform -%}
+        
+        {%- elsif settings.newsletter_system == 'by_mailchimp' -%}
+        <div id="mc_embed_signup" class="subscribe-form-2">
+          <form action="{{ settings.newsletter_action }}" method="post" id="mc-form" name="mc-embedded-subscribe-form" class="validate subscribe-form-style-2 newsletter-form validate mc-form-2 mc-form-2-modify" target="_blank" novalidate>
+            <input type="email" value="" name="EMAIL" class="email input-field subscribe" id="mce-EMAIL" placeholder="{{ section.settings.email_placeholder }}" required>
+            <button type="submit" name="subscribe" id="mc-embedded-subscribe" class="submit subscribe-btn">{{ section.settings.button_title }}</button>
+          </form>
+          <div class="mailchimp-alerts">
+            <div class="mailchimp-submitting"></div>
+            <div class="mailchimp-success"></div>
+            <div class="mailchimp-error"></div>
+          </div>
+        </div>
+        {%- endif -%}
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .subscribe-title-2 h3 {
+    color: {{ section.settings.newsletter_title_color }};
+  }
+  .subscribe-title-2 p {
+    color: {{ section.settings.newsletter_desc_color }};
+    margin-bottom: 35px;
+  }
+  
+  .subscribe-form-2 .mc-form-2 button.subscribe-btn {
+    color: {{ section.settings.newsletter_btn_color }};
+    background-color: {{ section.settings.newsletter_btn_bg_color }};
+  }
+  .subscribe-form-2 .mc-form-2 button.subscribe-btn:hover {
+    color: {{ section.settings.newsletter_btn_hover_color }};
+    background-color: {{ section.settings.newsletter_btn_bg_color_hov }};
+  }
+  .subscribe-form-2 .mc-form-2.mc-form-2-modify input {
+    border: 2px solid {{ section.settings.newsletter_border_color }};
+  }
+</style>
+
+{% elsif section.settings.newsletter_style == 'newsletter_style_6' %}
+
+<div class="subscribe-area subscribe-organic-ptb" id="section-{{ section.id }}">
+  <div class="container{% if section.settings.fullwidth_on %}-fluid{%endif%}">
+    <div class="row">
+      <div class="col-lg-8 ml-auto mr-auto">
+        
+        <div class="section-title-11 mb-60 text-center">
+          {% if section.settings.newsletter_sub_title != '' %}
+          <h3>{{ section.settings.newsletter_sub_title }}</h3>
+          {% endif %}
+          {% if section.settings.newsletter_title != '' %}
+          <h2>{{ section.settings.newsletter_title }}</h2>
+          {% endif %}
+          {% if section.settings.section_icon_img_enable %}
+          <img src="{% if section.settings.video_icon_image %}{{ section.settings.video_icon_image | img_url: 'master' }}{% else %}https://via.placeholder.com/220x46 {% endif %}" class="lazyload" alt="banner">
+          {% endif %}
+        </div>
+        
+        
+        {%- if settings.newsletter_system == 'by_shopify_form' -%}
+
+        {%- assign formId = 'Contact_' | append: section.id -%}
+        {%- form 'customer', id: formId -%}
+        {%- if form.posted_successfully? -%}
+        <p class="form-message form-message--success form-success">{{ 'general.newsletter_form.confirmation'| t }}</p>
+        {%- else -%}
+
+        {%- if form.errors -%}
+        <div class="form-message form-message--error">
+          {{ form.errors | default_errors }}
+        </div>
+        {%- endif -%}
+        
+        <div id="mc_embed_signup" class="subscribe-form-2">
+          <div id="mc-form" class="mc-form mc-form-2 mc-form-2-modify">
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            <input class="email input-field subscribe" type="email" name="contact[email]" id="Email" value="{% if customer %}{{ customer.email }}{% endif %}"
+             placeholder="{{ section.settings.email_placeholder }}" aria-label="{{ section.settings.email_placeholder }}" {% if form.errors %}aria-invalid="true"{% endif %} autocorrect="off" autocapitalize="off">
+            <button id="Subscribe" type="submit" name="commit" class="submit subscribe-btn">{{ section.settings.button_title }}</button>
+          </div>
+        </div>
+        {%- endif -%}
+        {%- endform -%}
+        
+        {%- elsif settings.newsletter_system == 'by_mailchimp' -%}
+        <div id="mc_embed_signup" class="subscribe-form-2">
+          <form action="{{ settings.newsletter_action }}" method="post" id="mc-form" name="mc-embedded-subscribe-form" class="validate subscribe-form-style-2 newsletter-form validate mc-form-2 mc-form-2-modify" target="_blank" novalidate>
+            <input type="email" value="" name="EMAIL" class="email input-field subscribe" id="mce-EMAIL" placeholder="{{ section.settings.email_placeholder }}" required>
+            <button type="submit" name="subscribe" id="mc-embedded-subscribe" class="submit subscribe-btn">{{ section.settings.button_title }}</button>
+          </form>
+          <div class="mailchimp-alerts">
+            <div class="mailchimp-submitting"></div>
+            <div class="mailchimp-success"></div>
+            <div class="mailchimp-error"></div>
+          </div>
+        </div>
+        {%- endif -%}
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  
+  .section-title-11 h3 {
+    color: {{ section.settings.newsletter_sub_title_color }};
+  }
+  .section-title-11 h2 {
+    color: {{ section.settings.newsletter_title_color }};
+  }
+  
+  
+  .subscribe-form-2 .mc-form-2 button.subscribe-btn {
+    background-color: {{ section.settings.newsletter_btn_bg_color }};
+  }
+  .subscribe-form-2 .mc-form-2 button.subscribe-btn:hover {
+    background-color: {{ section.settings.newsletter_btn_bg_color_hov }};
+  }
+  .subscribe-form-2 .mc-form-2.mc-form-2-modify input {
+    border: 2px solid {{ section.settings.newsletter_border_color }};
+  }
+
+</style>
+
+{% elsif section.settings.newsletter_style == 'newsletter_style_7' %}
+
+
+<div class="subscribe-area bg-img subscribe-pets-ptb" id="section-{{ section.id }}">
+  <div class="container{% if section.settings.fullwidth_on %}-fluid{%endif%}">
+    <div class="row">
+      <div class="col-lg-8 ml-auto mr-auto">
+
+        <div class="section-title-9 st-dec-font text-center mb-50">
+          {% if section.settings.newsletter_sub_title != '' %}
+          <h3>{{ section.settings.newsletter_sub_title }}</h3>
+          {% endif %}
+          {% if section.settings.newsletter_title != '' %}
+          <h2>{{ section.settings.newsletter_title }}</h2>
+          {% endif %}
+          {% if section.settings.section_icon_img_enable %}
+          <img src="{% if section.settings.video_icon_image %}{{ section.settings.video_icon_image | img_url: 'master' }}{% else %}https://via.placeholder.com/220x46 {% endif %}" class="lazyload" alt="banner">
+          {% endif %}
+        </div>
+        
+        
+        {%- if settings.newsletter_system == 'by_shopify_form' -%}
+
+        {%- assign formId = 'Contact_' | append: section.id -%}
+        {%- form 'customer', id: formId -%}
+        {%- if form.posted_successfully? -%}
+        <p class="form-message form-message--success form-success">{{ 'general.newsletter_form.confirmation'| t }}</p>
+        {%- else -%}
+
+        {%- if form.errors -%}
+        <div class="form-message form-message--error">
+          {{ form.errors | default_errors }}
+        </div>
+        {%- endif -%}
+        
+        <div id="mc_embed_signup" class="subscribe-form-2">
+          <div id="mc-form" class="mc-form mc-form-2 mc-form-2-modify">
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            <input class="email input-field subscribe" type="email" name="contact[email]" id="Email" value="{% if customer %}{{ customer.email }}{% endif %}"
+             placeholder="{{ section.settings.email_placeholder }}" aria-label="{{ section.settings.email_placeholder }}" {% if form.errors %}aria-invalid="true"{% endif %} autocorrect="off" autocapitalize="off">
+            <button id="Subscribe" type="submit" name="commit" class="submit subscribe-btn">{{ section.settings.button_title }}</button>
+          </div>
+        </div>
+        {%- endif -%}
+        {%- endform -%}
+        
+        {%- elsif settings.newsletter_system == 'by_mailchimp' -%}
+        <div id="mc_embed_signup" class="subscribe-form-2">
+          <form action="{{ settings.newsletter_action }}" method="post" id="mc-form" name="mc-embedded-subscribe-form" class="validate subscribe-form-style-2 newsletter-form validate mc-form-2 mc-form-2-modify" target="_blank" novalidate>
+            <input type="email" value="" name="EMAIL" class="email input-field subscribe" id="mce-EMAIL" placeholder="{{ section.settings.email_placeholder }}" required>
+            <button type="submit" name="subscribe" id="mc-embedded-subscribe" class="submit subscribe-btn">{{ section.settings.button_title }}</button>
+          </form>
+          <div class="mailchimp-alerts">
+            <div class="mailchimp-submitting"></div>
+            <div class="mailchimp-success"></div>
+            <div class="mailchimp-error"></div>
+          </div>
+        </div>
+        {%- endif -%}
+        
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+  
+  .section-title-9 h3 {
+    color: {{ section.settings.newsletter_sub_title_color }};
+  }
+  .section-title-9 h2 {
+    color: {{ section.settings.newsletter_title_color }};
+  }
+  
+  
+  .subscribe-form-2 .mc-form-2 button.subscribe-btn {
+    background-color: {{ section.settings.newsletter_btn_bg_color }};
+  }
+  .subscribe-form-2 .mc-form-2 button.subscribe-btn:hover {
+    background-color: {{ section.settings.newsletter_btn_bg_color_hov }};
+  }
+  .subscribe-form-2 .mc-form-2.mc-form-2-modify input {
+    border: 2px solid {{ section.settings.newsletter_border_color }};
+  }
+
+</style>
+
+{% endif %}
+
+
+{%- include 'section-style' -%}
+
+{% schema %}
+  {
+    "name": "Newsletter Section",
+    "settings": [
+		{
+          "type": "select",
+          "id": "newsletter_style",
+          "label": "Select Newsletter Style",
+          "options":[
+            {
+              "value":"newsletter_style_1",
+              "label": "Newsletter Style One"
+            },
+            {
+              "value":"newsletter_style_2",
+              "label": "Newsletter Style Two"
+            },
+			{
+              "value":"newsletter_style_3",
+              "label": "Newsletter Style Three"
+            },
+			{
+              "value":"newsletter_style_4",
+              "label": "Newsletter Style Four"
+            },
+			{
+              "value":"newsletter_style_5",
+              "label": "Newsletter Style Five"
+            },
+			{
+              "value":"newsletter_style_6",
+              "label": "Newsletter Style Six"
+            },
+			{
+              "value":"newsletter_style_7",
+              "label": "Newsletter Style Seven"
+            }
+          ],
+
+          "default": "newsletter_style_1"
+        },
+		{
+          "type": "header",
+          "content": "Newsletter Option"
+      	},
+		{
+            "type": "checkbox",
+            "id": "fullwidth_on",
+            "label": "Full Width Enable",
+            "default": false,
+            "info": "If you want Full Width click checkbox"
+        },
+		{
+          "type": "text",
+          "id": "newsletter_sub_title",
+          "label": "Newsletter Sub Title"
+      	},
+		{
+          "type": "text",
+          "id": "newsletter_title",
+          "label": "Newsletter Title",
+          "default": "Sign Up For Newsletter"
+      	},
+		{
+          "type": "checkbox",
+          "id": "section_icon_img_enable",
+          "label": "Section Title Icom Image Enable",
+          "default": true,
+          "info": "If you want Section Title Icon Image click checkbox"
+        },
+        {
+          "type": "image_picker",
+          "id": "video_icon_image",
+          "label": "Video Thumbnail Image",
+		  "info": "Recommended Size: 120x46px"
+      	},
+		{
+          "type": "text",
+          "id": "email_placeholder",
+          "label": "Email Placeholder",
+          "default": "Enter Your Email Address Here..."
+      	},
+		{
+          "type": "text",
+          "id": "button_title",
+          "label": "Button Title",
+          "default": "SUBSCRIBE"
+      	},
+		{
+          "type": "color",
+          "id": "newsletter_sub_title_color",	
+          "label": "Newsletter SubTitle Color",
+          "default":   "#3cd53f"
+        },
+		{
+          "type": "color",
+          "id": "newsletter_title_color",	
+          "label": "Newsletter Title Color",
+          "default":   "#fff"
+        },
+		{
+          "type": "color",
+          "id": "newsletter_desc_color",	
+          "label": "Newsletter Description Color",
+          "default":   "#fff"
+        },
+		{
+          "type": "color",
+          "id": "newsletter_btn_bg_color",	
+          "label": "Button BG Color",
+          "default":   "#FF6E21"
+        },
+		{
+          "type": "color",
+          "id": "newsletter_btn_bg_color_hov",	
+          "label": "Button BG Hover Color",
+          "default":   "#262626"
+        },
+		{
+          "type": "color",
+          "id": "newsletter_btn_color",	
+          "label": "Button Color",
+          "default":   "#fff"
+        },
+		{
+          "type": "color",
+          "id": "newsletter_btn_hover_color",	
+          "label": "Button Hover Color",
+          "default":   "#fff"
+        },
+		{
+          "type": "color",
+          "id": "newsletter_border_color",	
+          "label": "Button Border Color",
+          "default":   "#d8d8d8"
+        }
+	],
+	"blocks":[
+	   {
+          "type": "section_padding",
+          "name": "Section Padding",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 100
+			},
+			{
+			  "type": "header",
+			  "content": "Tablet Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 80
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 60
+			}
+          ]
+       },
+	   {
+          "type": "section_margin",
+          "name": "Section Margin",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Tablet Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			}
+          ]
+       },
+	   {
+          "type": "section_background",
+          "name": "Section Background",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "image_picker",
+			  "id": "section_bg_image",
+			  "label": "BG Image"
+			},
+			{
+			  "type": "color",
+			  "id": "section_bg_color",
+			  "label": "BG Color",
+			  "default": "#ffffff"
+			}
+          ]
+       }
+	],
+	"presets": [
+		{
+		  "name": "Newsletter Section",
+		  "category": "8. newsletter",
+		  "blocks":[
+
+			]
+		}
+	]
+  }
+{% endschema %}
+

@@ -1,0 +1,379 @@
+<div class="offer-area pt-120" id="section-{{ section.id }}">
+  <div class="container-fluid p-0">
+    <div class="banner-offer-wrap">
+      <img src="{% if section.settings.banner_bg_img %}{{ section.settings.banner_bg_img | img_url: 'master' }}{% else %}https://via.placeholder.com/1280x850 {% endif %}" class="lazyload" alt="banner">
+      <div class="banner-offer-content-1">
+        {%if section.settings.banner_subtitle != '' %}
+        <span class="animated">{{ section.settings.banner_subtitle }}</span>
+        {% endif %}
+        {%if section.settings.banner_title != '' %}
+        <h1 class="animated">{{ section.settings.banner_title }}</h1>
+        {% endif %}
+        {%if section.settings.banner_highlight_title != '' %}
+        <h3>{{ section.settings.banner_highlight_title }}</h3>
+        {% endif %}
+        {%if section.settings.banner_desc != '' %}
+        <p>{{ section.settings.banner_desc }}</p>
+        {% endif %}
+        {%if section.settings.banner_desc != '' %}
+        <div class="slider-btn-1 btn-hover">
+          <a class="animated slider-btn-1-border-1 slider-btn-1-ptb theme-color-yellow-2-hover" href="{{ section.settings.banner_button_url }}">{{ section.settings.banner_button_title }}</a>
+        </div>
+        {% endif %}
+      </div>
+      {%if section.settings.banner_big_title != '' %}
+      <div class="offer-young">
+        <h2>{{ section.settings.banner_big_title }}</h2>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+
+
+{%- style -%}
+  #section-{{ section.id }}{
+    {%- for block in section.blocks -%}
+    {%- case block.type -%}
+    {%- when 'section_margin' -%}
+    margin-top: {{ block.settings.section_margin_top }}px;
+    margin-bottom: {{ block.settings.section_margin_bottom }}px;
+    {%- when 'section_padding' -%}
+    padding-top: {{ block.settings.section_padding_top }}px;
+    padding-bottom: {{ block.settings.section_padding_bottom }}px;
+    {%- when 'section_background' -%}    
+    background: {{ block.settings.section_bg_color }} 
+      {%- if block.settings.section_bg_image -%}url("{{ block.settings.section_bg_image | img_url: 'master' }}"){%- endif -%} no-repeat scroll center center / cover;
+    {%- endcase -%}
+    {%- endfor -%}
+  }
+  @media (min-width: 768px) and (max-width: 991px) {
+    #section-{{ section.id }}{
+      {%- for block in section.blocks -%}
+      {% case block.type %}
+      {%- when 'section_margin' -%}
+      margin-top: {{ block.settings.section_margin_top_md }}px;
+      margin-bottom: {{ block.settings.section_margin_bottom_md }}px;
+      {%- when 'section_padding' -%}
+      padding-top: {{ block.settings.section_padding_top_md }}px;
+      padding-bottom: {{ block.settings.section_padding_bottom_md }}px;
+      {%- endcase -%}
+      {%- endfor -%}
+    }
+  }
+  @media (max-width: 767px) {
+    #section-{{ section.id }}{
+      {%- for block in section.blocks -%}
+      {%- case block.type -%}
+      {%- when 'section_margin' -%}
+      margin-top: {{ block.settings.section_margin_top_xs }}px;
+      margin-bottom: {{ block.settings.section_margin_bottom_xs }}px;
+      {%- when 'section_padding' -%}
+      padding-top: {{ block.settings.section_padding_top_xs }}px;
+      padding-bottom: {{ block.settings.section_padding_bottom_xs }}px;
+      {%- endcase -%}
+      {%- endfor -%}
+    }
+  }
+
+  .banner-offer-wrap .banner-offer-content-1 span {
+      color: {{ section.settings.banner_subtitle_color }};
+  }
+  .banner-offer-wrap .banner-offer-content-1 h1 {
+      color: {{ section.settings.banner_title_color }};
+  }
+  .banner-offer-wrap .banner-offer-content-1 h3 {
+      color: {{ section.settings.banner_offer_color }};
+  }
+  .banner-offer-wrap .banner-offer-content-1 p {
+      color: {{ section.settings.banner_desc_color }};
+  }
+  .slider-btn-1 a {
+      color: {{ section.settings.banner_btn_text_color }};
+  }
+  .btn-hover a:hover {
+      color: {{ section.settings.banner_btn_text_color_hov }};
+  }
+  .slider-btn-1 a.slider-btn-1-border-1 {
+      border: 2px solid {{ section.settings.banner_btn_bg }};
+  }
+  .btn-hover a.theme-color-yellow-2-hover::after {
+      background: {{ section.settings.banner_btn_bg_hov }};
+  }
+  .banner-offer-wrap .offer-young h2 {
+	  color: {{ section.settings.banner_big_title_color }};
+      background-image: url({% if section.settings.banner_bg_img %}{{ section.settings.banner_bg_img | img_url: 'master' }}{% else %}https://via.placeholder.com/1280x850{% endif %});
+  }
+
+
+{%- endstyle -%}
+
+
+{% schema %}
+  	{
+		"name": "Furniture Banner",
+		"settings": [
+			{
+              "type": "header",
+              "content": "Banner Full width Two Content"
+            },
+    		{
+              "type": "image_picker",
+              "id": "banner_bg_img",
+              "label": "Banner BG Image",
+              "info": "Recommended Size: 1280x850px"
+            },
+			{
+              "type": "text",
+              "id": "banner_subtitle",
+              "label": "Banner Subtitle",
+              "default": "OUR SERVICES"
+            },
+            {
+              "type": "text",
+              "id": "banner_title",
+              "label": "Banner Offer Title",
+              "default": "What we offer?"
+            },
+			{
+              "type": "text",
+              "id": "banner_highlight_title",
+              "label": "Banner Highlight Title",
+              "default": "21 Years of Experiences In Furniture Market"
+            },
+			{
+              "type": "textarea",
+              "id": "banner_desc",
+              "label": "Banner Description",
+              "default": "Vestibulum ante ipsum primis in faucibus orci <br>luctus et ultrices posuere cubilia Curae; Maecenas <br> venenatis posuere volutpat."
+            },
+            {
+              "type": "text",
+              "id": "banner_button_title",
+              "label": "Banner Button Title",
+              "default": "Order Service"
+            },
+            {
+              "type": "url",
+              "id": "banner_button_url",
+              "label": "Banner Button URL"
+            },
+			{
+              "type": "text",
+              "id": "banner_big_title",
+              "label": "Banner Big Title",
+              "default": "YOUNG"
+            },
+            {
+              "type": "header",
+              "content": "Banner Fullwidth Style"
+            },
+			{
+              "type": "color",
+              "id": "banner_subtitle_color",
+              "label": "Banner sub title Color",
+              "default": "#654600"
+            },
+            {
+              "type": "color",
+              "id": "banner_title_color",
+              "label": "Banner title Color",
+              "default": "#1b1b1b"
+            },
+			{
+              "type": "color",
+              "id": "banner_offer_color",
+              "label": "Banner Highlight Title Color",
+              "default": "#f2c456"
+            },
+			{
+              "type": "color",
+              "id": "banner_desc_color",
+              "label": "Banner Description Color",
+              "default": "#393939"
+            },
+            {
+              "type": "color",
+              "id": "banner_btn_bg",
+              "label": "Banner Button Border Color",
+              "default": "#c8c8c8"
+            },
+            {
+              "type": "color",
+              "id": "banner_btn_bg_hov",
+              "label": "Banner Button Hover BG Color",
+              "default": "#f2c456"
+            },
+			{
+              "type": "color",
+              "id": "banner_btn_text_color",
+              "label": "Banner Button  text Color",
+              "default": "#1b1b1b"
+            },
+            {
+              "type": "color",
+              "id": "banner_btn_text_color_hov",
+              "label": "Banner Button Hover text Color",
+              "default": "#fff"
+            },
+			{
+              "type": "color",
+              "id": "banner_big_title_color",
+              "label": "Banner Big Title Color",
+              "default": "#000"
+            }
+		],
+        "blocks":[
+               {
+                  "type": "section_margin",
+                  "name": "Section Margin",
+                  "limit": 1,
+                  "settings": [
+                    {
+                      "type": "header",
+                      "content": "Large/Desktop/Tablate Device"
+                    },
+                    {
+                      "type": "range",
+                      "id": "section_margin_top",
+                      "min": 0,
+                      "max": 150,
+                      "step": 5,
+                      "label": "Margin Top",
+                      "unit": "px",
+                      "default": 0
+                    },
+                    {
+                      "type": "range",
+                      "id": "section_margin_bottom",
+                      "min": 0,
+                      "max": 150,
+                      "step": 5,
+                      "label": "Margin Bottom",
+                      "unit": "px",
+                      "default": 0
+                    },
+                    {
+                      "type": "header",
+                      "content": "Mobile Device"
+                    },
+                    {
+                      "type": "range",
+                      "id": "section_margin_top_xs",
+                      "min": 0,
+                      "max": 150,
+                      "step": 5,
+                      "label": "Margin Top",
+                      "unit": "px",
+                      "default": 0
+                    },
+                    {
+                      "type": "range",
+                      "id": "section_margin_bottom_xs",
+                      "min": 0,
+                      "max": 150,
+                      "step": 5,
+                      "label": "Margin Bottom",
+                      "unit": "px",
+                      "default": 0
+                    }
+                  ]
+               },
+               {
+                  "type": "section_padding",
+                  "name": "Section Padding",
+                  "limit": 1,
+                  "settings": [
+                    {
+                      "type": "header",
+                      "content": "Large/Desktop/Tablate Device"
+                    },
+                    {
+                      "type": "range",
+                      "id": "section_padding_top",
+                      "min": 0,
+                      "max": 150,
+                      "step": 5,
+                      "label": "Padding Top",
+                      "unit": "px",
+                      "default": 90
+                    },
+                    {
+                      "type": "range",
+                      "id": "section_padding_bottom",
+                      "min": 0,
+                      "max": 150,
+                      "step": 5,
+                      "label": "Padding Bottom",
+                      "unit": "px",
+                      "default": 90
+                    },
+                    {
+                      "type": "header",
+                      "content": "Mobile Device"
+                    },
+                    {
+                      "type": "range",
+                      "id": "section_padding_top_xs",
+                      "min": 0,
+                      "max": 150,
+                      "step": 5,
+                      "label": "Padding Top",
+                      "unit": "px",
+                      "default": 40
+                    },
+                    {
+                      "type": "range",
+                      "id": "section_padding_bottom_xs",
+                      "min": 0,
+                      "max": 150,
+                      "step": 5,
+                      "label": "Padding Bottom",
+                      "unit": "px",
+                      "default": 40
+                    }
+                  ]
+               },
+               {
+                  "type": "section_background",
+                  "name": "Section Background",
+                  "limit": 1,
+                  "settings": [
+                    {
+                      "type": "image_picker",
+                      "id": "section_bg_image",
+                      "label": "BG Image"
+                    },
+                    {
+                      "type": "color",
+                      "id": "section_bg_color",
+                      "label": "BG Color",
+                      "default": "#ffffff"
+                    }
+                  ]
+               }
+
+            ],
+
+        "presets":[
+                {
+                    "name": "Furniture Banner",
+                    "category": "2. Banner",
+                    "blocks":[
+
+                    ]
+                }
+            ]
+
+
+ 	 }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+
+

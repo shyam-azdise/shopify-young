@@ -1,0 +1,8 @@
+<div class="product-details-info">
+  {% for block in section.blocks %}
+  {% case block.type %}
+  {% when 'product_service' %}
+  <a href="{{ block.settings.service_url }}"><i class="{{ block.settings.service_icon }}"></i>{{ block.settings.service_title }}</a>
+  {% endcase %}
+  {% endfor %}
+</div>

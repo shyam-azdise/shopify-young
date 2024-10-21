@@ -1,0 +1,660 @@
+{% if section.settings.video_banner_style == 'video_banner_style_1' %}
+<!-- Video Area -->
+<div class="video-banner" id="section-{{ section.id }}" data-section-id="{{ section.id }}" data-section-type="viedo_banner">
+  {% if section.settings.section_title != '' %}
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="section-title">
+          <h2>{{ section.settings.section_title }}</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  {% endif %}
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="video-area text-center">
+          <div class="static_video">
+            {% if section.settings.video_thumbnail_image %}
+            <img class="img_static" src="{{ section.settings.video_thumbnail_image | img_url: '1170x500', crop: 'center' }}" alt="image" />
+            {% else %}
+            <img class="img_static" src="https://via.placeholder.com/1170x500" alt="image" />
+            {% endif %}
+            {% if section.settings.video_type_handle == 'popup_banner' %}
+            <div id="cms_play"><a class="video-popup-banner fancybox.iframe" href="http://www.youtube.com/embed/{{ section.settings.video_url.id }}?autoplay=1"><img src="{{ 'play-btn-2.png' | asset_url }}" alt="image" /></a></div>
+            {% elsif section.settings.video_type_handle == 'normal_banner' %}
+            <div id="cms_play"><img src="{{ 'play-btn-2.png' | asset_url }}" alt="image" /></div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Our Video Area -->
+
+{%- if section.settings.video_type_handle == 'popup_banner' -%}
+{{ 'jquery.fancybox.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'jquery.fancybox.min.js' | asset_url }}"></script>
+
+<script>
+  $(document).ready(function() {
+    $(".video-popup-banner").fancybox({
+      maxWidth	: 800,
+      maxHeight	: 600,
+      fitToView	: false,
+      width		: '70%',
+      height		: '70%',
+      autoSize	: false,
+      closeClick	: false,
+      openEffect	: 'none',
+      closeEffect	: 'none'
+    });
+  });
+</script>
+
+{%- elsif section.settings.video_type_handle == 'normal_banner' -%}
+<script>
+  function getId(url) {
+    var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    var match = url.match(regExp);
+
+    if (match && match[2].length == 11) {
+      return match[2];
+    } else {
+      return 'error';
+    }
+  } 
+
+  var videoId = getId('{{ section.settings.video_url }}');
+                      var video_frame_w= $(".img_static").outerWidth();
+  var video_frame_h= $(".img_static").outerHeight();
+  $('#cms_play').click(function(){
+    $(this).hide('fast');
+    $(".img_static").fadeOut('fast');
+    $('.static_video').append('<iframe class="added_video" width="'+video_frame_w+'px" height="'+video_frame_h+'px" src="https://www.youtube.com/embed/'+videoId+'?rel=0&autoplay=1" frameborder="0"></iframe>');
+  }); 
+</script>
+{%- endif -%}
+
+{% elsif section.settings.video_banner_style == 'video_banner_style_2' %}
+
+<div class="video-area section-padding-1" id="section-{{ section.id }}">
+  <div class="container{% if section.settings.fullwidth_on %}-fluid{% endif %}">
+    <div class="video-wrap youtube-video-height youtube-bg" style="background-image: url({% if section.settings.banner_images %}{{ section.settings.banner_images | img_url: 'master' }}{% else %}https://via.placeholder.com/1680x610 {% endif %});" data-property="{videoURL:'{%if section.settings.video_url2 != '' %}{{ section.settings.video_url2 }}{% else %}UmvhL7pLxSI{% endif %}',}">
+      <div class="video-content">
+        {%if section.settings.banner_title != '' %}
+        <h2>{{ section.settings.banner_title }}</h2>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<style>
+  .video-wrap .video-content h2 {
+    color: {{ section.settings.content_color }};
+    border: 15px solid {{ section.settings.content_color }};
+  }
+</style>
+
+
+
+{% elsif section.settings.video_banner_style == 'video_banner_style_3' %}
+
+
+<div class="video-area cake-video-ptb bg-img"  id="section-{{ section.id }}">
+  <div class="container{% if section.settings.fullwidth_on %}-fluid{% endif %}">
+    <div class="cake-video-content text-center">
+      {% if section.settings.section_subtitle != '' %}
+      <h2>{{ section.settings.section_subtitle }}</h2>
+      {% endif %}
+      {% if section.settings.section_title3 != '' %}
+      <h1>{{ section.settings.section_title3 }}</h1>
+      {% endif %}
+      <div class="video-btn-2">
+        <a class="video-popup" href="{{ section.settings.video_url3 }}"><i class="fa fa-play"></i></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% elsif section.settings.video_banner_style == 'video_banner_style_4' %}
+
+
+<div class="about-area section-padding-8 pb-65 pt-155" id="section-{{ section.id }}">
+  <div class="container{% if section.settings.fullwidth_on %}-fluid{% endif %}">
+    <div class="organic-about-wrap ">
+      <div class="row align-items-center">
+        <div class="col-lg-6">
+          
+          <div class="organic-about-img tilt-active">
+            <img src="{% if section.settings.video_thumbnail_image4 %}{{ section.settings.video_thumbnail_image4 | img_url: 'master' }}{% else %}https://via.placeholder.com/804x588 {% endif %}" class="lazyload" alt="banner">
+          </div>
+          
+        </div>
+        <div class="col-lg-6">
+          
+          <div class="organic-about-content">
+            {% if section.settings.banner_title4 != '' %}
+            <h2>{{ section.settings.banner_title4 }}</h2>
+            {% endif %}
+            <img src="{% if section.settings.video_icon_image %}{{ section.settings.video_icon_image | img_url: 'master' }}{% else %}https://via.placeholder.com/220x46 {% endif %}" class="lazyload" alt="banner">
+            {% if section.settings.banner_content4 != '' %}
+            <p>{{ section.settings.banner_content4 }}</p>
+            {% endif %}
+            <div class="video-btn-3">
+              <a class="video-popup" href="{{ section.settings.video_url4 }}"><i class="fa fa-play"></i></a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<style>
+  
+  .video-btn-3 a {
+    background-color: {{ section.settings.button_bg_color }};
+    color: {{ section.settings.button_color }};
+  }
+  .video-btn-3 a:hover {
+      background-color: {{ section.settings.button_bg_color_hov }};
+      color: {{ section.settings.button_color_hov }};
+  }
+  .video-btn-3 a::before {
+    background: {{ section.settings.button_bg_color }} none repeat scroll 0 0;
+    -webkit-animation: 1500ms ease-out 0s normal none infinite running border-jump;
+    animation: 1500ms ease-out 0s normal none infinite running border-jump;
+    border-radius: 50%;
+    content: "";
+    display: block;
+    height: 90px;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    -ms-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+    width: 90px;
+    z-index: -1;
+  }
+
+</style>
+
+
+{% elsif section.settings.video_banner_style == 'video_banner_style_5' %}
+
+
+<!-- about us area start -->
+<div class="about-us-area pt-120 pb-120" id="section-{{ section.id }}">
+  <div class="container{% if section.settings.fullwidth_on %}-fluid{% endif %}">
+    <div class="row">
+      
+      <div class="col-xl-6 col-lg-5 col-md-6">
+        <div class="about-us-img tilt-active">
+          <img src="{% if section.settings.video_thumbnail_image4 %}{{ section.settings.video_thumbnail_image4 | img_url: 'master' }}{% else %}https://via.placeholder.com/804x588 {% endif %}" class="lazyload" alt="banner">
+        </div>
+      </div>
+      
+      <div class="col-xl-6 col-lg-7 col-md-6 align-self-center">
+        <div class="about-us-content">
+          {% if section.settings.banner_title4 != '' %}
+          <h2>{{ section.settings.banner_title4 }}</h2>
+          {% endif %}
+          {% if section.settings.banner_content4 != '' %}
+          <p>{{ section.settings.banner_content4 }}</p>
+          {% endif %}
+          <div class="video-btn-3 video-btn-3-yellow">
+            <a class="video-popup" href="{{ section.settings.video_url4 }}"><i class="fa fa-play"></i></a>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+<!-- about us area end -->
+
+
+<style>
+  
+  .video-btn-3 a {
+    background-color: {{ section.settings.button_bg_color }};
+    color: {{ section.settings.button_color }};
+  }
+  .video-btn-3 a:hover {
+      background-color: {{ section.settings.button_bg_color_hov }};
+      color: {{ section.settings.button_color_hov }};
+  }
+  .video-btn-3 a::before {
+    background: {{ section.settings.button_bg_color }} none repeat scroll 0 0;
+    -webkit-animation: 1500ms ease-out 0s normal none infinite running border-jump;
+    animation: 1500ms ease-out 0s normal none infinite running border-jump;
+    border-radius: 50%;
+    content: "";
+    display: block;
+    height: 90px;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    -ms-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+    width: 90px;
+    z-index: -1;
+  }
+
+</style>
+
+
+{% endif %}
+
+
+
+{%- include 'section-style' -%}
+
+{% schema %}
+  {
+    "name": "Video Banner",
+    "settings": [
+	    {
+          "type": "select",
+          "id": "video_banner_style",
+          "label": "Select Video Banner Style",
+          "options":[
+            {
+              "value":"video_banner_style_1",
+              "label": "Video Banner Style One"
+            },
+            {
+              "value":"video_banner_style_2",
+              "label": "Video Banner Style Two"
+            },
+			{
+              "value":"video_banner_style_3",
+              "label": "Video Banner Style Three"
+            },
+			{
+              "value":"video_banner_style_4",
+              "label": "Video Banner Style Four"
+            },
+			{
+              "value":"video_banner_style_5",
+              "label": "Video Banner Style Five"
+            }
+          ],
+
+          "default": "video_banner_style_1"
+        },
+        {
+          "type": "header",
+          "content": "Banner Width Control"
+        },
+        {
+          "type": "checkbox",
+          "id": "fullwidth_on",
+          "label": "Full Width Enable",
+          "default": true,
+          "info": "If you want Full Width click checkbox"
+        },
+		{
+			"type": "header",
+            "content": "Video Banner Style One"
+        },
+		{
+          "type": "text",
+          "id": "section_title",
+          "label": "Section Title",
+          "default": "Section Title Here"
+      	},
+		{
+          "type": "radio",
+          "id": "video_type_handle",
+          "label": "Video Type",
+		  "options":[
+				{
+                    "label": "Popup",
+                    "value": "popup_banner"
+                },
+                {
+                    "label": "Normal",
+                    "value": "normal_banner"
+                }
+			],
+			"default": "popup_banner"
+      	},
+		{
+          "type": "image_picker",
+          "id": "video_thumbnail_image",
+          "label": "Video Thumbnail Image",
+		  "info": "Recommended Size: 1170 x 500px"
+      	},
+		{
+           "id": "video_url",
+           "type": "video_url",
+           "label": "Video URL",
+           "accept": ["youtube"],
+           "default": "https://www.youtube.com/watch?v=_9VUPq3SxOc"
+        },
+        {
+          "type": "header",
+          "content": "Video Banner Style Two"
+        },
+        {
+          "type": "image_picker",
+          "id": "banner_images",
+          "label": "Banner Images",
+          "info": "Recommended Size: 1680 x 610px"
+        },
+        {
+          "type": "text",
+          "id": "video_url2",
+          "label": "Video URL",
+          "default": "UmvhL7pLxSI"
+        },
+        {
+          "type": "text",
+          "id": "banner_title",
+          "label": "Video Banner Title",
+          "default": "YOUNG"
+        },
+        {
+          "type": "header",
+          "content": "Banner Two CSS"
+        },
+        {
+          "type": "color",
+          "id": "content_color",
+          "label": "content and border Color",
+          "default": "#fff"
+        },
+		{
+		  "type": "header",
+          "content": "Video Banner Style Three"
+        },
+		{
+          "type": "text",
+          "id": "section_subtitle",
+          "label": "Section Subtitle",
+          "default": "Our History"
+      	},
+		{
+          "type": "text",
+          "id": "section_title3",
+          "label": "Section Title",
+          "default": "From our hearts to yours"
+      	},
+		{
+           "id": "video_url3",
+           "type": "video_url",
+           "label": "Video URL",
+           "accept": ["youtube"],
+           "default": "https://www.youtube.com/watch?v=_9VUPq3SxOc"
+        },
+		{
+		  "type": "header",
+          "content": "Video Banner Style Four"
+        },
+		{
+          "type": "image_picker",
+          "id": "video_thumbnail_image4",
+          "label": "Video Thumbnail Image",
+		  "info": "Recommended Size: 804x588px"
+      	},
+		{
+          "type": "image_picker",
+          "id": "video_icon_image",
+          "label": "Video Thumbnail Image",
+		  "info": "Recommended Size: 120x46px"
+      	},
+		{
+          "type": "text",
+          "id": "banner_title4",
+          "label": "Banner Title",
+          "default": "Fresh Food, Simply Deliciuos"
+      	},
+		{
+          "type": "textarea",
+          "id": "banner_content4",
+          "label": "Banner Content4",
+          "default": "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas venenatis posuere volutpat. Mauris laore Sed non sem blandit, ultrices nisl et, auctor purus. Nunc quam diam, vehicula in metus quis, pulvinar finibus tortor"
+      	},
+		{
+           "id": "video_url4",
+           "type": "video_url",
+           "label": "Video URL",
+           "accept": ["youtube"],
+           "default": "https://www.youtube.com/watch?v=_9VUPq3SxOc"
+        },
+		{
+          "type": "header",
+          "content": "Banner Four CSS"
+        },
+        {
+          "type": "color",
+          "id": "button_color",
+          "label": "Button Color",
+          "default": "#fff"
+        },
+		{
+          "type": "color",
+          "id": "button_bg_color",
+          "label": "Button BG Color",
+          "default": "#3cd53f"
+        },
+		{
+          "type": "color",
+          "id": "button_color_hov",
+          "label": "Button Hover Color",
+          "default": "#fff"
+        },
+		{
+          "type": "color",
+          "id": "button_bg_color_hov",
+          "label": "Button BG Hover Color",
+          "default": "#191919"
+        }
+	],
+	"blocks":[
+	   {
+          "type": "section_padding",
+          "name": "Section Padding",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 100
+			},
+			{
+			  "type": "header",
+			  "content": "Tablet Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 80
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 60
+			}
+          ]
+       },
+	   {
+          "type": "section_margin",
+          "name": "Section Margin",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Tablet Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			}
+          ]
+       },
+	   {
+          "type": "section_background",
+          "name": "Section Background",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "image_picker",
+			  "id": "section_bg_image",
+			  "label": "BG Image"
+			},
+			{
+			  "type": "color",
+			  "id": "section_bg_color",
+			  "label": "BG Color",
+			  "default": "#ffffff"
+			}
+          ]
+       }
+	],
+	"presets": [
+		{
+		  "name": "Video Banner",
+		  "category": "2. Banner",
+		  "blocks":[
+				{
+					"type": "section_padding"
+				},
+				{
+					"type": "section_background"
+				}
+			]
+		}
+	]
+  }
+{% endschema %}

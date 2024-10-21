@@ -1,0 +1,215 @@
+{%- assign on_sale = false -%}
+{%- if product.compare_at_price > product.price -%}
+{%- assign on_sale = true -%}
+{%- endif -%}
+
+{%- assign sold_out = true -%}
+{%- if product.available -%}
+{%- assign sold_out = false -%}
+{%- endif -%}
+
+{%- assign variant = product.selected_or_first_available_variant -%}
+
+{%- if product.available -%}
+{%- assign func = "Shopify.addItem(" | append: variant.id | append: ", 1)" -%}
+{%- endif -%} 
+
+
+{% comment %} "{{ variant.id }}" this Class is needed for Ajax popup cart {% endcomment %}
+
+<!--  Single Grid product Start -->
+
+<div class="{{ variant.id }} product-wrap mb-55">
+  <div class="product-img product-img-zoom pro-border-none mb-25">
+    {% if product.featured_image.src != blank %}
+    <a href="{{ product.url | within: collection }}">
+      <img src="{{ product.featured_image.src | img_url : 'large' }}" class="lazyload" alt="{{ image.alt | escape }}">
+    </a>
+    {% else %}
+    <a class="image-wrap" href="{{ product.url | within: collection }}" >
+      {% capture current %}{% cycle 1, 2, 3 %}{% endcapture %}
+      <div style="padding: 6px 0;">
+        {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+      </div>
+    </a>
+    {% endif %}
+    <div class="product-badge-area">
+    {%- include 'product-badge' -%}
+    </div>
+    {% if settings.product_countdown_enable %}
+    <div class="product-grid-countdown">
+      {%- if product.description contains '[countdown]' -%}
+      {%- assign count_down_first = product.description | split:'[/countdown]' | first -%}
+      {%- assign count_down_final = count_down_first | split:'[countdown]' | last -%}
+      <div data-countdown="{{ count_down_final }}"></div> 
+      {%- endif -%}
+    </div>
+	{% endif %}
+    <div class="product-action-2 product-action-position-2">
+      {% if settings.size_variation_enable %}
+      <div class="size-container ">
+        {% for option in product.options %}
+        {% if option == 'Size' %}
+        {% assign index = forloop.index0 %}
+        {% assign sizelist = '' %}
+        {% assign size = '' %}
+        {% for variant in product.variants %}
+        {% capture size %}
+        {{ variant.options[index] }}
+        {% endcapture %}
+        {% unless sizelist contains size %}
+
+        {% assign text = size | handleize %}
+
+        <span>{{ size | split: ' ' | last | handle }}</span>
+
+        {% capture tempList %}
+        {{ sizelist | append: size | append: ' ' }}
+        {% endcapture %}
+
+        {% assign sizelist = tempList %}
+        {% endunless %}
+
+        {% endfor %}
+        {% endif %}
+        {% endfor %}
+      </div>
+      {% endif %}
+      
+      {% if settings.color_variation_enable %}
+      <div class="product-color text-{{ settings.product_color_swatch_aline }}">    
+        <ul class="grid-color-swatch">
+          {% for option in product.options %}
+          {% if option == 'Color' %}
+          {% assign index = forloop.index0 %}
+          {% assign colorlist = '' %}
+          {% assign color = '' %}
+          {% for variant in product.variants limit: 5 %}
+          {% capture color %}
+          {{ variant.options[index] }}
+          {% endcapture %}
+          {% unless colorlist contains color %}
+
+          {% assign text = color | handleize %}
+
+          <li class="{{ color | split: ' ' | last | handle }}">
+            <label style="{% if text == 'white' %}border: 1px solid #f1f1f1;{% endif %} 
+                          background: {{ color | split: ' ' | last | handle }} {% if variant.image %}url({{ variant.image.src | product_img_url: 'thumb' }}) no-repeat scroll center center / cover;{% endif %}">
+            </label>
+
+            {% if variant.image != null %}
+            <div class="hidden">
+              <a href="{{ variant.image.src | product_img_url: 'large' }}"></a>
+            </div>
+            {% endif %}
+          </li>
+
+          {% capture tempList %}
+          {{ colorlist | append: color | append: ' ' }}
+          {% endcapture %}
+
+          {% assign colorlist = tempList %}
+          {% endunless %}
+
+          {% endfor %}
+          {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+      {%- unless product.description contains '[affiliate_link]' -%}
+        {% if product.available %}
+        {% if settings.product_cart_type == 'ajax_spin_cart' %}
+        {% if product.variants.size == 1 %}
+        <a href="javascript:void(0);" onclick="{{ func }}; return false;" class="ajax-spin-cart p-cart-btn">
+          <span>
+            <span class="cart-title">{{ settings.cart_button_title }}</span>
+            <span class="cart-loading">{{ settings.wait_title }}</span>
+            <span class="cart-added">{{ settings.added_title }}</span>
+            <span class="cart-unavailable">{{ settings.unavailable_title }}</span>
+          </span>
+        </a>
+        {% else %}
+        <a href="{{ product.url | within: collection }}" class="">
+          <span>
+            <span class="cart-title"><i class="fa fa-shopping-cart"></i></span>
+          </span>
+        </a>
+        {% endif %}
+
+        {% elsif settings.product_cart_type == 'ajax_popup_cart' %}
+        {% if product.variants.size == 1 %}
+        <a href="javascript:void(0);" onclick="{{ func }}; return false;" class="p-cart-btn">
+          <span>
+            <span class="cart-title"><i class="fa fa-shopping-cart"></i></span>
+          </span>
+        </a>
+        {% else %}
+        <a href="{{ product.url | within: collection }}" class="">
+          <span>
+            <span class="cart-title"><i class="fa fa-shopping-cart"></i></span>
+          </span>
+        </a>
+        {% endif %}
+
+        {% elsif settings.product_cart_type == 'without_ajax_cart' %}
+        {% if product.variants.size == 1 %}
+        <a href="javascript:void(0);" onclick="{{ func }}; return false;" class="">
+          <span>
+            <span class="cart-title"><i class="fa fa-shopping-cart"></i></span>
+          </span>
+        </a>
+        {% else %}
+        <form action="/cart/add" method="post" enctype="multipart/form-data">
+          <select name="id" style="display:none;">
+            {% for variant in product.variants %}
+            <option value="{{ variant.id }}">{{ variant.title | escape }} - {{ variant.price | money }}</option>
+            {% endfor %}
+          </select>
+          <button type="submit" class="p-cart-btn">
+            <span>
+              <span class="cart-title">{{ settings.cart_button_title }}</span>
+            </span>
+          </button>
+        </form>
+        {% endif %}
+        {% endif %}
+        {% else %}
+        <button class="cart-disable p-cart-btn">
+          <span class="cart-text"><i class="fa fa-ban"></i></span>
+        </button>
+        {% endif %}
+      
+      {%- else -%}
+      {% assign affiliate_link_first = product.description | split:'[/affiliate_link]' | first %}
+      {% assign affiliate_link_final = affiliate_link_first | split:'[affiliate_link]' | last %}
+        <a href="{{ affiliate_link_final }}" class="p-cart-btn">
+          <span class="cart-title"><i class="fa fa-amazon"></i></span>
+        </a>
+      {%- endunless -%}
+
+      {%- if settings.product_quickview_enalbe -%}
+      {%- unless product.description contains '[affiliate_link]' -%}
+      <a data-toggle="modal" data-target="#exampleModal" href="javascript:void(0);" onclick="quiqview('{{ product.handle | handleize }}')"><i class="fa fa-search-plus"></i></a>
+      {% endunless %}
+      {%- endif -%}
+
+      {% include 'wishlist-button' %}
+      
+      {%- if settings.compare_product_enalbe -%}
+      {%- unless product.description contains '[affiliate_link]' -%}
+      <a href="#" data-toggle="tooltip" data-placement="left" class="compare" data-pid="{{ product.handle  }}" title="Compare" data-original-title="Compare"><i class="fa fa-compress"></i></a>
+      {%- endunless -%}
+      {%- endif -%}
+    </div>
+  </div>
+  <div class="product-content product-content-green-2 text-{{ settings.product_content_aline }}">
+    <h4><a href="{{ product.url | within: collection }}">{{ product.title }}</a></h4>
+    <div class="product-price">
+      {% if product.variants.first.compare_at_price > product.variants.first.price %}
+      <span class="old-price discounted-price"> - {{ product.variants.first.compare_at_price | money }}</span>
+      {% endif %}
+      <span class="new-price main-price discounted">{{ product.variants.first.price | money }}</span>
+    </div>
+  </div>
+</div>

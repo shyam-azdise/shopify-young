@@ -1,0 +1,83 @@
+<header class="header-sidebar-area">
+  <div class="header-sidebar-wrap-all bg-light-green">
+    <div class="header-sidebar-wrap">      
+      <div class="logo text-center">
+        {%- include 'header-logo' -%}
+      </div>
+      <div class="header-right-wrap header-center-flex header-right-wrap-mrg">        
+        <div class="same-style same-style-font-dec same-style-mrg-dec-2">
+          {% include 'wishlist-button-top' %}
+        </div>        
+        <div class="same-style same-style-font-dec same-style-mrg-dec-2">
+          <a class="cart-active" href="/cart"><i class="fa fa-cart-arrow-down"></i></a>
+        </div>        
+        <div class="same-style same-style-font-dec same-style-mrg-dec-2">
+          <a class="clickalbe-button-active" href="#"><i class="fa fa-bars"></i></a>
+        </div>        
+      </div>
+      <div class="search-wrap search-wrap-2 search-width-2 search-wrap-2-mrg">
+        {% include 'search-bar' %}
+      </div>     
+      <div class="clickable-mainmenu-wrap-2 clickable-mainmenu-style-2 text-center">
+        {% include 'main-menu-4' %}
+      </div>
+      <div class="header-sidebar-footer text-center">
+        <h3>Contact Info</h3>
+        <div class="footer-sidebar-widget">
+          <p>Phone: {{ section.settings.hamburger_number }}</p>
+          <p>Email: {{ section.settings.hamburger_email }}</p>
+          <p>Open time: {{ section.settings.open_close_time }}</p>
+          <p>{{ section.settings.hamburger_address }}</p>
+        </div>
+        <div class="social-icon-style social-mrg-dec-2 social-font-dec text-center">
+          {% for block in section.blocks %}
+          {%- case block.type -%}
+          {%- when 'header_social_media' -%}
+          <a href="{{ block.settings.header_social_media_url }}"><i class="fa fa-{{ block.settings.header_social_media_icon }}"></i></a>
+          {%- endcase -%}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="header-small-device">
+    <div class="container-fluid">
+      <div class="row align-items-center">
+        <div class="col-6">
+          <div class="mobile-logo mobile-logo-width">
+            {%- include 'header-logo' -%}
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="header-right-wrap header-right-flex">
+            <div class="same-style">
+              {% include 'wishlist-button-top' %}
+            </div>
+            <div class="same-style">
+              <a class="cart-active" href="/cart"><i class="fa fa-cart-arrow-down"></i></a>
+            </div>
+            <div class="same-style">
+              <a class="mobile-menu-button-active" href="#"><i class="fa fa-bars"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="clickalbe-sidebar-wrapper-active clickalbe-sidebar-wrapper-style-1">
+  {%- include 'sidebar-info' -%}
+</div>
+
+<!-- mini cart start -->
+<div class="sidebar-cart-active">
+  {%- include 'mini-cart' -%}
+</div>
+
+<!-- Mobile menu start -->
+<div class="mobile-menu-active clickalbe-sidebar-wrapper-style-1">
+  <div class="clickalbe-sidebar-wrap">
+    {%- include 'mobile-header' -%}
+  </div>
+</div>

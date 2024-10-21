@@ -1,0 +1,439 @@
+<div class="product-area cake-product-mrg2 padding-44-row-col section-padding-7 pb-50" id="section-{{ section.id }}">
+  <div class="container{% if section.settings.fullwidth_on %}-fluid{%endif%}">
+    {% if section.settings.section_title != blank %}
+    <div class="section-title-10 text-center mb-50">
+      {% if section.settings.section_icon_img_enable %}
+      <img src="{% if section.settings.section_title_icon %}{{ section.settings.section_title_icon | img_url: 'master' }}{% else %}https://via.placeholder.com/60x46 {% endif %}" class="lazyload" alt="product">
+      {% endif %}
+      <h2>{{ section.settings.section_title }}</h2>
+      {% if section.settings.section_subtitle != blank %}
+      <p>{{ section.settings.section_subtitle }}</p>
+      {%endif%}
+    </div>
+    {%endif%}
+
+    <div class="row">
+      
+      <!-- product-item start -->
+      {% assign featured_product = collections[section.settings.special_offer_product] %}
+      {% assign featured_product_limit = section.settings.featured_product_limit_handle %}  
+
+      {%- if featured_product == empty -%}
+      {% assign a = 1 %}
+      {% for i in (1..featured_product_limit) %}
+
+      {% assign product_item = "product-" | append: a  %}
+      {% assign a = a | plus: 1 %}
+      <div class="col-xl-{{ section.settings.product_column }} col-lg-{{ section.settings.product_column_lg }} col-md-{{ section.settings.product_column_md }} col-sm-{{ section.settings.product_column_sm }} col-{{ section.settings.product_column_xs }}" style="margin-bottom: 30px;">
+        <div>
+          <div>
+            {{ product_item | placeholder_svg_tag: 'product-svg-image' }}
+          </div>
+          <h6>
+            Product Title
+          </h6>
+          <div class="">
+            <span>$99.99</span>
+          </div>
+        </div>
+      </div>
+      {% if a == 7 %}
+      {% assign a = 1 %}
+      {% endif %}
+      {% endfor %}
+
+      {%- else -%}
+      {% for product in featured_product.products limit: featured_product_limit %}
+      <div class="col-xl-{{ section.settings.product_column }} col-lg-{{ section.settings.product_column_lg }} col-md-{{ section.settings.product_column_md }} col-sm-{{ section.settings.product_column_sm }} col-{{ section.settings.product_column_xs }}">
+        {% include 'product-grid-item-cake' %}
+      </div>        
+      {% endfor %}
+      {%- endif -%}
+      
+    </div>
+  </div>
+</div>
+
+{%- include 'section-style' -%}
+
+
+{% schema %}
+  {
+    "name": "Featured Product Three",
+    "settings": [
+		{
+		  "type": "header",
+          "content": "Section Heading"
+        },
+		{
+            "type": "checkbox",
+            "id": "fullwidth_on",
+            "label": "Full Width Enable",
+            "default": true,
+            "info": "If you want Full Width click checkbox"
+        },
+		{
+          "type": "checkbox",
+          "id": "section_icon_img_enable",
+          "label": "Section Title Icom Image Enable",
+          "default": true,
+          "info": "If you want Section Title Icon Image click checkbox"
+        },
+        {
+          "type": "image_picker",
+          "id": "section_title_icon",
+          "label": "Section Title Icon Image",
+          "info": "Recommended Size: 60 x 46 px"
+        },
+        {
+          "type": "text",
+          "id": "section_title",
+          "label": "Section Title", 
+          "default": "New Cakes Very Delicious"
+        },
+		{
+          "type": "text",
+          "id": "section_subtitle",
+          "label": "Section Subtitle"
+        },
+		{
+          "type": "text",
+          "id": "view_more_product",
+          "label": "View More Product", 
+          "default": "View all deal"
+        },
+		{
+          "type": "text",
+          "id": "view_more_product_url",
+          "label": "View More Product URL", 
+          "default": "#"
+        },
+		{
+			"type": "header",
+            "content": "Product"
+        },
+		{
+			"type": "collection",
+            "id": "special_offer_product",
+            "label": "Select Collection"
+        },
+		{
+            "type": "range",
+            "id": "featured_product_limit_handle",
+            "min": 2,
+            "max": 20,
+            "step": 1,
+            "label": "Limit",
+            "default": 12
+        },
+		{
+			"type": "header",
+            "content": "Product Column"
+        },
+		{
+          "type": "select",
+          "id": "product_column",
+          "label": "Desktop XL",
+		  "options":[
+				{
+                    "label": "2",
+                    "value": "6"
+                },
+                {
+                    "label": "3",
+                    "value": "4"
+                },
+                {
+                    "label": "4",
+                    "value": "3"
+                }
+			],
+			"default": "3"
+      	},
+		{
+          "type": "select",
+          "id": "product_column_lg",
+          "label": "Desktop LG",
+		  "options":[
+				{
+                    "label": "2",
+                    "value": "6"
+                },
+                {
+                    "label": "3",
+                    "value": "4"
+                },
+                {
+                    "label": "4",
+                    "value": "3"
+                }
+			],
+			"default": "4"
+      	},
+		{
+          "type": "select",
+          "id": "product_column_md",
+          "label": "Desktop MD",
+		  "options":[
+				{
+                    "label": "2",
+                    "value": "6"
+                },
+                {
+                    "label": "3",
+                    "value": "4"
+                },
+                {
+                    "label": "4",
+                    "value": "3"
+                }
+			],
+			"default": "6"
+      	},
+		{
+          "type": "select",
+          "id": "product_column_sm",
+          "label": "Tablet",
+		  "options":[
+				{
+                    "label": "2",
+                    "value": "6"
+                },
+                {
+                    "label": "3",
+                    "value": "4"
+                },
+                {
+                    "label": "4",
+                    "value": "3"
+                }
+			],
+			"default": "6"
+      	},
+		{
+          "type": "select",
+          "id": "product_column_xs",
+          "label": "Mobile",
+		  "options":[
+				{
+                    "label": "1",
+                    "value": "12"
+                },
+                {
+                    "label": "2",
+                    "value": "6"
+                }
+			],
+			"default": "12"
+      	},
+		{
+          "type": "select",
+          "id": "service_aline",
+          "label": "Service Align",
+          "options":[
+            {
+              "value":"left_al",
+              "label": "Left"
+            },
+            {
+              "value":"right_al",
+              "label": "Right"
+            },
+            {
+              "value":"center_al",
+              "label": "Center"
+            }
+          ],
+
+          "default": "center_al"
+         }
+    ],
+	"blocks":[
+	   {
+          "type": "section_padding",
+          "name": "Section Padding",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Tablet Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 0
+			}
+          ]
+       },
+	   {
+          "type": "section_margin",
+          "name": "Section Margin",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Tablet Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			}
+          ]
+       },
+	   {
+          "type": "section_background",
+          "name": "Section Background",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "image_picker",
+			  "id": "section_bg_image",
+			  "label": "BG Image"
+			},
+			{
+			  "type": "color",
+			  "id": "section_bg_color",
+			  "label": "BG Color",
+			  "default": "#ffffff"
+			}
+          ]
+       }
+	],
+	"presets": [
+		{
+		  "name": "Featured Product Three",
+		  "category": "3. collections",
+		  "blocks":[
+				
+			]
+		}
+	]
+  }
+{% endschema %}

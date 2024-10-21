@@ -1,0 +1,785 @@
+{% if section.settings.testimonial_style == 'testimonial_style_1' %}
+<div class="testimonial-area pt-100 pb-100" id="section-{{ section.id }}">
+  <div class="container{% if section.settings.enable_full_area %}-fluid{%endif%}">
+    <div class="testimonial-active owl-carousel">
+      
+      {% for block in section.blocks %}
+      {%- case block.type -%}
+      {%- when 'about_testimonial' -%}
+      <div class="single-testimonial text-{{ section.settings.testiminial_alignment }}">
+        <div class="testimonial-quote">
+          <i class="fa fa-quote-left"></i>
+        </div>
+
+        {%if block.settings.testiminial_des != '' %}
+        <p>{{ block.settings.testiminial_des }}</p>
+        {% endif %}
+
+        <div class="client-info">
+          
+          {% if block.settings.img_enable %}
+          <div class="client-img">
+            <img src="{% if block.settings.testimonial_img %}{{ block.settings.testimonial_img | img_url: 'small' }}
+                    {% else %}https://via.placeholder.com/78x78 
+                    {% endif %}" class="lazyload img-fluid" alt="">
+          </div>
+          {% endif %}
+		  {%if block.settings.name != '' %}
+          <span>{{ block.settings.name }} {%if block.settings.form_client != '' %} - {{ block.settings.form_client }} {% endif %}</span>
+          {% endif %}
+
+        </div>
+      </div>
+      {%- endcase -%}
+      {% endfor %}
+      
+    </div>
+  </div>
+</div>
+
+
+{% elsif section.settings.testimonial_style == 'testimonial_style_2' %}
+
+
+<div class="testimonial-area bg-img" id="section-{{ section.id }}">
+  <div class="container{% if section.settings.enable_full_area %}-fluid{%endif%}">
+    <div class="testimonial-active owl-carousel">
+      {% for block in section.blocks %}
+      {%- case block.type -%}
+      {%- when 'about_testimonial' -%}
+      <div class="single-testimonial-2 text-{{ section.settings.testiminial_alignment }}">
+        <div class="testimonial-2-inner">
+          <div class="testimonial-quote-2">
+            <div class="quote-2-icon">
+              <i class="fa fa-quote-right"></i>
+            </div>
+          </div>
+          {%if block.settings.testiminial_des != '' %}
+          <p>{{ block.settings.testiminial_des }}</p>
+          {% endif %}
+          {%if block.settings.name != '' %}
+          <div class="client-info-2">
+            <span>{{ block.settings.name }}</span>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+      {%- endcase -%}
+      {% endfor %}
+
+    </div>
+  </div>
+</div>
+
+
+{% elsif section.settings.testimonial_style == 'testimonial_style_3' %}
+
+<div class="testimonial-area-3 testimonial3-negative-mt testimonial3-pt pb-120" id="section-{{ section.id }}">
+  <div class="container{% if section.settings.enable_full_area %}-fluid{%endif%}">
+    {% if section.settings.section_title != blank %}
+    <div class="section-title-6 text-center mb-55">
+      <h2>{{ section.settings.section_title }}</h2>
+    </div>
+    {%endif%}
+
+    <div class="testimonial-active owl-carousel">
+      
+      {% for block in section.blocks %}
+      {%- case block.type -%}
+      {%- when 'about_testimonial' -%}
+      <div class="single-testimonial-3 text-{{ section.settings.testiminial_alignment }}">
+        {% if block.settings.testimonial_shaip_img %}
+        <div class="testimonial-quote-3">
+          <img src="{{ block.settings.testimonial_shaip_img | img_url: 'small' }}" class="lazyload" alt="testimonial">
+        </div>
+        {% endif %}
+        {%if block.settings.testiminial_des != '' %}
+        <p>{{ block.settings.testiminial_des }}</p>
+        {% endif %}
+        {% if block.settings.img_enable %}
+        <div class="client-info-3">
+          <img src="{% if block.settings.testimonial_img %}{{ block.settings.testimonial_img | img_url: 'small' }}
+                    {% else %}https://via.placeholder.com/65x65
+                    {% endif %}" class="lazyload img-fluid" alt="">
+        </div>
+        {% endif %}
+        {%if block.settings.name != '' %}
+        <span>{{ block.settings.name }} {%if block.settings.form_client != '' %} - {{ block.settings.form_client }} {% endif %}</span>
+        {% endif %}
+      </div>
+      {%- endcase -%}
+      {% endfor %}
+
+      
+    </div>
+  </div>
+</div>
+
+{% elsif section.settings.testimonial_style == 'testimonial_style_4' %}
+
+<div class="testimonial-area-2 pt-200 pb-120" id="section-{{ section.id }}">
+  <div class="container{% if section.settings.enable_full_area %}-fluid{%endif%}">
+    <div class="{% if section.settings.enable_border %}testimonial-border{%endif%} text-center ">
+      {% if section.settings.section_title != blank %}
+      <div class="section-title-7 {% if section.settings.section_title_bg %}section-title-7-modify{%endif%} text-center mb-30">
+        {% if section.settings.section_subtitle != blank %}
+        <span>{{ section.settings.section_subtitle }}</span>
+        {%endif%}
+        <h2>{{ section.settings.section_title }}</h2>
+      </div>
+      {%endif%}
+
+      <div class="testimonial-active-2 nav-style-4 owl-carousel">
+        
+        {% for block in section.blocks %}
+        {%- case block.type -%}
+        {%- when 'about_testimonial' -%}
+        
+        <div class="single-testimonial-4 text-center"> 
+          {% if block.settings.quote_img_enable %}
+          <div class="testimonial-quote-4">
+            <img src="{% if block.settings.testimonial_shaip_img %}{{ block.settings.testimonial_shaip_img | img_url: 'small' }}{% else %}https://via.placeholder.com/35x25{% endif %}" class="lazyload" alt="testimonial">
+          </div>
+          {% endif %}
+
+          {%if block.settings.testiminial_des != '' %}
+          <p>{{ block.settings.testiminial_des }}</p>
+          {% endif %}
+          
+          {% if block.settings.img_enable %}
+          <div class="client-info-4">
+            <img src="{% if block.settings.testimonial_img %}{{ block.settings.testimonial_img | img_url: 'small' }}
+                    {% else %}https://via.placeholder.com/65x65
+                    {% endif %}" class="lazyload img-fluid" alt="">
+          </div>
+          {% endif %}
+        </div>
+
+        {%- endcase -%}
+        {% endfor %}
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  
+  /* Testimonial active 2 */
+    $('.testimonial-active-2').owlCarousel({
+        loop: true,
+        nav: {% if section.settings.enable_navigation %}true{% else %}false {%endif%},
+        navText: ['<i class=" ti-angle-left "></i>', '<i class=" ti-angle-right "></i>'],
+        autoplay: false,
+        autoplayTimeout: 5000,
+        animateOut: 'fadeOut',
+      	{%- if settings.rtl_enable -%}
+        rtl: true,
+        {%- else -%}
+        fade: false,
+        {%- endif -%}
+        animateIn: 'fadeIn',
+        item: 1,
+        responsive: {
+            0: {
+                items: 1
+            },
+            576: {
+                items: 1
+            },
+            768: {
+                items: 1
+            },
+            992: {
+                items: 1
+            }
+        }
+    })
+  
+</script>
+
+
+{% elsif section.settings.testimonial_style == 'testimonial_style_5' %}
+
+<div class="testimonial-area pt-110 pb-120" id="section-{{ section.id }}">
+  <div class="container{% if section.settings.enable_full_area %}-fluid{%endif%}">
+    {% if section.settings.section_title != blank %}
+    <div class="section-title-6 text-center mb-55">
+      <h2>{{ section.settings.section_title }}</h2>
+    </div>
+    {%endif%}
+
+    <div class="testimonial-active owl-carousel">
+      
+      {% for block in section.blocks %}
+      {%- case block.type -%}
+      {%- when 'about_testimonial' -%}
+      <div class="single-testimonial-3 text-{{ section.settings.testiminial_alignment }}">
+        {% if block.settings.testimonial_shaip_img %}
+        <div class="testimonial-quote-3">
+          <img src="{{ block.settings.testimonial_shaip_img | img_url: 'small' }}" class="lazyload" alt="testimonial">
+        </div>
+        {% endif %}
+        {%if block.settings.testiminial_des != '' %}
+        <p>{{ block.settings.testiminial_des }}</p>
+        {% endif %}
+        {% if block.settings.img_enable %}
+        <div class="client-info-3">
+          <img src="{% if block.settings.testimonial_img %}{{ block.settings.testimonial_img | img_url: 'small' }}
+                    {% else %}https://via.placeholder.com/65x65
+                    {% endif %}" class="lazyload img-fluid" alt="">
+        </div>
+        {% endif %}
+      </div>
+      {%- endcase -%}
+      {% endfor %}
+      
+    </div>
+  </div>
+  
+  
+  <div class="handmade-leaf-1">
+    <img src="{% if section.settings.animated_bg_img_1 %}{{ section.settings.animated_bg_img_1 | img_url: 'master' }}
+                    {% else %}https://via.placeholder.com/486x392
+                    {% endif %}" class="lazyload img-fluid" alt="">
+  </div>
+  <div class="handmade-leaf-2">
+    <img src="{% if section.settings.animated_bg_img_2 %}{{ section.settings.animated_bg_img_2 | img_url: 'master' }}
+                    {% else %}https://via.placeholder.com/597x579
+                    {% endif %}" class="lazyload img-fluid" alt="">
+  </div>
+  
+  
+</div>
+
+{% elsif section.settings.testimonial_style == 'testimonial_style_6' %}
+
+
+<div class="testimonial-area-2 testimonial-5-ptb bg-img" id="section-{{ section.id }}">
+  <div class="container{% if section.settings.enable_full_area %}-fluid{%endif%}">
+    {% if section.settings.section_title != blank %}
+    <div class="section-title-9 text-center mb-60">
+      <h2>{{ section.settings.section_title }}</h2>
+    </div>
+    {%endif%}
+    
+    <div class="testimonial-active owl-carousel">
+      {% for block in section.blocks %}
+      {%- case block.type -%}
+      {%- when 'about_testimonial' -%}
+      <div class="single-testimonial-5 text-center">
+        {% if block.settings.testimonial_shaip_img %}
+        <div class="testimonial-quote-5">
+          <img src="{{ block.settings.testimonial_shaip_img | img_url: 'small' }}" class="lazyload" alt="testimonial">
+        </div>
+        {% endif %}
+
+        {%if block.settings.testiminial_des != '' %}
+        <p>{{ block.settings.testiminial_des }}</p>
+        {% endif %}
+
+        {% if block.settings.img_enable %}
+        <div class="client-info-5">
+          <img src="{% if block.settings.testimonial_img %}{{ block.settings.testimonial_img | img_url: 'small' }}
+                    {% else %}https://via.placeholder.com/65x65
+                    {% endif %}" class="lazyload img-fluid" alt="">
+        </div>
+        {% endif %}
+        
+      </div>
+      {%- endcase -%}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% elsif section.settings.testimonial_style == 'testimonial_style_7' %}
+
+
+<div class="testimonial-area bg-gray pt-115 pb-120" id="section-{{ section.id }}">
+  <div class="container{% if section.settings.enable_full_area %}-fluid{%endif%}">
+    {% if section.settings.section_title != blank %}
+    <div class="section-title-2 text-center mb-50">
+      <h2>{{ section.settings.section_title }}</h2>
+    </div>
+    {%endif%}
+    <div class="testimonial-active owl-carousel">
+      {% for block in section.blocks %}
+      {%- case block.type -%}
+      {%- when 'about_testimonial' -%}
+      <div class="single-testimonial-3 text-center">
+        <div class="testimonial-quote-3">
+          <img src="{% if block.settings.testimonial_shaip_img %}{{ block.settings.testimonial_shaip_img | img_url: 'small' }}{% else %}https://via.placeholder.com/35x25{% endif %}" class="lazyload" alt="testimonial">
+        </div>
+        
+        {%if block.settings.testiminial_des != '' %}
+        <p>{{ block.settings.testiminial_des }}</p>
+        {% endif %}
+        
+        {% if block.settings.img_enable %}
+        <div class="client-info-3">
+          <img src="{% if block.settings.testimonial_img %}{{ block.settings.testimonial_img | img_url: 'small' }}
+                    {% else %}https://via.placeholder.com/65x65
+                    {% endif %}" class="lazyload img-fluid" alt="">
+        </div>
+        {% endif %}
+      </div>
+      {%- endcase -%}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+
+{% endif %}
+
+
+<script>
+  
+  /* Testimonial active 2 */
+    $('.testimonial-active').owlCarousel({
+        loop: true,
+        nav: {% if section.settings.enable_navigation %}true{% else %}false {%endif%},
+        navText: ['<i class=" ti-angle-left "></i>', '<i class=" ti-angle-right "></i>'],
+        autoplay: false,
+        autoplayTimeout: 5000,
+        animateOut: 'fadeOut',
+      	{%- if settings.rtl_enable -%}
+        rtl: true,
+        {%- else -%}
+        fade: false,
+        {%- endif -%}
+        animateIn: 'fadeIn',
+        item: 1,
+        responsive: {
+            0: {
+                items: 1
+            },
+            576: {
+                items: 1
+            },
+            768: {
+                items: 1
+            },
+            992: {
+                items: 1
+            }
+        }
+    })
+  
+</script>
+
+
+{%- style -%}
+  #section-{{ section.id }}{
+    {%- for block in section.blocks -%}
+    {%- case block.type -%}
+    {%- when 'section_margin' -%}
+    margin-top: {{ block.settings.section_margin_top }}px;
+    margin-bottom: {{ block.settings.section_margin_bottom }}px;
+    {%- when 'section_padding' -%}
+    padding-top: {{ block.settings.section_padding_top }}px;
+    padding-bottom: {{ block.settings.section_padding_bottom }}px;
+    {%- when 'section_background' -%}    
+    background: {{ block.settings.section_bg_color }} 
+      {%- if block.settings.section_bg_image -%}url("{{ block.settings.section_bg_image | img_url: 'master' }}"){%- endif -%} no-repeat scroll center center / cover;
+    {%- endcase -%}
+    {%- endfor -%}
+  }
+  @media (min-width: 768px) and (max-width: 991px) {
+    #section-{{ section.id }}{
+      {%- for block in section.blocks -%}
+      {% case block.type %}
+      {%- when 'section_margin' -%}
+      margin-top: {{ block.settings.section_margin_top_md }}px;
+      margin-bottom: {{ block.settings.section_margin_bottom_md }}px;
+      {%- when 'section_padding' -%}
+      padding-top: {{ block.settings.section_padding_top_md }}px;
+      padding-bottom: {{ block.settings.section_padding_bottom_md }}px;
+      {%- endcase -%}
+      {%- endfor -%}
+    }
+  }
+  @media (max-width: 767px) {
+    #section-{{ section.id }}{
+      {%- for block in section.blocks -%}
+      {%- case block.type -%}
+      {%- when 'section_margin' -%}
+      margin-top: {{ block.settings.section_margin_top_xs }}px;
+      margin-bottom: {{ block.settings.section_margin_bottom_xs }}px;
+      {%- when 'section_padding' -%}
+      padding-top: {{ block.settings.section_padding_top_xs }}px;
+      padding-bottom: {{ block.settings.section_padding_bottom_xs }}px;
+      {%- endcase -%}
+      {%- endfor -%}
+    }
+  }
+{%- endstyle -%}
+
+
+
+{% schema %}
+  {
+    "name": "Testimonial",
+    "settings": [
+		{
+          "type": "select",
+          "id": "testimonial_style",
+          "label": "Select Testimonial Style",
+          "options":[
+            {
+              "value":"testimonial_style_1",
+              "label": "Testimonial Style One"
+            },
+            {
+              "value":"testimonial_style_2",
+              "label": "Testimonial Style Two"
+            },
+			{
+              "value":"testimonial_style_3",
+              "label": "Testimonial Style Three"
+            },
+			{
+              "value":"testimonial_style_4",
+              "label": "Testimonial Style Four"
+            },
+			{
+              "value":"testimonial_style_5",
+              "label": "Testimonial Style Five"
+            },
+			{
+              "value":"testimonial_style_6",
+              "label": "Testimonial Style Six"
+            },
+			{
+              "value":"testimonial_style_7",
+              "label": "Testimonial Style Seven"
+            }
+          ],
+
+          "default": "testimonial_style_1"
+        },
+		{
+          "type": "header",
+          "content": "Testimonial Width "
+        },
+		{
+          "type": "checkbox",
+          "id": "enable_full_area",
+          "label": "Enable Full Width",
+          "default": false
+        },
+		{
+          "type": "text",
+          "id": "section_subtitle",
+          "label": "Section Subtitle", 
+          "default": "TOP COLLECTIONS"
+        },
+		{
+          "type": "text",
+          "id": "section_title",
+          "label": "Section Title", 
+          "default": "Recent reviews from happy people"
+        },
+		{
+          "type": "select",
+          "id": "testiminial_alignment",
+          "label": "Testimonial Alignment",
+          "options":[
+              {
+                "label": "Left",
+                "value": "left"
+              },
+              {
+                "label": "Right",
+                "value": "right"
+              },
+              {
+                "label": "Center",
+                "value": "center"
+              }
+          ],
+          "default": "center"
+        },
+		{
+          "type": "header",
+          "content": "Animated BG Images For Style Five "
+        },
+        {
+          "type": "image_picker",
+          "id": "animated_bg_img_1",
+          "label": "Animated BG Images One",
+          "info": "Recommended Size: 486 x 392"
+        },
+        {
+          "type": "image_picker",
+          "id": "animated_bg_img_2",
+          "label": "Animated BG Images Two",
+          "info": "Recommended Size: 597 x 579"
+        },
+		{
+          "type": "header",
+          "content": "Testimonial Options For Style Four "
+        },
+		{
+          "type": "checkbox",
+          "id": "enable_border",
+          "label": "Enable Testimonial Border",
+          "default": true
+        },
+		{
+          "type": "checkbox",
+          "id": "section_title_bg",
+          "label": "Enable Section Title Bg",
+          "default": true
+        },
+		{
+          "type": "checkbox",
+          "id": "enable_navigation",
+          "label": "Enable Navigation",
+          "default": true
+        }
+	],
+	"blocks":[
+		{
+          "type": "about_testimonial",
+          "name": "Testimonial",
+          "settings": [
+              {
+                "type": "checkbox",
+                "id": "quote_img_enable",
+                "label": "Testimonial Quote Image Enable",
+                "default": true		
+              },
+			  {
+                  "type": "image_picker",
+                  "id": "testimonial_shaip_img",
+                  "label": "Testimonial Quote Image",
+                  "info": "Recommended Size: 35 x 26"
+              },
+			  {
+                "type": "checkbox",
+                "id": "img_enable",
+                "label": "Testimonial Image Enable",
+                "default": true		
+              },
+              {
+                  "type": "image_picker",
+                  "id": "testimonial_img",
+                  "label": "Testimonial Image",
+                  "info": "Recommended Size: 75 x 75"
+              },
+			  {
+                "type": "text",
+                "id": "name",
+                "label": "Name",
+                "default": "Lela Rodgers"
+              },
+			  {
+                "type": "text",
+                "id": "form_client",
+                "label": "Form",
+                "default": "California"
+              },
+			  {
+                "type": "text",
+                "id": "testiminial_des",
+                "label": "Testiminial Description",
+                "default": "This template is fantastic, EXACTLY what I wanted and the support has been AMAZING !! fast and super helpful. Thanks so much guys and good luck with the template"
+              }
+          ]
+       },
+	   {
+          "type": "section_margin",
+          "name": "Section Margin",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Tablet Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			}
+          ]
+       },
+	   {
+          "type": "section_padding",
+          "name": "Section Padding",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 100
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 100
+			},
+			{
+			  "type": "header",
+			  "content": "Tablet Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 70
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 70
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 40
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 40
+			}
+          ]
+       },
+	   {
+          "type": "section_background",
+          "name": "Section Background",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "image_picker",
+			  "id": "section_bg_image",
+			  "label": "BG Image"
+			},
+			{
+			  "type": "color",
+			  "id": "section_bg_color",
+			  "label": "BG Color",
+			  "default": "#ffffff"
+			}
+          ]
+       }
+	],
+	"presets": [
+		{
+		  "name": "Testimonial",
+		  "category": "7. testimonial",
+		  "blocks":[
+				{
+					"type": "about_testimonial"
+				},
+				{
+					"type": "section_background"
+				}
+			]
+		}
+	]
+  }
+{% endschema %}

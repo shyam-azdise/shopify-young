@@ -1,0 +1,1002 @@
+{% if section.settings.newsletter_enable %}
+<div class="subscribe-area bg-black pt-70 pb-80" id="section-{{ section.id }}">
+  <div class="container{% if section.settings.fullwidth_on %}-fluid{%endif%}">
+    <div class="row align-items-center">
+      {% if section.settings.newsletter_title != '' %}
+      <div class="col-lg-3">
+        <div class="subscribe-title">
+          <h3>{{ section.settings.newsletter_title }}</h3>
+        </div>
+      </div>
+      {% endif %}
+      <div class="col-lg-9">
+
+        
+        {%- if settings.newsletter_system == 'by_shopify_form' -%}
+
+        {%- assign formId = 'Contact_' | append: section.id -%}
+        {%- form 'customer', id: formId -%}
+        {%- if form.posted_successfully? -%}
+        <p class="form-message form-message--success form-success">{{ 'general.newsletter_form.confirmation'| t }}</p>
+        {%- else -%}
+
+        {%- if form.errors -%}
+        <div class="form-message form-message--error">
+          {{ form.errors | default_errors }}
+        </div>
+        {%- endif -%}
+        
+        <div id="mc_embed_signup" class="subscribe-form subscribe-mrg-1">
+          <div id="mc-form" class="mc-form mc-form-3">
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            <input class="email input-field subscribe" type="email" name="contact[email]" id="Email" value="{% if customer %}{{ customer.email }}{% endif %}"
+                   placeholder="{{ section.settings.email_placeholder }}" aria-label="{{ section.settings.email_placeholder }}" {% if form.errors %}aria-invalid="true"{% endif %} autocorrect="off" autocapitalize="off">
+            <div class="clear">
+              <input id="Subscribe" class="button submit subscribe-btn" type="submit" name="subscribe" value="{{ section.settings.button_title }}">
+            </div>
+          </div>
+        </div>
+        {%- endif -%}
+        {%- endform -%}
+        
+        {%- elsif settings.newsletter_system == 'by_mailchimp' -%}
+        <div id="mc_embed_signup" class="subscribe-form subscribe-mrg-1">
+          <form action="{{ settings.newsletter_action }}" method="post" id="mc-form" name="mc-embedded-subscribe-form" class="validate subscribe-form-style subscribe-form-style-2 newsletter-form validate mc-form-2" target="_blank" novalidate>
+            <input type="email" value="" name="EMAIL" class="email input-field subscribe" id="mce-EMAIL" placeholder="{{ section.settings.email_placeholder }}" required>
+            <div class="clear">
+              <input id="mc-embedded-subscribe" class="button submit subscribe-btn" type="submit" name="subscribe" value="{{ section.settings.button_title }}">
+            </div>
+          </form>
+          <div class="mailchimp-alerts">
+            <div class="mailchimp-submitting"></div>
+            <div class="mailchimp-success"></div>
+            <div class="mailchimp-error"></div>
+          </div>
+        </div>
+        {%- endif -%}
+        
+
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endif %}
+
+
+{% if section.settings.footer_enable %}
+
+{% if section.settings.footer_style == 'footer_style_1' %}
+{% include 'footer-one' %}
+{% elsif section.settings.footer_style == 'footer_style_2' %}
+{% include 'footer-two' %}
+{% elsif section.settings.footer_style == 'footer_style_3' %}
+{% include 'footer-three' %}
+{% elsif section.settings.footer_style == 'footer_style_4' %}
+{% include 'footer-four' %}
+{% elsif section.settings.footer_style == 'footer_style_5' %}
+{% include 'footer-five' %}
+{% elsif section.settings.footer_style == 'footer_style_6' %}
+{% include 'footer-six' %}
+{% elsif section.settings.footer_style == 'footer_style_7' %}
+{% include 'footer-seven' %}
+{% elsif section.settings.footer_style == 'footer_style_8' %}
+{% include 'footer-eight' %}
+{% elsif section.settings.footer_style == 'footer_style_9' %}
+{% include 'footer-nine' %}
+{% endif %}
+
+{% endif %}
+
+
+{%- style -%}
+  #section-{{ section.id }}{
+    {%- for block in section.blocks -%}
+    {%- case block.type -%}
+    {%- when 'section_margin' -%}
+    margin-top: {{ block.settings.section_margin_top }}px;
+    margin-bottom: {{ block.settings.section_margin_bottom }}px;
+    {%- when 'section_padding' -%}
+    padding-top: {{ block.settings.section_padding_top }}px;
+    padding-bottom: {{ block.settings.section_padding_bottom }}px;
+    {%- when 'section_background' -%}    
+    background: {{ block.settings.section_bg_color }} 
+      {%- if block.settings.section_bg_image -%}url("{{ block.settings.section_bg_image | img_url: 'master' }}"){%- endif -%} no-repeat scroll center center / cover;
+    {%- endcase -%}
+    {%- endfor -%}
+  }
+  @media (min-width: 768px) and (max-width: 991px) {
+    #section-{{ section.id }}{
+      {%- for block in section.blocks -%}
+      {% case block.type %}
+      {%- when 'section_margin' -%}
+      margin-top: {{ block.settings.section_margin_top_md }}px;
+      margin-bottom: {{ block.settings.section_margin_bottom_md }}px;
+      {%- when 'section_padding' -%}
+      padding-top: {{ block.settings.section_padding_top_md }}px;
+      padding-bottom: {{ block.settings.section_padding_bottom_md }}px;
+      {%- endcase -%}
+      {%- endfor -%}
+    }
+  }
+  @media (max-width: 767px) {
+    #section-{{ section.id }}{
+      {%- for block in section.blocks -%}
+      {%- case block.type -%}
+      {%- when 'section_margin' -%}
+      margin-top: {{ block.settings.section_margin_top_xs }}px;
+      margin-bottom: {{ block.settings.section_margin_bottom_xs }}px;
+      {%- when 'section_padding' -%}
+      padding-top: {{ block.settings.section_padding_top_xs }}px;
+      padding-bottom: {{ block.settings.section_padding_bottom_xs }}px;
+      {%- endcase -%}
+      {%- endfor -%}
+    }
+  }
+
+
+  .subscribe-area.bg-black {
+  background: {{ section.settings.newsletter_area_bg }} !important;
+  }
+  .subscribe-title h3 {
+  color: {{ section.settings.newsletter_title_color }};
+  }
+  .subscribe-form .mc-form .clear input {
+  color: {{ section.settings.newsletter_btn_color }};
+  }
+  .subscribe-form .mc-form .clear input:hover {
+  color: {{ section.settings.newsletter_btn_hover_color }};
+  }
+
+
+
+
+{%- endstyle -%}
+
+{% schema %}
+  {
+    "name": "Footer",
+    "settings": [
+		{
+          "type": "header",
+          "content": "Newsletter"
+        },
+		{
+          "type": "checkbox",
+          "id": "newsletter_enable",
+          "label": "Newsletter Enable",
+          "default": true,
+          "info": "If you want Newsletter click checkbox"
+        },
+		{
+          "type": "text",
+          "id": "newsletter_title",
+          "label": "Newsletter Title",
+          "default": "Sign Up For Newsletter"
+      	},
+		{
+          "type": "text",
+          "id": "email_placeholder",
+          "label": "Email Placeholder",
+          "default": "Enter Your Email Address Here..."
+      	},
+		{
+          "type": "text",
+          "id": "button_title",
+          "label": "Button Title",
+          "default": "SUBSCRIBE"
+      	},
+		{
+          "type": "header",
+          "content": "Newsletter Style"
+        },
+		{
+          "type": "color",
+          "id": "newsletter_area_bg",	
+          "label": "Newsletter Area BG Color",
+          "default":   "#1b1b1b"
+        },
+		{
+          "type": "color",
+          "id": "newsletter_title_color",	
+          "label": "Newsletter Title Color",
+          "default":   "#fff"
+        },
+		{
+          "type": "color",
+          "id": "newsletter_btn_color",	
+          "label": "Button Color",
+          "default":   "#fff"
+        },
+		{
+          "type": "color",
+          "id": "newsletter_btn_hover_color",	
+          "label": "Button Hover Color",
+          "default":   "#fff"
+        },
+		{
+          "type": "select",
+          "id": "footer_style",
+          "label": "Select Footer Style",
+          "options":[
+            {
+              "value":"footer_style_1",
+              "label": "Footer Style One"
+            },
+            {
+              "value":"footer_style_2",
+              "label": "Footer Style Two"
+            },
+			{
+              "value":"footer_style_3",
+              "label": "Footer Style Three"
+            },
+			{
+              "value":"footer_style_4",
+              "label": "Footer Style Four"
+            }
+          ],
+
+          "default": "footer_style_1"
+        },
+		{
+          "type": "checkbox",
+          "id": "footer_enable",
+          "label": "Footer Enable",
+          "default": true,
+          "info": "If you want Footer click checkbox"
+        },
+        {
+          "type": "header",
+          "content": "Header Width Control"
+        },
+        {
+          "type": "checkbox",
+          "id": "fullwidth_on",
+          "label": "Full Width Enable",
+          "default": false,
+          "info": "If you want Full Width click checkbox"
+        },
+		{
+          "type": "header",
+          "content": "Logo Area Width"
+      	},
+        {
+          "type": "range",
+          "id": "logo_col",
+          "min": 1,
+          "max": 12,
+          "step": 1,
+          "label": "Column LG",
+          "default": 4,
+          "info": "Follow Bootstrap-4 Column"
+        },
+        {
+          "type": "range",
+          "id": "logo_col_md",
+          "min": 1,
+          "max": 12,
+          "step": 1,
+          "label": "Column MD",
+          "default": 4,
+          "info": "Follow Bootstrap-4 Column"
+        },
+		{
+          "type": "header",
+          "content": "Menu Area Width"
+      	},
+        {
+          "type": "range",
+          "id": "menu_col",
+          "min": 1,
+          "max": 12,
+          "step": 1,
+          "label": "Column LG",
+          "default": 8,
+          "info": "Follow Bootstrap-4 Column"
+        },
+        {
+          "type": "range",
+          "id": "menu_col_md",
+          "min": 1,
+          "max": 12,
+          "step": 1,
+          "label": "Column MD",
+          "default": 8,
+          "info": "Follow Bootstrap-4 Column"
+        },
+		{
+          "type": "header",
+          "content": "Footer Top Enable"
+      	},
+		{
+           "type": "checkbox",
+           "id": "footer_top_section",
+           "label": "Footer Top Section enable",
+           "default": true,
+		   "info": "If you want Footer Top Section click checkbox"
+        },
+		{
+          "type": "color",
+          "id": "footer_top_bg_color",	
+          "label": "Footer Top Background Color",
+          "default":   "#ffffff"
+        },
+		{
+          "type": "header",
+          "content": "Copyright Option"
+      	},
+		{
+          "type": "richtext",
+          "id": "copy_ritht_text",
+          "label": "CopyRight Text",
+		  "default": "<p>Copyright © 99 Shopify All Right Reserved.</p>"
+		},
+		{
+          "type": "url",
+          "id": "copy_ritht_url",
+          "label": "CopyRight URL"
+		},
+		{
+           "type": "checkbox",
+           "id": "payment_icon_enable",
+           "label": "payment icon enable",
+           "default": true,
+		   "info": "If you want payment icon click checkbox"
+        },
+		{
+          "type": "image_picker",
+          "id": "payment_icon",
+          "label": "payment Cart",
+          "info": "Recommended Size: 410 x 35px"
+        },
+		{
+          "type": "color",
+          "id": "footer_copy_bg_color",	
+          "label": "Footer Copyright BG Color",
+          "default":   "#ffffff"
+        },
+		{
+          "type": "header",
+          "content": "Footer Background images"
+      	},
+		{
+          "type": "image_picker",
+          "id": "left_bg_image",
+          "label": "Left Side Bg image",
+          "info": "Recommended Size: 322x163px"
+        },
+		{
+          "type": "image_picker",
+          "id": "center_bg_image",
+          "label": "Center Bg image",
+          "info": "Recommended Size: 267x143px"
+        },
+		{
+          "type": "image_picker",
+          "id": "right_bg_image",
+          "label": "Right Side Bg image",
+          "info": "Recommended Size: 339x313px"
+        },
+		{
+          "type": "header",
+          "content": "Footer Four images"
+      	},
+		{
+          "type": "image_picker",
+          "id": "right_bg_image4",
+          "label": "Right Side image",
+          "info": "Recommended Size: 664x586px"
+        }
+    ],
+	"blocks":[
+		{
+          "type": "footer_logo",
+          "name": "Footer Logo",
+          "settings": [
+			  {
+                "type": "text",
+                "id": "footer_logo_col",
+                "label": "Column",
+                "default": "4",
+				"info": "Follow Bootstrap-4 Column"
+              },
+			  {
+                  "type": "image_picker",
+                  "id": "footer_logo",
+                  "label": "Footer Logo",
+                  "info": "Recommended Size: 87 x 25px"
+              } 
+		  ]
+        },
+		{
+          "type": "footer_menu",
+          "name": "Footer Menu",
+          "settings": [
+              {
+                  "type": "text",
+                  "id": "footer_menu_title",
+                  "label": "Menu Title",
+				  "default": "Menu Title"
+              },
+              {
+                  "type": "link_list",
+                  "id": "footer_menu_handle",
+                  "label": "Select Menu"
+              },
+			  {
+                "type": "range",
+                "id": "menu_col_lg",
+                "min": 1,
+                "max": 12,
+                "step": 1,
+                "label": "Column LG",
+                "default": 3,
+                "info": "Follow Bootstrap-4 Column"
+              },
+              {
+                "type": "range",
+                "id": "menu_col_md",
+                "min": 1,
+                "max": 12,
+                "step": 1,
+                "label": "Column MD",
+                "default": 6,
+                "info": "Follow Bootstrap-4 Column"
+              },
+        	  {
+                "type": "select",
+                "id": "widget_margin",
+                "label": "Widget Margin",
+                "options": [
+                  {
+                    "value": " ",
+                    "label": "No Margin"
+                  },
+                  {
+                    "value": "footer-mrg-1",
+                    "label": "Margin One"
+                  },
+                  {
+                    "value": "footer-mrg-2",
+                    "label": "Margin Two"
+                  },
+				  {
+                    "value": "footer-mrg-3",
+                    "label": "Margin Three"
+                  }
+                ],
+                "default": " " 
+              }
+          ]
+        },
+  		{
+            "type": "category",
+            "name": "Category",
+            "limit": 1,
+            "settings": [
+              {
+                "type": "text",
+                "id": "cat_title",
+                "label": "Title",
+                "default": "Poular Categories"
+              },
+              {
+                "type": "range",
+                "id": "categories_list_limit_hanlde",
+                "min": 2,
+                "max": 20,
+                "step": 1,
+                "label": "Category Limit",
+                "default": 4
+              },
+			  {
+                "type": "range",
+                "id": "cat_col_lg",
+                "min": 1,
+                "max": 12,
+                "step": 1,
+                "label": "Column LG",
+                "default": 4,
+                "info": "Follow Bootstrap-4 Column"
+              },
+              {
+                "type": "range",
+                "id": "cat_col_md",
+                "min": 1,
+                "max": 12,
+                "step": 1,
+                "label": "Column MD",
+                "default": 6,
+                "info": "Follow Bootstrap-4 Column"
+              },
+        	  {
+                "type": "select",
+                "id": "widget_margin",
+                "label": "Widget Margin",
+                "options": [
+                  {
+                    "value": " ",
+                    "label": "No Margin"
+                  },
+                  {
+                    "value": "footer-mrg-1",
+                    "label": "Margin One"
+                  },
+                  {
+                    "value": "footer-mrg-2",
+                    "label": "Margin Two"
+                  },
+				  {
+                    "value": "footer-mrg-3",
+                    "label": "Margin Three"
+                  }
+                ],
+                "default": "footer-mrg-1"
+              }
+            ]
+         },
+		{
+          "type": "footer_app_info",
+          "name": "Footer App Info",
+          "settings": [
+			  {
+                "type": "text",
+                "id": "footer_app_title",
+                "label": "Experience App on Mobile",
+                "default": "GET THE APP"
+              },
+			  {
+                  "type": "image_picker",
+                  "id": "app_images1",
+                  "label": "App Store",
+                  "info": "Recommended Size: 181 x 45px"
+              },
+			  {
+                "type": "url",
+                "id": "app_store_url",
+                "label": "App Store URL"
+              },
+			  {
+                  "type": "image_picker",
+                  "id": "app_images2",
+                  "label": "Google Play",
+                  "info": "Recommended Size: 181 x 45px"
+              },
+			  {
+                "type": "url",
+                "id": "app_store_url2",
+                "label": "Google Play URL"
+              },
+			  {
+                "type": "range",
+                "id": "app_col_lg",
+                "min": 1,
+                "max": 12,
+                "step": 1,
+                "label": "Column LG",
+                "default": 5,
+                "info": "Follow Bootstrap-4 Column"
+              },
+              {
+                "type": "range",
+                "id": "app_col_md",
+                "min": 1,
+                "max": 12,
+                "step": 1,
+                "label": "Column MD",
+                "default": 6,
+                "info": "Follow Bootstrap-4 Column"
+              },
+        	  {
+                "type": "select",
+                "id": "widget_margin",
+                "label": "Widget Margin",
+                "options": [
+                  {
+                    "value": " ",
+                    "label": "No Margin"
+                  },
+                  {
+                    "value": "footer-mrg-1",
+                    "label": "Margin One"
+                  },
+                  {
+                    "value": "footer-mrg-2",
+                    "label": "Margin Two"
+                  },
+				  {
+                    "value": "footer-mrg-3",
+                    "label": "Margin Three"
+                  }
+                ],
+                "default": "footer-mrg-2"
+              }
+			  
+		  ]
+        },
+		{
+          "type": "tag",
+          "name": "Tag",
+		  "limit": 1,
+          "settings": [
+            {
+              "type": "text",
+              "id": "widget_title",
+              "label": "Title",
+              "default": "Hot Tags"
+            },
+            {
+              "type": "range",
+              "id": "tags_list_limit_hanlde",
+              "min": 5,
+              "max": 20,
+              "step": 1,
+              "label": "Size Limit",
+              "default": 15
+            },
+			{
+                "type": "range",
+                "id": "tag_col_lg",
+                "min": 1,
+                "max": 12,
+                "step": 1,
+                "label": "Column LG",
+                "default": 4,
+                "info": "Follow Bootstrap-4 Column"
+              },
+              {
+                "type": "range",
+                "id": "tag_col_md",
+                "min": 1,
+                "max": 12,
+                "step": 1,
+                "label": "Column MD",
+                "default": 6,
+                "info": "Follow Bootstrap-4 Column"
+              },
+        	  {
+                "type": "select",
+                "id": "widget_margin",
+                "label": "Widget Margin",
+                "options": [
+                  {
+                    "value": " ",
+                    "label": "No Margin"
+                  },
+                  {
+                    "value": "footer-mrg-1",
+                    "label": "Margin One"
+                  },
+                  {
+                    "value": "footer-mrg-2",
+                    "label": "Margin Two"
+                  },
+				  {
+                    "value": "footer-mrg-3",
+                    "label": "Margin Three"
+                  }
+                ],
+                "default": "footer-mrg-1"
+              }
+          ]
+        },
+		{
+          "type": "about_us",
+          "name": "About Information",
+          "settings": [
+			  {
+                  "type": "text",
+                  "id": "footer_about_title",
+                  "label": "Contact info",
+				  "default": "Contact info"
+              },
+			  {
+                "type": "textarea",
+                "id": "about_support_content",
+                "label": "About Support Info",
+				"default": "<ul><li>Phone: +54.8638.8583.43</li><li>Email: info@la-studioweb.com</li><li>Open time: 9:00 - 19:00, Monday - Saturday</li><li>Local: 121 King Street, Melbourne <br>Victoria 3000 Australia</li></ul>"
+              },
+			  {
+                "type": "range",
+                "id": "about_col_lg",
+                "min": 1,
+                "max": 12,
+                "step": 1,
+                "label": "Column LG",
+                "default": 5,
+                "info": "Follow Bootstrap-4 Column"
+              },
+              {
+                "type": "range",
+                "id": "about_col_md",
+                "min": 1,
+                "max": 12,
+                "step": 1,
+                "label": "Column MD",
+                "default": 6,
+                "info": "Follow Bootstrap-4 Column"
+              },
+        	  {
+                "type": "select",
+                "id": "widget_margin",
+                "label": "Widget Margin",
+                "options": [
+                  {
+                    "value": " ",
+                    "label": "No Margin"
+                  },
+                  {
+                    "value": "footer-mrg-1",
+                    "label": "Margin One"
+                  },
+                  {
+                    "value": "footer-mrg-2",
+                    "label": "Margin Two"
+                  },
+				  {
+                    "value": "footer-mrg-3",
+                    "label": "Margin Three"
+                  }
+                ],
+                "default": "footer-mrg-2"
+              }
+		  ]
+       },
+	   {
+          "type": "contact_info",
+          "name": "Contact Information",
+          "settings": [
+			  {
+                  "type": "text",
+                  "id": "contact_info_title",
+                  "label": "Contact info Title",
+				  "default": "Contact info"
+              },
+			  {
+                "type": "range",
+                "id": "about_col_lg",
+                "min": 1,
+                "max": 12,
+                "step": 1,
+                "label": "Column LG",
+                "default": 4,
+                "info": "Follow Bootstrap-4 Column"
+              },
+              {
+                "type": "range",
+                "id": "about_col_md",
+                "min": 1,
+                "max": 12,
+                "step": 1,
+                "label": "Column MD",
+                "default": 6,
+                "info": "Follow Bootstrap-4 Column"
+              },
+			  {
+                  "type": "header",
+                  "content": "Information #1"
+              },
+              {
+                "type": "text",
+                "id": "footer_info_1_icon",
+                "label": "Icon Name",
+                "default": "clock-o",
+                "info": "[See Icon](https:\/\/fontawesome.com\/v4.7.0\/icons\/)"	
+              },
+			  {
+                "type": "text",
+                "id": "footer_info_1_content",
+                "label": "Contact info Details",
+                "default": "Monday - Friday: 9:00 - 19:00"
+              },
+			  {
+                  "type": "header",
+                  "content": "Information #2"
+              },
+              {
+                "type": "text",
+                "id": "footer_info_2_icon",
+                "label": "Icon Name",
+                "default": "envelope-o",
+                "info": "[See Icon](https:\/\/fontawesome.com\/v4.7.0\/icons\/)"	
+              },
+			  {
+                "type": "text",
+                "id": "footer_info_2_content",
+                "label": "Contact info Details",
+                "default": "info@example.com"
+              },
+			  {
+                  "type": "header",
+                  "content": "Information #3"
+              },
+              {
+                "type": "text",
+                "id": "footer_info_3_icon",
+                "label": "Icon Name",
+                "default": "volume-control-phone",
+                "info": "[See Icon](https:\/\/fontawesome.com\/v4.7.0\/icons\/)"	
+              },
+			  {
+                "type": "text",
+                "id": "footer_info_3_content",
+                "label": "Contact info Details",
+                "default": "(+612) 2531 5600"
+              },
+			  {
+                  "type": "header",
+                  "content": "Information #4"
+              },
+              {
+                "type": "text",
+                "id": "footer_info_4_icon",
+                "label": "Icon Name",
+                "default": "home",
+                "info": "[See Icon](https:\/\/fontawesome.com\/v4.7.0\/icons\/)"	
+              },
+			  {
+                "type": "text",
+                "id": "footer_info_4_content",
+                "label": "Contact info Details",
+                "default": "PO Box 1622 Colins Street West Victoria 8077 Australia"
+              },
+        	  {
+                "type": "select",
+                "id": "widget_margin",
+                "label": "Widget Margin",
+                "options": [
+                  {
+                    "value": " ",
+                    "label": "No Margin"
+                  },
+                  {
+                    "value": "footer-mrg-1",
+                    "label": "Margin One"
+                  },
+                  {
+                    "value": "footer-mrg-2",
+                    "label": "Margin Two"
+                  },
+				  {
+                    "value": "footer-mrg-3",
+                    "label": "Margin Three"
+                  }
+                ],
+                "default": "footer-mrg-2"
+              }
+		  ]
+       },
+        {
+          "type": "section_margin",
+          "name": "Section Margin",
+          "limit": 1,
+          "settings": [
+            {
+              "type": "header",
+              "content": "Large/Desktop/Tablate Device"
+            },
+            {
+              "type": "range",
+              "id": "section_margin_top",
+              "min": 0,
+              "max": 150,
+              "step": 5,
+              "label": "Margin Top",
+              "unit": "px",
+              "default": 0
+            },
+            {
+              "type": "range",
+              "id": "section_margin_bottom",
+              "min": 0,
+              "max": 150,
+              "step": 5,
+              "label": "Margin Bottom",
+              "unit": "px",
+              "default": 0
+            },
+            {
+              "type": "header",
+              "content": "Mobile Device"
+            },
+            {
+              "type": "range",
+              "id": "section_margin_top_xs",
+              "min": 0,
+              "max": 150,
+              "step": 5,
+              "label": "Margin Top",
+              "unit": "px",
+              "default": 0
+            },
+            {
+              "type": "range",
+              "id": "section_margin_bottom_xs",
+              "min": 0,
+              "max": 150,
+              "step": 5,
+              "label": "Margin Bottom",
+              "unit": "px",
+              "default": 0
+            }
+          ]
+        },
+        {
+          "type": "section_padding",
+          "name": "Section Padding",
+          "limit": 1,
+          "settings": [
+            {
+              "type": "header",
+              "content": "Large/Desktop/Tablate Device"
+            },
+            {
+              "type": "range",
+              "id": "section_padding_top",
+              "min": 0,
+              "max": 150,
+              "step": 5,
+              "label": "Padding Top",
+              "unit": "px",
+              "default": 40
+            },
+            {
+              "type": "range",
+              "id": "section_padding_bottom",
+              "min": 0,
+              "max": 150,
+              "step": 5,
+              "label": "Padding Bottom",
+              "unit": "px",
+              "default": 40
+            },
+            {
+              "type": "header",
+              "content": "Mobile Device"
+            },
+            {
+              "type": "range",
+              "id": "section_padding_top_xs",
+              "min": 0,
+              "max": 150,
+              "step": 5,
+              "label": "Padding Top",
+              "unit": "px",
+              "default": 30
+            },
+            {
+              "type": "range",
+              "id": "section_padding_bottom_xs",
+              "min": 0,
+              "max": 150,
+              "step": 5,
+              "label": "Padding Bottom",
+              "unit": "px",
+              "default": 30
+            }
+          ]
+        },
+        {
+          "type": "section_background",
+          "name": "Section Background",
+          "limit": 1,
+          "settings": [
+            {
+              "type": "image_picker",
+              "id": "section_bg_image",
+              "label": "BG Image"
+            },
+            {
+              "type": "color",
+              "id": "section_bg_color",
+              "label": "BG Color",
+              "default": "#ffffff"
+            }
+          ]
+        }
+	]
+  }
+
+{% endschema %}

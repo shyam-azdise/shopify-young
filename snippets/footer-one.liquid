@@ -1,0 +1,243 @@
+<footer class="footer-area border-top-2 cake-footer-area" id="section-{{ section.id }}">
+  <div class="container{% if section.settings.fullwidth_on %}-fluid{% endif %}">
+    
+    
+    
+    
+    <div class="footer-top pt-110 pb-40">
+      <div class="row align-items-center">
+        {% for block in section.blocks %}
+        {% case block.type %}
+        
+        {% when 'footer_logo' %}
+        <div class="col-lg-{{ section.settings.logo_col }} col-md-{{ section.settings.logo_col_md }}">
+          {% if block.settings.footer_logo != '' %}
+          <div class="footer-logo footer-logo-ngtv-mrg f-logo-small-left">
+            <a href="/">
+              <img src="{% if block.settings.footer_logo %}{{ block.settings.footer_logo | img_url: 'master' }}
+                                    {% else %}https://via.placeholder.com/182x67 {% endif %}"  class="lazyload" alt="{{ block.settings.footer_logo.alt }}">
+            </a>
+          </div>
+          {% endif %}
+        </div>
+        
+        
+        <div class="col-lg-{{ section.settings.menu_col }} col-md-{{ section.settings.menu_col_md }}">
+          <div class="footer-ml-95">
+            <div class="row">
+              
+              
+              {% when 'footer_menu' %}
+              <div class="col-lg-{{ block.settings.menu_col_lg }} col-md-{{ block.settings.menu_col_md }} col-12 col-sm-6">
+                <div class="footer-widget {{ block.settings.widget_margin }} mb-55">
+                  {% if block.settings.footer_menu_title != '' %}
+                  <h3 class="footer-title">{{ block.settings.footer_menu_title }}</h3>
+                  {% endif %}
+                  <div class="footer-info-list">
+                    <ul>
+                      {% assign footer_menu = block.settings.footer_menu_handle %}
+                      {% for link in linklists[footer_menu].links %}
+                      <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                      {% endfor %}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              
+              {% when 'category' %}
+              <div class="col-lg-{{ block.settings.cat_col_lg }} col-md-{{ block.settings.cat_col_md }} col-12 col-sm-6">
+                <div class="footer-widget {{ block.settings.widget_margin }} mb-55">
+                  {% if block.settings.cat_title != '' %}
+                  <h3 class="footer-title">{{ block.settings.cat_title }}</h3>
+                  {% endif %}
+                  <div class="footer-info-list">
+                    <ul>
+                      {% assign categories_list_limit = block.settings.categories_list_limit_hanlde %}
+                      {% for c in collections limit: categories_list_limit %}
+                      <li><a href="{{ c.url }}">{{ c.title }}</a></li>
+                      {% endfor %}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              {% when 'footer_app_info' %}
+              <div class="col-lg-{{ block.settings.app_col_lg }} col-md-{{ block.settings.app_col_md }} col-12 col-sm-6">
+                <div class="footer-widget {{ block.settings.widget_margin }} mb-55">
+                  {% if block.settings.footer_app_title != '' %}
+                  <h3 class="footer-title-2">{{ block.settings.footer_app_title }}</h3>
+                  {% endif %}
+                  
+                  <div class="app-img">
+                    <a href="{{ block.settings.app_store_url }}">
+                      <img src="{% if block.settings.app_images1 %}{{ block.settings.app_images1 | img_url: 'master' }}
+                                {% else %}https://via.placeholder.com/163x48 {% endif %}" class="lazyload" alt="{{ block.settings.app_images1.alt }}">
+                    </a>
+                  </div>
+
+                  <div class="app-img">
+                    <a href="{{ block.settings.app_store_url2 }}">
+                      <img src="{% if block.settings.app_images2 %}{{ block.settings.app_images2 | img_url: 'master' }}
+                                {% else %}https://via.placeholder.com/163x48 {% endif %}" class="lazyload" alt="{{ block.settings.app_images2.alt }}">
+                    </a>
+                  </div>
+
+                </div>
+              </div>
+              
+              
+              {% when 'tag' %}
+              <div class="col-lg-{{ block.settings.tag_col_lg }} col-md-{{ block.settings.tag_col_md }} col-12 col-sm-6">
+                <div class="footer-widget {{ block.settings.widget_margin }} mb-55">
+                  {%- if block.settings.widget_title != '' -%}
+                  <h3 class="footer-title">{{ block.settings.widget_title }}</h3>
+                  {%- endif -%}
+                  <div class="footer-info-list">
+                    <ul>
+                      <li>
+                        {% assign tags_list_limit = block.settings.tags_list_limit_hanlde %}
+                        {% for tag in collection.all_tags limit: tags_list_limit %}
+                        {%- if current_tags contains tag -%}
+                        <a href="/collections/all/{{ tag | handle }}">{{ tag }}</a>,
+                        {%- else -%}
+                        <a href="/collections/all/{{ tag | handle }}">{{ tag }}</a>,
+                        {%- endif -%}
+                        {% endfor %}
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              
+              {% when 'about_us' %}
+              <div class="col-lg-{{ block.settings.about_col_lg }} col-md-{{ block.settings.about_col_md }} col-12 col-sm-6">
+                <div class="footer-widget {{ block.settings.widget_margin }} mb-55">
+                  {%- if block.settings.footer_about_title != '' -%}
+                  <h3 class="footer-title">{{ block.settings.footer_about_title }}</h3>
+                  {%- endif -%}
+                  <div class="footer-info-list">
+                    {{ block.settings.about_support_content }}
+                  </div>
+                </div>
+              </div>
+              
+              {% when 'contact_info' %}
+              <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                <div class="footer-widget mb-55">
+                  {%- if block.settings.footer_about_title != '' -%}
+                  <h3 class="footer-title-3">{{ block.settings.footer_about_title }}</h3>
+                  {%- endif -%}
+                  <div class="footer-contact-wrap">
+                    
+                    {% if block.settings.footer_info_1_content != '' %}
+                    <div class="single-footer-contact">
+                      {% if block.settings.footer_info_1_icon != '' %}
+                      <div class="footer-contact-icon">
+                        <i class="fa fa-{{ block.settings.footer_info_1_icon }}"></i>
+                      </div>
+                      {% endif %}
+                      <div class="footer-contact-text">
+                        <p>{{ block.settings.footer_info_1_content }}</p>
+                      </div>
+                    </div>
+                    {% endif %}
+                    
+					{% if block.settings.footer_info_2_content != '' %}
+                    <div class="single-footer-contact">
+                      {% if block.settings.footer_info_2_icon != '' %}
+                      <div class="footer-contact-icon">
+                        <i class="fa fa-{{ block.settings.footer_info_2_icon }}"></i>
+                      </div>
+                      {% endif %}
+                      <div class="footer-contact-text">
+                        <p>{{ block.settings.footer_info_2_content }}</p>
+                      </div>
+                    </div>
+                    {% endif %}
+                    
+                    {% if block.settings.footer_info_3_content != '' %}
+                    <div class="single-footer-contact">
+                      {% if block.settings.footer_info_3_icon != '' %}
+                      <div class="footer-contact-icon">
+                        <i class="fa fa-{{ block.settings.footer_info_3_icon }}"></i>
+                      </div>
+                      {% endif %}
+                      <div class="footer-contact-text">
+                        <p>{{ block.settings.footer_info_3_content }}</p>
+                      </div>
+                    </div>
+                    {% endif %}
+                    
+                    {% if block.settings.footer_info_4_content != '' %}
+                    <div class="single-footer-contact">
+                      {% if block.settings.footer_info_4_icon != '' %}
+                      <div class="footer-contact-icon">
+                        <i class="fa fa-{{ block.settings.footer_info_4_icon }}"></i>
+                      </div>
+                      {% endif %}
+                      <div class="footer-contact-text">
+                        <p>{{ block.settings.footer_info_4_content }}</p>
+                      </div>
+                    </div>
+                    {% endif %}
+
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        
+        {% endcase %}
+        {% endfor %}
+      </div>
+    </div>
+    
+    
+    
+    
+    <div class="footer-bottom footer-bottom-pb">
+      <div class="row align-items-center">
+        <div class="col-md-6 col-12">
+          <div class="copyright">
+            <p><a target="_blank" href="{{ section.settings.copy_ritht_url }}">{{ section.settings.copy_ritht_text }}</a></p>
+          </div>
+        </div>
+        <div class="col-md-6 col-12">
+          {% if section.settings.payment_icon_enable %}
+          <div class="footer-payment footer-payment-right">
+              <img src="{% if section.settings.payment_icon %}{{ section.settings.payment_icon | img_url: 'master' }}
+                      {% else %}https://via.placeholder.com/271x18 {% endif %}" class="lazyload" alt="{{ section.settings.payment_icon.alt }}">
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    
+    
+    
+    
+    
+  </div>
+
+  {% if section.settings.left_bg_image %}
+  <div class="cake-footer-img1">
+    <img src="{{ section.settings.left_bg_image | img_url: 'master' }}" class="lazyload" alt="">
+  </div>
+  {% endif %}
+  
+  {% if section.settings.center_bg_image %}
+  <div class="cake-footer-img2">
+    <img src="{{ section.settings.center_bg_image | img_url: 'master' }}" class="lazyload" alt="">
+  </div>
+  {% endif %}
+  
+  {% if section.settings.right_bg_image %}
+  <div class="cake-footer-img3">
+    <img src="{{ section.settings.right_bg_image | img_url: 'master' }}" class="lazyload" alt="">
+  </div>
+  {% endif %}
+  
+</footer>
